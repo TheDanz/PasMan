@@ -13,6 +13,7 @@
 		0545E8E729AD0A1700963D40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */; };
 		05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085629AFBCFC000F4373 /* TabBarController.swift */; };
 		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
+		05DF085B29AFD5D8000F4373 /* PasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085A29AFD5D8000F4373 /* PasswordTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0545E8E829AD0A1700963D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		05DF085629AFBCFC000F4373 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		05DF085A29AFD5D8000F4373 /* PasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
 				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
 				05DF085629AFBCFC000F4373 /* TabBarController.swift */,
+				05DF085A29AFD5D8000F4373 /* PasswordTableViewController.swift */,
 				05DF085829AFC7BB000F4373 /* HomeViewController.swift */,
 				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
 				0545E8E829AD0A1700963D40 /* Info.plist */,
@@ -141,6 +144,7 @@
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
 				0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */,
 				05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */,
+				05DF085B29AFD5D8000F4373 /* PasswordTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
