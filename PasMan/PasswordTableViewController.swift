@@ -5,6 +5,8 @@ class PasswordTableViewController: UIViewController {
     let passwordsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.separatorStyle = .none
+        tableView.register(PasswordTableViewCell.self, forCellReuseIdentifier: PasswordTableViewCell.identifier)
         return tableView
     }()
 
@@ -30,6 +32,9 @@ class PasswordTableViewController: UIViewController {
 
 extension PasswordTableViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
 }
 
 extension PasswordTableViewController: UITableViewDataSource {
@@ -39,6 +44,12 @@ extension PasswordTableViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: PasswordTableViewCell.identifier) as? PasswordTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.titleLabel.text = "Title Label"
+        cell.loginLabel.text = "Login Label"
+        return cell
     }
 }
