@@ -2,6 +2,52 @@ import UIKit
 
 class PasswordAddingViewController: UIViewController {
     
+    lazy var titleTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter title here..."
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(textField)
+        return textField
+    }()
+    
+    lazy var loginTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter login here..."
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(textField)
+        return textField
+    }()
+    
+    lazy var passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter password here..."
+        textField.font = UIFont.systemFont(ofSize: 15)
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.autocorrectionType = UITextAutocorrectionType.no
+        textField.keyboardType = UIKeyboardType.default
+        textField.returnKeyType = UIReturnKeyType.done
+        textField.clearButtonMode = UITextField.ViewMode.whileEditing
+        textField.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        textField.isSecureTextEntry = true
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(textField)
+        return textField
+    }()
+    
     lazy var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Save password", for: .normal)
@@ -24,6 +70,9 @@ class PasswordAddingViewController: UIViewController {
         view.backgroundColor = .white
         
         setSaveButtonConstraints()
+        setTitleTextFieldConstraints()
+        setLoginTextFieldConstraints()
+        setPasswordTextFieldConstraints()
     }
     
     @objc
@@ -34,7 +83,28 @@ class PasswordAddingViewController: UIViewController {
     func setSaveButtonConstraints() {
         saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        saveButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 60).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setTitleTextFieldConstraints() {
+        titleTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        titleTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        titleTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        titleTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setLoginTextFieldConstraints() {
+        loginTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        loginTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        loginTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 5).isActive = true
+        loginTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setPasswordTextFieldConstraints() {
+        passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 5).isActive = true
+        passwordTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
