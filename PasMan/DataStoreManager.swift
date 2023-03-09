@@ -4,7 +4,7 @@ class DataStoreManager {
     
     lazy var persistentContainer: NSPersistentContainer = {
 
-        let container = NSPersistentContainer(name: "testCoreData")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -25,5 +25,15 @@ class DataStoreManager {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func createPasswordModel(title: String, login: String, password: String) {
+        
+        let passwordModel = PasswordModel(context: viewContext)
+        passwordModel.title = title
+        passwordModel.login = login
+        passwordModel.password = password
+        
+        try? viewContext.save()
     }
 }
