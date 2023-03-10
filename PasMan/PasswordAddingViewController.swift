@@ -64,6 +64,9 @@ class PasswordAddingViewController: UIViewController {
         self.view.addSubview(button)
         return button
     }()
+    
+    var reloadDataDelegate: ReloadDataDelegate?
+    private let dataStoreManager = DataStoreManager.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +80,14 @@ class PasswordAddingViewController: UIViewController {
     
     @objc
     func savePasswordButtonClick(sender: Any) {
+        
+        guard let title = titleTextField.text,
+              let login = loginTextField.text,
+              let password = passwordTextField.text else { return }
+        
+        dataStoreManager.createPasswordModel(title: title, login: login, password: password)
+        reloadDataDelegate?.reloadData()
+        
         dismiss(animated: true)
     }
     

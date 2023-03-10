@@ -2,6 +2,10 @@ import CoreData
 
 class DataStoreManager {
     
+    static var shared: DataStoreManager  = DataStoreManager()
+    
+    private init() {}
+    
     lazy var persistentContainer: NSPersistentContainer = {
 
         let container = NSPersistentContainer(name: "Model")
@@ -35,5 +39,12 @@ class DataStoreManager {
         passwordModel.password = password
         
         try? viewContext.save()
+    }
+}
+
+extension DataStoreManager: NSCopying {
+
+    func copy(with zone: NSZone? = nil) -> Any {
+        return self
     }
 }

@@ -17,17 +17,21 @@ class TabBarController: UITabBarController {
         tabBar.addSubview(button)
         return button
     }()
+    
+    private let homeVC = HomeViewController()
+    private let passwordAddingVC = PasswordAddingViewController()
+    private let passwordTVC = PasswordTableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         delegate = self
+        
+        let homeNC = UINavigationController(rootViewController: homeVC)
+        let passwordAddingNC = UINavigationController(rootViewController: passwordAddingVC)
+        let passwordTableNC = UINavigationController(rootViewController: passwordTVC)
 
-        let homeVC = UINavigationController(rootViewController: HomeViewController())
-        let passwordAddingVC = UINavigationController(rootViewController: PasswordAddingViewController())
-        let passwordTVC = UINavigationController(rootViewController: PasswordTableViewController())
-
-        setViewControllers([homeVC, passwordAddingVC, passwordTVC], animated: false)
+        setViewControllers([homeNC, passwordAddingNC, passwordTableNC], animated: false)
         
         tabBar.tintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -50,6 +54,7 @@ class TabBarController: UITabBarController {
     @objc
     func presentPasswordAddingVC(sender: Any) {
         let destinationVC = PasswordAddingViewController()
+        destinationVC.reloadDataDelegate = passwordTVC
         present(destinationVC, animated: true)
     }
 }

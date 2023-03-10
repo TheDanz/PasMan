@@ -3,8 +3,8 @@ import CoreData
 
 class PasswordTableViewController: UIViewController {
     
-    let dataStoreManager = DataStoreManager()
-    var fetchedResultsController: NSFetchedResultsController<PasswordModel>!
+    private let dataStoreManager = DataStoreManager.shared
+    private var fetchedResultsController: NSFetchedResultsController<PasswordModel>!
     
     let passwordsTableView: UITableView = {
         let tableView = UITableView()
@@ -85,8 +85,22 @@ extension PasswordTableViewController: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         switch type {
+        case .insert:
+            if let indexPath = indexPath {
+                passwordsTableView.insertRows(at: [indexPath], with: .automatic)
+            }
         default:
             break
+        }
+    }
+}
+
+
+extension PasswordTableViewController: ReloadDataDelegate {
+    
+    func reloadData() {
+        DispatchQueue.main.async {
+            self.passwordsTableView.reloadData()
         }
     }
 }
