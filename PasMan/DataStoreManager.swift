@@ -40,6 +40,10 @@ class DataStoreManager {
         
         try? viewContext.save()
     }
+    
+    func deletePasswordModel(object: PasswordModel) {
+        viewContext.delete(object)
+    }
 }
 
 extension DataStoreManager: NSCopying {

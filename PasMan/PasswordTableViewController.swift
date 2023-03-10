@@ -76,6 +76,15 @@ extension PasswordTableViewController: UITableViewDataSource {
         cell.loginLabel.text = passwordModel?.login
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+            let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
+            dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
+        }
+    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
@@ -88,6 +97,10 @@ extension PasswordTableViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             if let indexPath = indexPath {
                 passwordsTableView.insertRows(at: [indexPath], with: .automatic)
+            }
+        case .delete:
+            if let indexPath = indexPath {
+                passwordsTableView.deleteRows(at: [indexPath], with: .automatic)
             }
         default:
             break
