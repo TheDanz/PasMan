@@ -43,6 +43,7 @@ class DataStoreManager {
     
     func deletePasswordModel(object: PasswordModel) {
         viewContext.delete(object)
+        try? viewContext.save()
     }
 }
 
