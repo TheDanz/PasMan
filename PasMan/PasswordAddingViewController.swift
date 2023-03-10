@@ -85,6 +85,18 @@ class PasswordAddingViewController: UIViewController {
               let login = loginTextField.text,
               let password = passwordTextField.text else { return }
         
+        guard !title.isEmpty,
+              !login.isEmpty,
+              !password.isEmpty else {
+            
+            let alert = UIAlertController(title: nil, message: "Fill in all the fields", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default)
+            alert.addAction(action)
+            
+            present(alert, animated: true)
+            return
+        }
+        
         dataStoreManager.createPasswordModel(title: title, login: login, password: password)
         reloadDataDelegate?.reloadData()
         
