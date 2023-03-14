@@ -1,6 +1,6 @@
 import UIKit
 
-class PasswordDetailsTextView: UIView {
+class PasswordDetailsView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
