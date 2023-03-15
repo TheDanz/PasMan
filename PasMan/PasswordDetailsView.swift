@@ -14,6 +14,8 @@ class PasswordDetailsView: UIView {
     lazy var inputTextView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont(name: "Avenir Next", size: 15)
+        textView.textContainer.maximumNumberOfLines = 1
+        textView.textContainer.lineBreakMode = .byTruncatingTail
         textView.isScrollEnabled = false
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.backgroundColor = .none

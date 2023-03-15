@@ -29,6 +29,7 @@ class PasswordDetailsViewController: UIViewController {
     lazy var additionalInformationView: UIView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Additional Information"
+        passwordDetailsView.inputTextView.textContainer.maximumNumberOfLines = 10
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -63,21 +64,21 @@ class PasswordDetailsViewController: UIViewController {
         titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         titleView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         titleView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        titleView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: 65).isActive = true
     }
     
     func setLoginViewConstraints() {
         loginView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10).isActive = true
         loginView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         loginView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        loginView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        loginView.heightAnchor.constraint(equalToConstant: 65).isActive = true
     }
     
     func setPasswordViewConstraints() {
         passwordView.topAnchor.constraint(equalTo: loginView.bottomAnchor, constant: 10).isActive = true
         passwordView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         passwordView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        passwordView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        passwordView.heightAnchor.constraint(equalToConstant: 65).isActive = true
     }
     
     func setAdditionalInformationViewConstraints() {
