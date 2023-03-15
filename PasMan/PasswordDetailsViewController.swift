@@ -4,7 +4,7 @@ class PasswordDetailsViewController: UIViewController {
     
     lazy var titleView: UIView = {
         let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Website"
+        passwordDetailsView.titleLabel.text = "Title"
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -63,25 +63,28 @@ class PasswordDetailsViewController: UIViewController {
         titleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         titleView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         titleView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        titleView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     func setLoginViewConstraints() {
         loginView.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10).isActive = true
         loginView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         loginView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        loginView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     func setPasswordViewConstraints() {
         passwordView.topAnchor.constraint(equalTo: loginView.bottomAnchor, constant: 10).isActive = true
         passwordView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         passwordView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        passwordView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     func setAdditionalInformationViewConstraints() {
         additionalInformationView.topAnchor.constraint(equalTo: passwordView.bottomAnchor, constant: 10).isActive = true
         additionalInformationView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         additionalInformationView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        additionalInformationView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        additionalInformationView.heightAnchor.constraint(equalToConstant: 250).isActive = true
     }
     
     func setDeleteButtonPasswordConstraints() {

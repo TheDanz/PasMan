@@ -38,14 +38,14 @@ class PasswordDetailsView: UIView {
     func setTitleLabelConstraints() {
         titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
-        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        titleLabel.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     func setInputTextViewConstraints() {
         inputTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-        inputTextView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 0).isActive = true
-        inputTextView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 0).isActive = true
-        inputTextView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.7).isActive = true
+        inputTextView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
+        inputTextView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
+        inputTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
     }
 }
