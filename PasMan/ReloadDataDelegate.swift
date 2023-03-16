@@ -1,3 +1,0 @@
-protocol ReloadDataDelegate {
-    func reloadData()
-}

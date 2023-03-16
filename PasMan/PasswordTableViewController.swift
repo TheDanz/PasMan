@@ -91,6 +91,8 @@ extension PasswordTableViewController: UITableViewDataSource {
         let destinationVC = PasswordDetailsViewController()
         let passwordModel = fetchedResultsController.object(at: indexPath)
         destinationVC.data = passwordModel
+        destinationVC.deletePasswordModelDelegate = self
+        destinationVC.index = indexPath
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
@@ -116,6 +118,7 @@ extension PasswordTableViewController: NSFetchedResultsControllerDelegate {
     }
 }
 
+// MARK: - Delegates
 
 extension PasswordTableViewController: ReloadDataDelegate {
     
@@ -123,5 +126,13 @@ extension PasswordTableViewController: ReloadDataDelegate {
         DispatchQueue.main.async {
             self.passwordsTableView.reloadData()
         }
+    }
+}
+
+extension PasswordTableViewController: DeletePasswordModelDelegate {
+    
+    func deletePasswordModel(at indexPath: IndexPath) {
+        let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
+        dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
     }
 }

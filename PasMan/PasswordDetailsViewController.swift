@@ -59,6 +59,14 @@ class PasswordDetailsViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        let action = UIAction { _ in
+            guard let index = self.index else { return }
+            self.deletePasswordModelDelegate?.deletePasswordModel(at: index)
+            self.navigationController?.popViewController(animated: true)
+        }
+        button.addAction(action, for: .touchUpInside)
+        
         self.contentView.addSubview(button)
         return button
     }()
@@ -73,6 +81,9 @@ class PasswordDetailsViewController: UIViewController {
             }
         }
     }
+    
+    var deletePasswordModelDelegate: DeletePasswordModelDelegate?
+    var index: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
