@@ -7,3 +7,4 @@ protocol ReloadDataDelegate {
 protocol DeletePasswordModelDelegate {
     func deletePasswordModel(at indexPath: IndexPath)
 }
+

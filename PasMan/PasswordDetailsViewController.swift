@@ -19,6 +19,7 @@ class PasswordDetailsViewController: UIViewController {
     lazy var titleView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Title"
+        passwordDetailsView.inputTextView.delegate = self
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -27,6 +28,7 @@ class PasswordDetailsViewController: UIViewController {
     lazy var loginView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Username"
+        passwordDetailsView.inputTextView.delegate = self
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -35,15 +37,17 @@ class PasswordDetailsViewController: UIViewController {
     lazy var passwordView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Password"
+        passwordDetailsView.inputTextView.delegate = self
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
     }()
     
-    lazy var additionalInformationView: UIView = {
+    lazy var additionalInformationView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Additional Information"
         passwordDetailsView.inputTextView.textContainer.maximumNumberOfLines = 10
+        passwordDetailsView.inputTextView.delegate = self
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -78,6 +82,7 @@ class PasswordDetailsViewController: UIViewController {
                 self.titleView.inputTextView.text = data.title
                 self.loginView.inputTextView.text = data.login
                 self.passwordView.inputTextView.text = data.password
+                self.additionalInformationView.inputTextView.text = data.additionalInformation
             }
         }
     }
@@ -149,5 +154,32 @@ class PasswordDetailsViewController: UIViewController {
         deletePasswordButton.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
         deletePasswordButton.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -20).isActive = true
         deletePasswordButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+}
+
+extension PasswordDetailsViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        switch textView {
+        case titleView.inputTextView:
+            if let text = self.titleView.inputTextView.text {
+                DataStoreManager.shared.updateTitle(for: data!, title: text)
+            }
+        case loginView.inputTextView:
+            if let text = self.loginView.inputTextView.text {
+                DataStoreManager.shared.updateLogin(for: data!, login: text)
+            }
+        case passwordView.inputTextView:
+            if let text = self.passwordView.inputTextView.text {
+                DataStoreManager.shared.updatePassword(for: data!, password: text)
+            }
+        case additionalInformationView.inputTextView:
+            if let text = self.additionalInformationView.inputTextView.text {
+                DataStoreManager.shared.updateAdditionalInformation(for: data!, information: text)
+            }
+        default:
+            break
+        }
     }
 }

@@ -45,6 +45,26 @@ class DataStoreManager {
         viewContext.delete(object)
         try? viewContext.save()
     }
+    
+    func updateTitle(for object: PasswordModel, title: String) {
+        object.title = title
+        try? viewContext.save()
+    }
+    
+    func updateLogin(for object: PasswordModel, login: String) {
+        object.login = login
+        try? viewContext.save()
+    }
+    
+    func updatePassword(for object: PasswordModel, password: String) {
+        object.password = password
+        try? viewContext.save()
+    }
+    
+    func updateAdditionalInformation(for object: PasswordModel, information: String) {
+        object.additionalInformation = information
+        try? viewContext.save()
+    }
 }
 
 extension DataStoreManager: NSCopying {

@@ -8,9 +8,10 @@ extension PasswordModel {
         return NSFetchRequest<PasswordModel>(entityName: "PasswordModel")
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var login: String?
     @NSManaged public var password: String?
+    @NSManaged public var title: String?
+    @NSManaged public var additionalInformation: String?
 
 }
 
