@@ -53,7 +53,7 @@ class PasswordAddingViewController: UIViewController {
         button.setTitle("Save password", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
-        button.backgroundColor = UIColor(red: 0.823, green: 0.867, blue: 0.751, alpha: 1)
+        button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         button.layer.cornerRadius = 12
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
         button.layer.shadowOpacity = 1
