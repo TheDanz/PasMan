@@ -89,6 +89,8 @@ extension PasswordTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let destinationVC = PasswordDetailsViewController()
+        let passwordModel = fetchedResultsController.object(at: indexPath)
+        destinationVC.data = passwordModel
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

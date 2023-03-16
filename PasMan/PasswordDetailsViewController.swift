@@ -16,7 +16,7 @@ class PasswordDetailsViewController: UIViewController {
         return view
     }()
     
-    lazy var titleView: UIView = {
+    lazy var titleView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Title"
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,7 +24,7 @@ class PasswordDetailsViewController: UIViewController {
         return passwordDetailsView
     }()
     
-    lazy var loginView: UIView = {
+    lazy var loginView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Username"
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ class PasswordDetailsViewController: UIViewController {
         return passwordDetailsView
     }()
     
-    lazy var passwordView: UIView = {
+    lazy var passwordView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Password"
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,6 +62,17 @@ class PasswordDetailsViewController: UIViewController {
         self.contentView.addSubview(button)
         return button
     }()
+    
+    var data: PasswordModel? {
+        didSet {
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.titleView.inputTextView.text = data.title
+                self.loginView.inputTextView.text = data.login
+                self.passwordView.inputTextView.text = data.password
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
