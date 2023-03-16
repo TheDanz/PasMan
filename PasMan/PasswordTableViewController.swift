@@ -85,6 +85,12 @@ extension PasswordTableViewController: UITableViewDataSource {
             dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let destinationVC = PasswordDetailsViewController()
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
 }
 
 // MARK: - NSFetchedResultsControllerDelegate
