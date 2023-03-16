@@ -1,3 +1,4 @@
+import UIKit
 import Foundation
 
 protocol ReloadDataDelegate {
@@ -8,3 +9,6 @@ protocol DeletePasswordModelDelegate {
     func deletePasswordModel(at indexPath: IndexPath)
 }
 
+protocol ReloadRowsDelegate {
+    func reloadRows(indexPath: [IndexPath], animation: UITableView.RowAnimation)
+}

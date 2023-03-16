@@ -88,6 +88,7 @@ class PasswordDetailsViewController: UIViewController {
     }
     
     var deletePasswordModelDelegate: DeletePasswordModelDelegate?
+    var reloadRowsDelegate: ReloadRowsDelegate?
     var index: IndexPath?
 
     override func viewDidLoad() {
@@ -101,6 +102,13 @@ class PasswordDetailsViewController: UIViewController {
         setupPasswordViewConstraints()
         setupAdditionalInformationViewConstraints()
         setupDeleteButtonPasswordConstraints()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if let index = index {
+            reloadRowsDelegate?.reloadRows(indexPath: [index], animation: .automatic)
+        }
     }
     
     private func setupScrollViewConstraints() {
