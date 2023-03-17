@@ -55,6 +55,7 @@ class TabBarController: UITabBarController {
     func presentPasswordAddingVC(sender: Any) {
         let destinationVC = PasswordAddingViewController()
         destinationVC.reloadDataDelegate = passwordTVC
+        destinationVC.updateNumberOfPasswordsLabelDelegate = homeVC
         present(destinationVC, animated: true)
     }
 }

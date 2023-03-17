@@ -66,6 +66,7 @@ class PasswordAddingViewController: UIViewController {
     }()
     
     var reloadDataDelegate: ReloadDataDelegate?
+    var updateNumberOfPasswordsLabelDelegate: UpdateNumberOfPasswordsLabelDelegate?
     private let dataStoreManager = DataStoreManager.shared
 
     override func viewDidLoad() {
@@ -99,6 +100,7 @@ class PasswordAddingViewController: UIViewController {
         
         dataStoreManager.createPasswordModel(title: title, login: login, password: password)
         reloadDataDelegate?.reloadData()
+        updateNumberOfPasswordsLabelDelegate?.updateNumberOfPasswordsLabel()
         
         dismiss(animated: true)
     }

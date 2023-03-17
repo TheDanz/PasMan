@@ -12,3 +12,7 @@ protocol DeletePasswordModelDelegate {
 protocol ReloadRowsDelegate {
     func reloadRows(indexPath: [IndexPath], animation: UITableView.RowAnimation)
 }
+
+protocol UpdateNumberOfPasswordsLabelDelegate {
+    func updateNumberOfPasswordsLabel()
+}

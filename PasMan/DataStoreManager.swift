@@ -31,6 +31,12 @@ class DataStoreManager {
         }
     }
     
+    var countOfPasswords: Int {
+        get {
+            return try! viewContext.fetch(PasswordModel.fetchRequest()).count
+        }
+    }
+    
     func createPasswordModel(title: String, login: String, password: String) {
         
         let passwordModel = PasswordModel(context: viewContext)
