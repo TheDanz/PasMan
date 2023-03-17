@@ -35,6 +35,7 @@ class TabBarController: UITabBarController {
         
         tabBar.tintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        tabBar.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.2)
         
         if let items = tabBar.items {
             
