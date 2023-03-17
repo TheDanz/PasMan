@@ -12,7 +12,7 @@ class PasswordTableViewCell: UITableViewCell {
         view.layer.shadowOpacity = 1
         view.layer.shadowRadius = 4
         view.layer.shadowOffset = CGSize(width: 1, height: 5)
-        view.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        view.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.8)
         view.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(view)
         return view

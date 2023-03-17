@@ -58,9 +58,9 @@ class PasswordDetailsViewController: UIViewController {
         button.layer.cornerRadius = 12
         button.layer.borderWidth = 0.3
         button.layer.borderColor = UIColor.red.cgColor
-        button.backgroundColor = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+        button.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.2)
+        button.setTitleColor(.systemRed, for: .normal)
         button.setTitle("Delete password", for: .normal)
-        button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
         
@@ -93,7 +93,7 @@ class PasswordDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         
         setupScrollViewConstraints()
         setupContentViewConstraints()

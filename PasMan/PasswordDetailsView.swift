@@ -30,7 +30,7 @@ class PasswordDetailsView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        backgroundColor = #colorLiteral(red: 0.96, green: 0.97, blue: 0.99, alpha: 1)
+        backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         layer.cornerRadius = 12
         
         setTitleLabelConstraints()
