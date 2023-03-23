@@ -7,23 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0517247829B905DC0003EE27 /* Model.xcdatamodeld */; };
+		0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0517247F29B9088A0003EE27 /* DataStoreManager.swift */; };
 		0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545E8DA29AD0A1500963D40 /* AppDelegate.swift */; };
 		0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */; };
-		0545E8DF29AD0A1500963D40 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545E8DE29AD0A1500963D40 /* ViewController.swift */; };
-		0545E8E229AD0A1500963D40 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E029AD0A1500963D40 /* Main.storyboard */; };
 		0545E8E429AD0A1700963D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E329AD0A1700963D40 /* Assets.xcassets */; };
 		0545E8E729AD0A1700963D40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */; };
+		055DAD7D29BF96B9007DFEF1 /* PasswordDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD7C29BF96B9007DFEF1 /* PasswordDetailsViewController.swift */; };
+		055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */; };
+		056E160129BB6EDC003D6662 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056E160029BB6EDC003D6662 /* Delegates.swift */; };
+		05A0C8E029C3975800A349DD /* PasswordModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */; };
+		05A0C8E129C3975800A349DD /* PasswordModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */; };
+		05D65E5029B12C20005DC1D2 /* PasswordAddingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D65E4F29B12C20005DC1D2 /* PasswordAddingViewController.swift */; };
+		05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085629AFBCFC000F4373 /* TabBarController.swift */; };
+		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
+		05DF085B29AFD5D8000F4373 /* PasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085A29AFD5D8000F4373 /* PasswordTableViewController.swift */; };
+		05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0517247929B905DC0003EE27 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		0517247F29B9088A0003EE27 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		0545E8D729AD0A1500963D40 /* PasMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0545E8DA29AD0A1500963D40 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		0545E8DE29AD0A1500963D40 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0545E8E129AD0A1500963D40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0545E8E329AD0A1700963D40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0545E8E629AD0A1700963D40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0545E8E829AD0A1700963D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		055DAD7C29BF96B9007DFEF1 /* PasswordDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailsViewController.swift; sourceTree = "<group>"; };
+		055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailsView.swift; sourceTree = "<group>"; };
+		056E160029BB6EDC003D6662 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
+		05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05D65E4F29B12C20005DC1D2 /* PasswordAddingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordAddingViewController.swift; sourceTree = "<group>"; };
+		05DF085629AFBCFC000F4373 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		05DF085A29AFD5D8000F4373 /* PasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewController.swift; sourceTree = "<group>"; };
+		05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +78,21 @@
 			children = (
 				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
 				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
-				0545E8DE29AD0A1500963D40 /* ViewController.swift */,
-				0545E8E029AD0A1500963D40 /* Main.storyboard */,
-				0545E8E329AD0A1700963D40 /* Assets.xcassets */,
+				05DF085629AFBCFC000F4373 /* TabBarController.swift */,
+				05D65E4F29B12C20005DC1D2 /* PasswordAddingViewController.swift */,
+				055DAD7C29BF96B9007DFEF1 /* PasswordDetailsViewController.swift */,
+				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+				05DF085A29AFD5D8000F4373 /* PasswordTableViewController.swift */,
+				05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */,
+				05DF085829AFC7BB000F4373 /* HomeViewController.swift */,
+				05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */,
+				05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */,
+				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
+				056E160029BB6EDC003D6662 /* Delegates.swift */,
 				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
 				0545E8E829AD0A1700963D40 /* Info.plist */,
+				0517247829B905DC0003EE27 /* Model.xcdatamodeld */,
+				0545E8E329AD0A1700963D40 /* Assets.xcassets */,
 			);
 			path = PasMan;
 			sourceTree = "<group>";
@@ -127,7 +157,6 @@
 			files = (
 				0545E8E729AD0A1700963D40 /* LaunchScreen.storyboard in Resources */,
 				0545E8E429AD0A1700963D40 /* Assets.xcassets in Resources */,
-				0545E8E229AD0A1500963D40 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +167,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0545E8DF29AD0A1500963D40 /* ViewController.swift in Sources */,
+				055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */,
+				05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */,
 				0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */,
+				05A0C8E029C3975800A349DD /* PasswordModel+CoreDataClass.swift in Sources */,
+				05A0C8E129C3975800A349DD /* PasswordModel+CoreDataProperties.swift in Sources */,
+				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
+				0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */,
+				0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */,
+				055DAD7D29BF96B9007DFEF1 /* PasswordDetailsViewController.swift in Sources */,
 				0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */,
+				05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */,
+				05D65E5029B12C20005DC1D2 /* PasswordAddingViewController.swift in Sources */,
+				05DF085B29AFD5D8000F4373 /* PasswordTableViewController.swift in Sources */,
+				056E160129BB6EDC003D6662 /* Delegates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0545E8E029AD0A1500963D40 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0545E8E129AD0A1500963D40 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -290,11 +322,12 @@
 				DEVELOPMENT_TEAM = K576QY7WLK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PasMan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PasMan;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +335,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.DanilRyumin.PasMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -318,11 +354,12 @@
 				DEVELOPMENT_TEAM = K576QY7WLK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PasMan/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PasMan;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +367,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.DanilRyumin.PasMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +398,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0517247829B905DC0003EE27 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0517247929B905DC0003EE27 /* Model.xcdatamodel */,
+			);
+			currentVersion = 0517247929B905DC0003EE27 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0545E8CF29AD0A1500963D40 /* Project object */;
 }
