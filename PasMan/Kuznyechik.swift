@@ -44,4 +44,28 @@ final class Kuznyechik {
     
     private let iterationСonstants: [[UInt8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
     private let roundKeys: [[UInt8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
+    
+    func XOR(_ first: [UInt8], _ second: [UInt8]) -> [UInt8] {
+        
+        var result: [UInt8] = Array(repeating: 0, count: blockSize)
+        
+        for i in 0..<blockSize {
+            result[i] = first[i] ^ second[i]
+        }
+        
+        return result
+    }
+    
+    func nonLinearTransformation(data: [UInt8]) -> [UInt8] {
+        
+        var result: [UInt8] = Array(repeating: 0, count: data.count)
+        
+        for i in 0..<blockSize {
+            
+            let index = Int(data[i])
+            result[i] = nonLinearTransformationTable[index]
+        }
+        
+        return result
+    }
 }
