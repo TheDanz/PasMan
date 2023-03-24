@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-class PasswordTableViewController: UIViewController {
+class TableViewController: UIViewController {
     
     private let dataStoreManager = DataStoreManager.shared
     private var fetchedResultsController: NSFetchedResultsController<PasswordModel>!
@@ -49,14 +49,14 @@ class PasswordTableViewController: UIViewController {
 
 // MARK: - Table View Methods
 
-extension PasswordTableViewController: UITableViewDelegate {
+extension TableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
     }
 }
 
-extension PasswordTableViewController: UITableViewDataSource {
+extension TableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -87,7 +87,7 @@ extension PasswordTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let destinationVC = PasswordDetailsViewController()
+        let destinationVC = DetailsViewController()
         let passwordModel = fetchedResultsController.object(at: indexPath)
         destinationVC.data = passwordModel
         destinationVC.deletePasswordModelDelegate = self
@@ -99,7 +99,7 @@ extension PasswordTableViewController: UITableViewDataSource {
 
 // MARK: - NSFetchedResultsControllerDelegate
 
-extension PasswordTableViewController: NSFetchedResultsControllerDelegate {
+extension TableViewController: NSFetchedResultsControllerDelegate {
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
@@ -120,7 +120,7 @@ extension PasswordTableViewController: NSFetchedResultsControllerDelegate {
 
 // MARK: - Delegates
 
-extension PasswordTableViewController: ReloadDataDelegate {
+extension TableViewController: ReloadDataDelegate {
     
     func reloadData() {
         DispatchQueue.main.async {
@@ -129,7 +129,7 @@ extension PasswordTableViewController: ReloadDataDelegate {
     }
 }
 
-extension PasswordTableViewController: DeletePasswordModelDelegate {
+extension TableViewController: DeletePasswordModelDelegate {
     
     func deletePasswordModel(at indexPath: IndexPath) {
         let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
@@ -137,7 +137,7 @@ extension PasswordTableViewController: DeletePasswordModelDelegate {
     }
 }
 
-extension PasswordTableViewController: ReloadRowsDelegate {
+extension TableViewController: ReloadRowsDelegate {
     
     func reloadRows(indexPath: [IndexPath], animation: UITableView.RowAnimation) {
         passwordsTableView.reloadRows(at: indexPath, with: animation)

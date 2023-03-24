@@ -1,6 +1,6 @@
 import UIKit
 
-class PasswordDetailsViewController: UIViewController {
+class DetailsViewController: UIViewController {
     
     lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -165,7 +165,7 @@ class PasswordDetailsViewController: UIViewController {
     }
 }
 
-extension PasswordDetailsViewController: UITextViewDelegate {
+extension DetailsViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         
