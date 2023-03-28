@@ -74,4 +74,64 @@ final class Kuznyechik {
         
         return result
     }
+    
+    private func GFMultiplication(_ first: Int8, _ second: Int8) -> Int8 {
+        
+        var first = first
+        var second = second
+        var result = Int8()
+        var bit = Int8()
+          
+        for _ in 0..<8 {
+              
+            if (second & 1) == 1 {
+                result ^= first
+            }
+              
+            bit = first & -128
+            first <<= 1
+              
+            if bit < 0 {
+                first ^= -61
+                
+            }
+            
+            second >>= 1
+        }
+          
+        return result
+    }
+    
+    private func R(data: [Int8]) -> [Int8] {
+          
+        var a15 = Int8()
+        var result: [Int8] = Array(repeating: 0, count: 16)
+          
+        for i in stride(from: 15, through: 0, by: -1) {
+              
+            if i == 0 {
+                result[15] = data[i]
+            } else {
+                result[i - 1] = data[i]
+            }
+            
+            a15 ^= GFMultiplication(data[i], linearTransformationVector[i])
+        }
+        
+        result[15] = a15
+        return result
+    }
+      
+    private func linearTransformation(data: [Int8]) -> [Int8] {
+
+        var data = data
+        var result: [Int8] = Array(repeating: 0, count: data.count)
+
+        for _ in 0..<16 {
+            data = R(data: data)
+        }
+
+        result = data
+        return result
+    }
 }
