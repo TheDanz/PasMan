@@ -44,8 +44,8 @@ final class Kuznyechik {
         0x12, 0x1A, 0x48, 0x68, 0xF5, 0x81, 0x8B, 0xC7, 0xD6, 0x20, 0x0A, 0x08, 0x00, 0x4C, 0xD7, 0x74
      ].map { Int8(bitPattern: $0) }
     
-    private let iterationСonstants: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
-    private let roundKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
+    private var iterationСonstants: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
+    private var roundKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
     
     private func XOR(_ first: [Int8], _ second: [Int8]) -> [Int8] {
 
@@ -133,5 +133,50 @@ final class Kuznyechik {
 
         result = data
         return result
+    }
+    
+    private func generateIterationConstants() {
+        
+        var iter_num: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16), count: 32)
+        
+        for i in 0..<32 {
+            iter_num[i][0] = Int8(i + 1)
+        }
+    
+        for i in 0..<32 {
+            iterationСonstants[i] = linearTransformation(data: iter_num[i])
+        }
+    }
+    
+    private func FeistelCell(key1: [Int8], key2: [Int8], iterationConst: [Int8]) -> [[Int8]] {
+        
+        var resultF = XOR(key1, iterationConst)
+        resultF = nonLinearTransformation(data: resultF)
+        resultF = linearTransformation(data: resultF)
+        
+        let outputKey1 = XOR(resultF, key2)
+        let outputKey2 = key1
+        let outputKey = [outputKey1, outputKey2]
+        return outputKey
+    }
+    
+    private func generateRoundKeys(key1: [Int8], key2: [Int8]) {
+        
+        generateIterationConstants()
+        
+        roundKeys[0] = key1
+        roundKeys[1] = key2
+        
+        var pairOfKeys = [key1, key2]
+         
+        for i in 0..<4 {
+            
+            for j in 0..<8 {
+                pairOfKeys = FeistelCell(key1: pairOfKeys[0], key2: pairOfKeys[1], iterationConst: iterationСonstants[j + 8 * i])
+            }
+            
+            roundKeys[2 * i + 2] = pairOfKeys[0]
+            roundKeys[2 * i + 3] = pairOfKeys[1]
+        }
     }
 }
