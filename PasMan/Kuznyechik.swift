@@ -160,7 +160,7 @@ final class Kuznyechik {
         return outputKey
     }
     
-    private func generateRoundKeys(key1: [Int8], key2: [Int8]) {
+    func generateRoundKeys(key1: [Int8], key2: [Int8]) {
         
         generateIterationConstants()
         
@@ -180,7 +180,7 @@ final class Kuznyechik {
         }
     }
     
-     func inverseNonLinearTransformation(data: [Int8]) -> [Int8] {
+    private func inverseNonLinearTransformation(data: [Int8]) -> [Int8] {
         
         var result: [Int8] = Array(repeating: 0, count: data.count)
 
@@ -197,7 +197,7 @@ final class Kuznyechik {
         return result
     }
     
-     func inverseR(data: [Int8]) -> [Int8] {
+    private func inverseR(data: [Int8]) -> [Int8] {
         
         var a0 = data[15]
         var result: [Int8] = Array(repeating: 0, count: 16)
@@ -212,7 +212,7 @@ final class Kuznyechik {
         return result
     }
     
-     func inverseLinearTransformation(data: [Int8]) -> [Int8] {
+    private func inverseLinearTransformation(data: [Int8]) -> [Int8] {
         
         var data = data
         var result: [Int8] = Array(repeating: 0, count: data.count)
@@ -222,6 +222,36 @@ final class Kuznyechik {
         }
 
         result = data
+        return result
+    }
+    
+    func encrypt(data: [Int8]) -> [Int8] {
+        
+        var result: [Int8] = data
+        
+        for i in 0..<9 {
+            
+            result = XOR(roundKeys[i], result)
+            result = nonLinearTransformation(data: result)
+            result = linearTransformation(data: result)
+        }
+        
+        result = XOR(result, roundKeys[9])
+        return result
+    }
+    
+    func decrypt(data: [Int8]) -> [Int8] {
+        
+        var result: [Int8] = data
+        result  = XOR(result, roundKeys[9])
+        
+        for i in stride(from: 8, through: 0, by: -1) {
+            
+            result = inverseLinearTransformation(data: result)
+            result = inverseNonLinearTransformation(data: result)
+            result = XOR(roundKeys[i], result)
+        }
+        
         return result
     }
 }
