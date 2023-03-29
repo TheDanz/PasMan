@@ -179,4 +179,49 @@ final class Kuznyechik {
             roundKeys[2 * i + 3] = pairOfKeys[1]
         }
     }
+    
+     func inverseNonLinearTransformation(data: [Int8]) -> [Int8] {
+        
+        var result: [Int8] = Array(repeating: 0, count: data.count)
+
+        for i in 0..<blockSize {
+
+            var index = Int(data[i])
+            if index < 0 {
+                index += 256
+            }
+            
+            result[i] = inverseNonLinearTransformationTable[index]
+        }
+        
+        return result
+    }
+    
+     func inverseR(data: [Int8]) -> [Int8] {
+        
+        var a0 = data[15]
+        var result: [Int8] = Array(repeating: 0, count: 16)
+        
+        for i in 1..<16 {
+            
+            result[i] = data[i - 1]
+            a0 ^= GFMultiplication(result[i], linearTransformationVector[i])
+        }
+        
+        result[0] = a0
+        return result
+    }
+    
+     func inverseLinearTransformation(data: [Int8]) -> [Int8] {
+        
+        var data = data
+        var result: [Int8] = Array(repeating: 0, count: data.count)
+
+        for _ in 0..<16 {
+            data = inverseR(data: data)
+        }
+
+        result = data
+        return result
+    }
 }
