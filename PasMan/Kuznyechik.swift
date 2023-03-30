@@ -2,11 +2,11 @@ final class Kuznyechik {
     
     private let blockSize = 16
     
-    private let linearTransformationVector: [Int8] = [
+    private let lVector: [Int8] = [
         0x01, 0x94, 0x20, 0x85, 0x10, 0xC2, 0xC0, 0x01, 0xFB, 0x01, 0xC0, 0xC2, 0x10, 0x85, 0x20, 0x94
     ].map { Int8(bitPattern: $0) }
         
-    private let nonLinearTransformationTable: [Int8] = [
+    private let Pi: [Int8] = [
         0xFC, 0xEE, 0xDD, 0x11, 0xCF, 0x6E, 0x31, 0x16, 0xFB, 0xC4, 0xFA, 0xDA, 0x23, 0xC5, 0x04, 0x4D,
         0xE9, 0x77, 0xF0, 0xDB, 0x93, 0x2E, 0x99, 0xBA, 0x17, 0x36, 0xF1, 0xBB, 0x14, 0xCD, 0x5F, 0xC1,
         0xF9, 0x18, 0x65, 0x5A, 0xE2, 0x5C, 0xEF, 0x21, 0x81, 0x1C, 0x3C, 0x42, 0x8B, 0x01, 0x8E, 0x4F,
@@ -25,7 +25,7 @@ final class Kuznyechik {
         0x59, 0xA6, 0x74, 0xD2, 0xE6, 0xF4, 0xB4, 0xC0, 0xD1, 0x66, 0xAF, 0xC2, 0x39, 0x4B, 0x63, 0xB6
     ].map { Int8(bitPattern: $0) }
     
-    private let inverseNonLinearTransformationTable: [Int8] = [
+    private let inversePi: [Int8] = [
         0xA5, 0x2D, 0x32, 0x8F, 0x0E, 0x30, 0x38, 0xC0, 0x54, 0xE6, 0x9E, 0x39, 0x55, 0x7E, 0x52, 0x91,
         0x64, 0x03, 0x57, 0x5A, 0x1C, 0x60, 0x07, 0x18, 0x21, 0x72, 0xA8, 0xD1, 0x29, 0xC6, 0xA4, 0x3F,
         0xE0, 0x27, 0x8D, 0x0C, 0x82, 0xEA, 0xAE, 0xB4, 0x9A, 0x63, 0x49, 0xE5, 0x42, 0xE4, 0x15, 0xB7,
@@ -45,9 +45,9 @@ final class Kuznyechik {
      ].map { Int8(bitPattern: $0) }
     
     private var iterationСonstants: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
-    private var roundKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
+    private var iterationKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
     
-    private func XOR(_ first: [Int8], _ second: [Int8]) -> [Int8] {
+    private func X(_ first: [Int8], _ second: [Int8]) -> [Int8] {
 
         var result: [Int8] = Array(repeating: 0, count: blockSize)
 
@@ -58,21 +58,38 @@ final class Kuznyechik {
         return result
     }
     
-    private func nonLinearTransformation(data: [Int8]) -> [Int8] {
+    private func S(_ input: [Int8]) -> [Int8] {
 
-        var result: [Int8] = Array(repeating: 0, count: data.count)
+        var output: [Int8] = Array(repeating: 0, count: input.count)
 
         for i in 0..<blockSize {
 
-            var index = Int(data[i])
+            var index = Int(input[i])
             if index < 0 {
                 index += 256
             }
             
-            result[i] = nonLinearTransformationTable[index]
+            output[i] = Pi[index]
         }
         
-        return result
+        return output
+    }
+    
+    private func inverseS(_ input: [Int8]) -> [Int8] {
+        
+        var output: [Int8] = Array(repeating: 0, count: input.count)
+
+        for i in 0..<blockSize {
+
+            var index = Int(input[i])
+            if index < 0 {
+                index += 256
+            }
+            
+            output[i] = inversePi[index]
+        }
+        
+        return output
     }
     
     private func GFMultiplication(_ first: Int8, _ second: Int8) -> Int8 {
@@ -93,7 +110,6 @@ final class Kuznyechik {
               
             if bit < 0 {
                 first ^= -61
-                
             }
             
             second >>= 1
@@ -102,156 +118,132 @@ final class Kuznyechik {
         return result
     }
     
-    private func R(data: [Int8]) -> [Int8] {
+    private func R(_ input: [Int8]) -> [Int8] {
           
+        var output: [Int8] = Array(repeating: 0, count: 16)
         var a15 = Int8()
-        var result: [Int8] = Array(repeating: 0, count: 16)
           
         for i in stride(from: 15, through: 0, by: -1) {
               
-            if i == 0 {
-                result[15] = data[i]
-            } else {
-                result[i - 1] = data[i]
+            if i != 0 {
+                output[i - 1] = input[i]
             }
             
-            a15 ^= GFMultiplication(data[i], linearTransformationVector[i])
+            a15 ^= GFMultiplication(input[i], lVector[i])
         }
         
-        result[15] = a15
-        return result
+        output[15] = a15
+        return output
+    }
+    
+    private func inverseR(_ input: [Int8]) -> [Int8] {
+        
+        var output: [Int8] = Array(repeating: 0, count: 16)
+        var a0 = input[15]
+        
+        for i in 1..<16 {
+            
+            output[i] = input[i - 1]
+            a0 ^= GFMultiplication(output[i], lVector[i])
+        }
+        
+        output[0] = a0
+        return output
     }
       
-    private func linearTransformation(data: [Int8]) -> [Int8] {
-
-        var data = data
-        var result: [Int8] = Array(repeating: 0, count: data.count)
+    private func L(_ input: [Int8]) -> [Int8] {
+        
+        var output = input
 
         for _ in 0..<16 {
-            data = R(data: data)
+            output = R(output)
+        }
+        
+        return output
+    }
+    
+    private func inverseL(_ input: [Int8]) -> [Int8] {
+        
+        var output = input
+
+        for _ in 0..<16 {
+            output = inverseR(output)
         }
 
-        result = data
-        return result
+        return output
+    }
+    
+    private func F(leftKey: [Int8], rightKey: [Int8], iterationConstant: [Int8]) -> [[Int8]] {
+        
+        var XSL = X(leftKey, iterationConstant)
+        XSL = S(XSL)
+        XSL = L(XSL)
+        
+        let outputLeftKey = X(XSL, rightKey)
+        let outputRightKey = leftKey
+        let outputKey = [outputLeftKey, outputRightKey]
+        
+        return outputKey
     }
     
     private func generateIterationConstants() {
         
-        var iter_num: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16), count: 32)
-        
         for i in 0..<32 {
-            iter_num[i][0] = Int8(i + 1)
+            iterationСonstants[i][0] = Int8(i + 1)
         }
     
         for i in 0..<32 {
-            iterationСonstants[i] = linearTransformation(data: iter_num[i])
+            iterationСonstants[i] = L(iterationСonstants[i])
         }
     }
     
-    private func FeistelCell(key1: [Int8], key2: [Int8], iterationConst: [Int8]) -> [[Int8]] {
-        
-        var resultF = XOR(key1, iterationConst)
-        resultF = nonLinearTransformation(data: resultF)
-        resultF = linearTransformation(data: resultF)
-        
-        let outputKey1 = XOR(resultF, key2)
-        let outputKey2 = key1
-        let outputKey = [outputKey1, outputKey2]
-        return outputKey
-    }
-    
-    func generateRoundKeys(key1: [Int8], key2: [Int8]) {
+    func generateIterationKeys(key: [Int8]) {
         
         generateIterationConstants()
         
-        roundKeys[0] = key1
-        roundKeys[1] = key2
+        iterationKeys[0] = Array(key.prefix(16))
+        iterationKeys[1] = key.suffix(16)
         
-        var pairOfKeys = [key1, key2]
+        var pairOfKeys = [iterationKeys[0], iterationKeys[1]]
          
         for i in 0..<4 {
             
             for j in 0..<8 {
-                pairOfKeys = FeistelCell(key1: pairOfKeys[0], key2: pairOfKeys[1], iterationConst: iterationСonstants[j + 8 * i])
+                pairOfKeys = F(leftKey: pairOfKeys[0], rightKey: pairOfKeys[1], iterationConstant: iterationСonstants[j + 8 * i])
             }
             
-            roundKeys[2 * i + 2] = pairOfKeys[0]
-            roundKeys[2 * i + 3] = pairOfKeys[1]
+            iterationKeys[2 * i + 2] = pairOfKeys[0]
+            iterationKeys[2 * i + 3] = pairOfKeys[1]
         }
-    }
-    
-    private func inverseNonLinearTransformation(data: [Int8]) -> [Int8] {
-        
-        var result: [Int8] = Array(repeating: 0, count: data.count)
-
-        for i in 0..<blockSize {
-
-            var index = Int(data[i])
-            if index < 0 {
-                index += 256
-            }
-            
-            result[i] = inverseNonLinearTransformationTable[index]
-        }
-        
-        return result
-    }
-    
-    private func inverseR(data: [Int8]) -> [Int8] {
-        
-        var a0 = data[15]
-        var result: [Int8] = Array(repeating: 0, count: 16)
-        
-        for i in 1..<16 {
-            
-            result[i] = data[i - 1]
-            a0 ^= GFMultiplication(result[i], linearTransformationVector[i])
-        }
-        
-        result[0] = a0
-        return result
-    }
-    
-    private func inverseLinearTransformation(data: [Int8]) -> [Int8] {
-        
-        var data = data
-        var result: [Int8] = Array(repeating: 0, count: data.count)
-
-        for _ in 0..<16 {
-            data = inverseR(data: data)
-        }
-
-        result = data
-        return result
     }
     
     func encrypt(data: [Int8]) -> [Int8] {
         
-        var result: [Int8] = data
+        var output: [Int8] = data
         
         for i in 0..<9 {
             
-            result = XOR(roundKeys[i], result)
-            result = nonLinearTransformation(data: result)
-            result = linearTransformation(data: result)
+            output = X(iterationKeys[i], output)
+            output = S(output)
+            output = L(output)
         }
         
-        result = XOR(result, roundKeys[9])
-        return result
+        output = X(output, iterationKeys[9])
+        return output
     }
     
     func decrypt(data: [Int8]) -> [Int8] {
         
-        var result: [Int8] = data
-        result  = XOR(result, roundKeys[9])
+        var output: [Int8] = data
+        output  = X(output, iterationKeys[9])
         
         for i in stride(from: 8, through: 0, by: -1) {
             
-            result = inverseLinearTransformation(data: result)
-            result = inverseNonLinearTransformation(data: result)
-            result = XOR(roundKeys[i], result)
+            output = inverseL(output)
+            output = inverseS(output)
+            output = X(iterationKeys[i], output)
         }
         
-        return result
+        return output
     }
 }
