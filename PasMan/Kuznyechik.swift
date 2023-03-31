@@ -1,7 +1,5 @@
 final class Kuznyechik {
     
-    private let blockSize = 16
-    
     private let lVector: [Int8] = [
         0x01, 0x94, 0x20, 0x85, 0x10, 0xC2, 0xC0, 0x01, 0xFB, 0x01, 0xC0, 0xC2, 0x10, 0x85, 0x20, 0x94
     ].map { Int8(bitPattern: $0) }
@@ -49,20 +47,20 @@ final class Kuznyechik {
     
     private func X(_ first: [Int8], _ second: [Int8]) -> [Int8] {
 
-        var result: [Int8] = Array(repeating: 0, count: blockSize)
+        var output: [Int8] = Array(repeating: 0, count: 16)
 
-        for i in 0..<blockSize {
-            result[i] = first[i] ^ second[i]
+        for i in 0..<16 {
+            output[i] = first[i] ^ second[i]
         }
 
-        return result
+        return output
     }
     
     private func S(_ input: [Int8]) -> [Int8] {
 
-        var output: [Int8] = Array(repeating: 0, count: input.count)
+        var output: [Int8] = Array(repeating: 0, count: 16)
 
-        for i in 0..<blockSize {
+        for i in 0..<16 {
 
             var index = Int(input[i])
             if index < 0 {
@@ -77,9 +75,9 @@ final class Kuznyechik {
     
     private func inverseS(_ input: [Int8]) -> [Int8] {
         
-        var output: [Int8] = Array(repeating: 0, count: input.count)
+        var output: [Int8] = Array(repeating: 0, count: 16)
 
-        for i in 0..<blockSize {
+        for i in 0..<16 {
 
             var index = Int(input[i])
             if index < 0 {
