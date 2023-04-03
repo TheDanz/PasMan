@@ -248,6 +248,16 @@ final class Kuznyechik {
         }
     }
     
+    private func encrypt(string: String) -> String {
+        
+        let bytes = Array(string.utf8).map({ Int8(bitPattern: $0) })
+        let encryptedBytes = encrypt(bytes: bytes).map({ UInt8(bitPattern: $0) })
+        let encryptString: String = String(bytes: encryptedBytes, encoding: .utf8) ?? "ERROR"
+        
+        return encryptString
+    }
+    
+    
     func decrypt(data: [Int8]) -> [Int8] {
         
         var output: [Int8] = data
