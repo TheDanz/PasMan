@@ -215,9 +215,9 @@ final class Kuznyechik {
         }
     }
     
-    func encrypt(data: [Int8]) -> [Int8] {
+    private func encrypt(bytes: [Int8]) -> [Int8] {
         
-        var output: [Int8] = data
+        var output: [Int8] = bytes
         
         for i in 0..<9 {
             
@@ -228,6 +228,24 @@ final class Kuznyechik {
         
         output = X(output, iterationKeys[9])
         return output
+    }
+    
+    private func splitIntoBlocks(string: String) {
+        
+        var string = string
+        var blocks = Array<String>()
+        
+        while string.count > 0 {
+            
+            let prefix = String(string.prefix(16))
+            blocks.append(prefix)
+            
+            let offsetBy = string.count >= 16 ? 16 : string.count
+            let leftBound = string.startIndex
+            let rightBound = string.index(string.startIndex, offsetBy: offsetBy)
+            let range = leftBound..<rightBound
+            string.removeSubrange(range)
+        }
     }
     
     func decrypt(data: [Int8]) -> [Int8] {
