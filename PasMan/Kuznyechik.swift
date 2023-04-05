@@ -217,21 +217,6 @@ final class Kuznyechik {
         }
     }
     
-    private func encrypt(block: [Int8]) -> [Int8] {
-        
-        var output: [Int8] = block
-        
-        for i in 0..<9 {
-            
-            output = X(iterationKeys[i], output)
-            output = S(output)
-            output = L(output)
-        }
-        
-        output = X(output, iterationKeys[9])
-        return output
-    }
-    
     private func splitIntoBlocks(bytes: [Int8]) -> [[Int8]] {
         
         var bytes = bytes
@@ -265,13 +250,28 @@ final class Kuznyechik {
         return array
     }
     
+    private func encrypt(block: [Int8]) -> [Int8] {
+        
+        var output: [Int8] = block
+        
+        for i in 0..<9 {
+            
+            output = X(iterationKeys[i], output)
+            output = S(output)
+            output = L(output)
+        }
+        
+        output = X(output, iterationKeys[9])
+        return output
+    }
+    
     func encrypt(string: String) -> Data {
         
         let bytesToEncrypt = Array(string.utf8).map({ Int8(bitPattern: $0) })
-        let blocks = splitIntoBlocks(bytes: bytesToEncrypt)
+        let blocksToEncrypt = splitIntoBlocks(bytes: bytesToEncrypt)
         
         var encryptedBlocks: [[Int8]] = []
-        for block in blocks {
+        for block in blocksToEncrypt {
             encryptedBlocks.append(encrypt(block: block))
         }
         
@@ -280,10 +280,10 @@ final class Kuznyechik {
         
         return encryptedData
     }
-
-    func decrypt(data: [Int8]) -> [Int8] {
+    
+    private func decrypt(block: [Int8]) -> [Int8] {
         
-        var output: [Int8] = data
+        var output: [Int8] = block
         output  = X(output, iterationKeys[9])
         
         for i in stride(from: 8, through: 0, by: -1) {
@@ -294,5 +294,21 @@ final class Kuznyechik {
         }
         
         return output
+    }
+
+    func decrypt(data: Data) -> String {
+        
+        let bytesToDecrypt = Array(data).map({ Int8(bitPattern: $0) })
+        let blocksToDecrypt = splitIntoBlocks(bytes: bytesToDecrypt)
+        
+        var decryptedBlocks: [[Int8]] = []
+        for block in blocksToDecrypt {
+            decryptedBlocks.append(decrypt(block: block))
+        }
+        
+        let decrtypedBytes = mergeIntoArray(blocks: decryptedBlocks).map({ UInt8(bitPattern: $0) })
+        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8)!
+        
+        return decryptedString
     }
 }
