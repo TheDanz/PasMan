@@ -1,3 +1,5 @@
+import Foundation
+
 final class Kuznyechik {
     
     private let lVector: [Int8] = [
@@ -215,9 +217,9 @@ final class Kuznyechik {
         }
     }
     
-    private func encrypt(bytes: [Int8]) -> [Int8] {
+    private func encrypt(block: [Int8]) -> [Int8] {
         
-        var output: [Int8] = bytes
+        var output: [Int8] = block
         
         for i in 0..<9 {
             
@@ -230,34 +232,55 @@ final class Kuznyechik {
         return output
     }
     
-    private func splitIntoBlocks(string: String) {
+    private func splitIntoBlocks(bytes: [Int8]) -> [[Int8]] {
         
-        var string = string
-        var blocks = Array<String>()
+        var bytes = bytes
+        var blocks: [[Int8]] = []
         
-        while string.count > 0 {
+        while bytes.count > 0 {
             
-            let prefix = String(string.prefix(16))
+            let prefix = [Int8](bytes.prefix(16))
             blocks.append(prefix)
             
-            let offsetBy = string.count >= 16 ? 16 : string.count
-            let leftBound = string.startIndex
-            let rightBound = string.index(string.startIndex, offsetBy: offsetBy)
+            let offsetBy = bytes.count >= 16 ? 16 : bytes.count
+            let leftBound = bytes.startIndex
+            let rightBound = bytes.index(bytes.startIndex, offsetBy: offsetBy)
             let range = leftBound..<rightBound
-            string.removeSubrange(range)
+            bytes.removeSubrange(range)
         }
+        
+        return blocks
     }
     
-    private func encrypt(string: String) -> String {
+    private func mergeIntoArray(blocks: [[Int8]]) -> [Int8] {
         
-        let bytes = Array(string.utf8).map({ Int8(bitPattern: $0) })
-        let encryptedBytes = encrypt(bytes: bytes).map({ UInt8(bitPattern: $0) })
-        let encryptString: String = String(bytes: encryptedBytes, encoding: .utf8) ?? "ERROR"
+        var array = Array<Int8>()
         
-        return encryptString
+        for block in blocks {
+            for element in block {
+                array.append(element)
+            }
+        }
+        
+        return array
     }
     
-    
+    func encrypt(string: String) -> Data {
+        
+        let bytesToEncrypt = Array(string.utf8).map({ Int8(bitPattern: $0) })
+        let blocks = splitIntoBlocks(bytes: bytesToEncrypt)
+        
+        var encryptedBlocks: [[Int8]] = []
+        for block in blocks {
+            encryptedBlocks.append(encrypt(block: block))
+        }
+        
+        let encrtypedBytes = mergeIntoArray(blocks: encryptedBlocks)
+        let encryptedData = Data(bytes: encrtypedBytes, count: encrtypedBytes.count)
+        
+        return encryptedData
+    }
+
     func decrypt(data: [Int8]) -> [Int8] {
         
         var output: [Int8] = data
