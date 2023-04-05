@@ -217,6 +217,23 @@ final class Kuznyechik {
         }
     }
     
+    private func completeBlock(_ block: [Int8]) -> [Int8] {
+        
+        var block = block
+        let deficiency = 16 - block.count % 16
+        
+        for i in 0..<deficiency {
+            
+            if i == 0 {
+                block.append(1)
+            } else {
+                block.append(0)
+            }
+        }
+        
+        return block
+    }
+    
     private func splitIntoBlocks(bytes: [Int8]) -> [[Int8]] {
         
         var bytes = bytes
@@ -232,6 +249,12 @@ final class Kuznyechik {
             let rightBound = bytes.index(bytes.startIndex, offsetBy: offsetBy)
             let range = leftBound..<rightBound
             bytes.removeSubrange(range)
+        }
+        
+        if blocks.last!.count % 16 != 0 {
+            
+            let lastIndex = blocks.count - 1
+            blocks[lastIndex] = completeBlock(blocks[lastIndex])
         }
         
         return blocks
