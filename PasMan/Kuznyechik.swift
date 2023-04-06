@@ -3,7 +3,7 @@ import Foundation
 final class Kuznyechik {
     
     private let lVector: [Int8] = [
-        0x01, 0x94, 0x20, 0x85, 0x10, 0xC2, 0xC0, 0x01, 0xFB, 0x01, 0xC0, 0xC2, 0x10, 0x85, 0x20, 0x94
+        0x94, 0x20, 0x85, 0x10, 0xC2, 0xC0, 0x01, 0xFB, 0x01, 0xC0, 0xC2, 0x10, 0x85, 0x20, 0x94, 0x01
     ].map { Int8(bitPattern: $0) }
         
     private let Pi: [Int8] = [
@@ -121,33 +121,34 @@ final class Kuznyechik {
     private func R(_ input: [Int8]) -> [Int8] {
           
         var output: [Int8] = Array(repeating: 0, count: 16)
-        var a15 = Int8()
+        var a0 = Int8()
           
-        for i in stride(from: 15, through: 0, by: -1) {
-              
-            if i != 0 {
-                output[i - 1] = input[i]
-            }
-            
-            a15 ^= GFMultiplication(input[i], lVector[i])
+        for i in 0..<15 {
+            output[i + 1] = input[i]
         }
         
-        output[15] = a15
-        return output
-    }
-    
-    private func inverseR(_ input: [Int8]) -> [Int8] {
-        
-        var output: [Int8] = Array(repeating: 0, count: 16)
-        var a0 = input[15]
-        
-        for i in 1..<16 {
-            
-            output[i] = input[i - 1]
-            a0 ^= GFMultiplication(output[i], lVector[i])
+        for i in 0..<16 {
+            a0 ^= GFMultiplication(input[i], lVector[i])
         }
         
         output[0] = a0
+        return output
+    }
+    
+     func inverseR(_ input: [Int8]) -> [Int8] {
+          
+        var output: [Int8] = Array(repeating: 0, count: 16)
+        var a15 = input[0]
+          
+        for i in 1..<16 {
+            output[i - 1] = input[i]
+        }
+        
+        for i in 0..<16 {
+            a15 ^= GFMultiplication(output[i], lVector[i])
+        }
+        
+        output[15] = a15
         return output
     }
       
@@ -189,7 +190,7 @@ final class Kuznyechik {
     private func generateIterationConstants() {
         
         for i in 0..<32 {
-            iterationСonstants[i][0] = Int8(i + 1)
+            iterationСonstants[i][15] = Int8(i + 1)
         }
     
         for i in 0..<32 {
