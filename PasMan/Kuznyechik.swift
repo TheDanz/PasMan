@@ -47,6 +47,18 @@ final class Kuznyechik {
     private var iterationСonstants: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
     private var iterationKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
     
+    init() {
+        var randomKey = Array<Int8>()
+        for _ in 0..<32 {
+            randomKey.append(Int8.random(in: -128...127))
+        }
+        generateIterationKeys(key: randomKey)
+    }
+    
+    init(key: [Int8]) {
+        generateIterationKeys(key: key)
+    }
+    
     private func X(_ first: [Int8], _ second: [Int8]) -> [Int8] {
 
         var output: [Int8] = Array(repeating: 0, count: 16)
@@ -198,7 +210,7 @@ final class Kuznyechik {
         }
     }
     
-    func generateIterationKeys(key: [Int8]) {
+    private func generateIterationKeys(key: [Int8]) {
         
         generateIterationConstants()
         
