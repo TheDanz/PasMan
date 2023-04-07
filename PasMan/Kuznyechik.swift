@@ -48,15 +48,37 @@ final class Kuznyechik {
     private var iterationKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
     
     init() {
+        
+        if let keysData = try? KeychainManager.get("KuznyechikKeys") {
+            
+            var keys = Array(keysData).map({ Int8(bitPattern: $0) })
+            
+            for i in 0..<iterationKeys.count {
+                
+                iterationKeys[i] = Array(keys.prefix(16))
+                
+                let leftBound = keys.startIndex
+                let rightBound = keys.index(keys.startIndex, offsetBy: 16)
+                let range = leftBound..<rightBound
+                keys.removeSubrange(range)
+            }
+            return
+        }
+        
         var randomKey = Array<Int8>()
         for _ in 0..<32 {
             randomKey.append(Int8.random(in: -128...127))
         }
         generateIterationKeys(key: randomKey)
-    }
-    
-    init(key: [Int8]) {
-        generateIterationKeys(key: key)
+        
+        let keys = mergeIntoArray(blocks: iterationKeys)
+        let keysData = Data(bytes: keys, count: keys.count)
+        
+        do {
+            try KeychainManager.save(keysData, forTag: "KuznyechikKeys")
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
     private func X(_ first: [Int8], _ second: [Int8]) -> [Int8] {
