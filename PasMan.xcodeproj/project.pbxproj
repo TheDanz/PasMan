@@ -18,6 +18,7 @@
 		056E160129BB6EDC003D6662 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056E160029BB6EDC003D6662 /* Delegates.swift */; };
 		05A0C8E029C3975800A349DD /* PasswordModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */; };
 		05A0C8E129C3975800A349DD /* PasswordModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */; };
+		05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B226A729DF45CF0086F1A7 /* KeychainManager.swift */; };
 		05D65E5029B12C20005DC1D2 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */; };
 		05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085629AFBCFC000F4373 /* TabBarController.swift */; };
 		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
@@ -40,6 +41,7 @@
 		056E160029BB6EDC003D6662 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
 		05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05B226A729DF45CF0086F1A7 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		05DF085629AFBCFC000F4373 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
 				056E160029BB6EDC003D6662 /* Delegates.swift */,
 				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
+				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
 				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
 				0545E8E829AD0A1700963D40 /* Info.plist */,
 				0517247829B905DC0003EE27 /* Model.xcdatamodeld */,
@@ -185,6 +188,7 @@
 				05A0C8E129C3975800A349DD /* PasswordModel+CoreDataProperties.swift in Sources */,
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
 				05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */,
+				05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */,
 				0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */,
 				0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */,
 				055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */,
