@@ -16,13 +16,15 @@
 		055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */; };
 		055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */; };
 		056E160129BB6EDC003D6662 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056E160029BB6EDC003D6662 /* Delegates.swift */; };
-		05A0C8E029C3975800A349DD /* PasswordModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */; };
-		05A0C8E129C3975800A349DD /* PasswordModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */; };
+		05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B226A729DF45CF0086F1A7 /* KeychainManager.swift */; };
+		05BDF12E29E1624B004773B9 /* PasswordModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */; };
+		05BDF12F29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */; };
 		05D65E5029B12C20005DC1D2 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */; };
 		05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085629AFBCFC000F4373 /* TabBarController.swift */; };
 		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
 		05DF085B29AFD5D8000F4373 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085A29AFD5D8000F4373 /* TableViewController.swift */; };
 		05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */; };
+		05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F16A1729CDE0AF001884FB /* Kuznyechik.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,13 +39,15 @@
 		055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailsView.swift; sourceTree = "<group>"; };
 		056E160029BB6EDC003D6662 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
-		05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataClass.swift"; sourceTree = "<group>"; };
-		05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		05B226A729DF45CF0086F1A7 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataClass.swift"; sourceTree = "<group>"; };
+		05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		05DF085629AFBCFC000F4373 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		05DF085A29AFD5D8000F4373 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewCell.swift; sourceTree = "<group>"; };
+		05F16A1729CDE0AF001884FB /* Kuznyechik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuznyechik.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +85,12 @@
 				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
 				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
 				05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */,
-				05A0C8DE29C3975800A349DD /* PasswordModel+CoreDataClass.swift */,
-				05A0C8DF29C3975800A349DD /* PasswordModel+CoreDataProperties.swift */,
+				05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */,
+				05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */,
 				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
 				056E160029BB6EDC003D6662 /* Delegates.swift */,
+				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
+				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
 				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
 				0545E8E829AD0A1700963D40 /* Info.plist */,
 				0517247829B905DC0003EE27 /* Model.xcdatamodeld */,
@@ -175,12 +181,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05BDF12F29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift in Sources */,
 				055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */,
 				05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */,
 				0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */,
-				05A0C8E029C3975800A349DD /* PasswordModel+CoreDataClass.swift in Sources */,
-				05A0C8E129C3975800A349DD /* PasswordModel+CoreDataProperties.swift in Sources */,
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
+				05BDF12E29E1624B004773B9 /* PasswordModel+CoreDataClass.swift in Sources */,
+				05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */,
+				05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */,
 				0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */,
 				0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */,
 				055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */,
@@ -336,6 +344,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -368,6 +377,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
