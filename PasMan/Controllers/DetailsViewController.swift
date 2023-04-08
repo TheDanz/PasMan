@@ -79,10 +79,12 @@ class DetailsViewController: UIViewController {
         didSet {
             guard let data = data else { return }
             DispatchQueue.main.async {
+                let kuznyechik = Kuznyechik()
                 self.titleView.inputTextView.text = data.title
-                self.loginView.inputTextView.text = data.login
-                self.passwordView.inputTextView.text = data.password
-                self.additionalInformationView.inputTextView.text = data.additionalInformation
+                self.loginView.inputTextView.text = kuznyechik.decrypt(data: data.login!)
+                self.passwordView.inputTextView.text = kuznyechik.decrypt(data: data.password!)
+                guard let additionalInformation = data.additionalInformation else { return }
+                self.additionalInformationView.inputTextView.text = kuznyechik.decrypt(data: additionalInformation)
             }
         }
     }

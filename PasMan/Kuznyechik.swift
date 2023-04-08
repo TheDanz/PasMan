@@ -49,8 +49,7 @@ final class Kuznyechik {
     
     init() {
         
-        if let keysData = try? KeychainManager.get("KuznyechikKeys") {
-            
+        if let keysData = try? KeychainManager.get("ru.PasMan.KuznyechikKeys") {
             var keys = Array(keysData).map({ Int8(bitPattern: $0) })
             
             for i in 0..<iterationKeys.count {
@@ -75,7 +74,7 @@ final class Kuznyechik {
         let keysData = Data(bytes: keys, count: keys.count)
         
         do {
-            try KeychainManager.save(keysData, forTag: "KuznyechikKeys")
+            try KeychainManager.save(keysData, forTag: "ru.PasMan.KuznyechikKeys")
         } catch let error {
             print(error.localizedDescription)
         }
@@ -286,10 +285,13 @@ final class Kuznyechik {
             bytes.removeSubrange(range)
         }
         
-        if blocks.last!.count % 16 != 0 {
+        if let lastBlock = blocks.last {
             
-            let lastIndex = blocks.count - 1
-            blocks[lastIndex] = completeBlock(blocks[lastIndex])
+            if lastBlock.count % 16 != 0 {
+                
+                let lastIndex = blocks.count - 1
+                blocks[lastIndex] = completeBlock(blocks[lastIndex])
+            }
         }
         
         return blocks
@@ -364,8 +366,20 @@ final class Kuznyechik {
             decryptedBlocks.append(decrypt(block: block))
         }
         
+        if let _ = decryptedBlocks.last {
+
+            let index = decryptedBlocks.count - 1
+
+            while decryptedBlocks[index].last == 0 {
+
+                decryptedBlocks[index].removeLast()
+            }
+            decryptedBlocks[index].removeLast()
+        }
+        
+        
         let decrtypedBytes = mergeIntoArray(blocks: decryptedBlocks).map({ UInt8(bitPattern: $0) })
-        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8)!
+        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) ?? "Decryption Error"
         
         return decryptedString
     }
