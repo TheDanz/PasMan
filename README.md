@@ -2,11 +2,16 @@
 
 <p>An easy to use iOS app to keep your passwords safe.</p>
 
+## Security
+
+<p>For the secure storage of your information we use the Russian encryption algorithm <a href="https://en.wikipedia.org/wiki/Kuznyechik">Kuznyechik</a>. This is a robust algorithm that uses a 256-bit long, randomly generated master key. You can be sure that your data will not be read.</p>
+
 ## Features
 
 * Save password and what it is for
 * Store additional information for the password
 * Edit any information
+* Password encryption
 
 ## Screenshots
 

@@ -19,8 +19,8 @@ class TabBarController: UITabBarController {
     }()
     
     private let homeVC = HomeViewController()
-    private let passwordAddingVC = PasswordAddingViewController()
-    private let passwordTVC = PasswordTableViewController()
+    private let passwordAddingVC = NewPasswordViewController()
+    private let passwordTVC = TableViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +54,7 @@ class TabBarController: UITabBarController {
     
     @objc
     func presentPasswordAddingVC(sender: Any) {
-        let destinationVC = PasswordAddingViewController()
+        let destinationVC = NewPasswordViewController()
         destinationVC.reloadDataDelegate = passwordTVC
         destinationVC.updateNumberOfPasswordsLabelDelegate = homeVC
         present(destinationVC, animated: true)

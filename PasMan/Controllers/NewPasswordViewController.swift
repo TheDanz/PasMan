@@ -1,6 +1,6 @@
 import UIKit
 
-class PasswordAddingViewController: UIViewController {
+class NewPasswordViewController: UIViewController {
     
     lazy var titleTextField: UITextField = {
         let textField = UITextField()
