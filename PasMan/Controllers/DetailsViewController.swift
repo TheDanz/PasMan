@@ -38,6 +38,7 @@ class DetailsViewController: UIViewController {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Password"
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
