@@ -62,8 +62,26 @@ extension TableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let sectionInfo = fetchedResultsController?.sections?[section]
-        return sectionInfo?.numberOfObjects ?? 0
+        let numberOfObjects = fetchedResultsController?.sections?[section].numberOfObjects ?? 0
+        
+        if numberOfObjects == 0 {
+            
+            let noDataLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
+            noDataLabel.font = UIFont(name: "Avenir Next Bold", size: 30)
+            noDataLabel.text = "You haven't saved any passwords yet"
+            noDataLabel.textAlignment = .center
+            noDataLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+            noDataLabel.numberOfLines = 0
+            tableView.backgroundView = noDataLabel
+            
+            return 0
+        }
+        
+        if tableView.backgroundView != nil {
+            tableView.backgroundView = nil
+        }
+        
+        return numberOfObjects
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
