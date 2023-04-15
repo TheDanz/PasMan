@@ -68,6 +68,7 @@ class DetailsViewController: UIViewController {
         let action = UIAction { _ in
             guard let index = self.index else { return }
             self.deletePasswordModelDelegate?.deletePasswordModel(at: index)
+            self.updateNumberOfPasswordsLabelDelegate?.updateNumberOfPasswordsLabel()
             self.navigationController?.popViewController(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
@@ -91,6 +92,7 @@ class DetailsViewController: UIViewController {
     }
     
     var deletePasswordModelDelegate: DeletePasswordModelDelegate?
+    var updateNumberOfPasswordsLabelDelegate: UpdateNumberOfPasswordsLabelDelegate?
     var reloadRowsDelegate: ReloadRowsDelegate?
     var index: IndexPath?
 

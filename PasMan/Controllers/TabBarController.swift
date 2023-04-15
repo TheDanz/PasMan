@@ -25,6 +25,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        passwordTVC.updateNumberOfPasswordsLabelDelegate = homeVC
+        
         delegate = self
         
         let homeNC = UINavigationController(rootViewController: homeVC)
