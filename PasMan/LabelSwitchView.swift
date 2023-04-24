@@ -5,7 +5,7 @@ class LabelSwitchView : UIView {
     lazy var leftLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir Next Demi Bold", size: 18)
-        label.textColor = #colorLiteral(red: 0.67, green: 0.73, blue: 0.78, alpha: 1)
+        label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
         return label
@@ -34,12 +34,12 @@ class LabelSwitchView : UIView {
     }
     
     func setupLeftLabelConstraints() {
-        leftLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
+        leftLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10).isActive = true
         leftLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
     }
     
     func setupRightSwitchConstraints() {
-        rightSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
+        rightSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
         rightSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
     }
 }

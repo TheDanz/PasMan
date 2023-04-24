@@ -6,13 +6,13 @@ final class PasswordGeneration {
         case upperCaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         case lowerCaseLetters = "abcdefghijklmnopqrstuvwxyz"
         case numbers = "0123456789"
-        case specialCharacters = "!@#$%^&*()_+-=[]{}|;':\"<>,.?\\/"
+        case specialCharacters = "!@#$%^&*()_+-=[]{}|;:<>,.?"
     }
     
     func generatePassword(length: Int, using: Set<CharacterSet>) -> String {
         
         if using.isEmpty {
-            return ""
+            return "YOUR STRONG PASSWORD"
         }
         
         var password = ""
