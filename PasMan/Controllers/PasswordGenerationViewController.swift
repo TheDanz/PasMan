@@ -77,6 +77,37 @@ class PasswordGenerationViewController: UIViewController {
         self.view.addSubview(labelSwitchView)
         return labelSwitchView
     }()
+    
+    lazy var saveButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Save password", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        button.layer.cornerRadius = 12
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowRadius = 4
+        button.layer.shadowOffset = CGSize(width: 1, height: 5)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let action = UIAction { _ in
+            
+            let passwordTableNC = self.tabBarController?.viewControllers?[3] as? UINavigationController
+            let homeNC = self.tabBarController?.viewControllers?[0] as? UINavigationController
+            let passwordTVC = passwordTableNC?.topViewController as? TableViewController
+            let homeVC = homeNC?.topViewController as? HomeViewController
+            
+            let destinationVC = NewPasswordViewController()
+            destinationVC.reloadDataDelegate = passwordTVC
+            destinationVC.updateNumberOfPasswordsLabelDelegate = homeVC
+            
+            self.present(destinationVC, animated: true)
+            destinationVC.passwordTextField.text = self.passwordTextView.text
+        }
+        button.addAction(action, for: .touchUpInside)
+        self.view.addSubview(button)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +120,7 @@ class PasswordGenerationViewController: UIViewController {
         setUppercaseViewConstraints()
         setDigitsViewConstraints()
         setSpecialCharactersViewConstraints()
+        setSaveButtonConstraints()
     }
     
     override func viewDidLayoutSubviews() {
@@ -141,5 +173,12 @@ class PasswordGenerationViewController: UIViewController {
         specialCharactersView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         specialCharactersView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         specialCharactersView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setSaveButtonConstraints() {
+        saveButton.topAnchor.constraint(equalTo: specialCharactersView.bottomAnchor, constant: 10).isActive = true
+        saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
