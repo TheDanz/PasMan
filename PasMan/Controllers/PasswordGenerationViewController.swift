@@ -46,6 +46,37 @@ class PasswordGenerationViewController: UIViewController {
         return slider
     }()
     
+    lazy var lowercaseView: LabelSwitchView = {
+        let labelSwitchView = LabelSwitchView()
+        labelSwitchView.leftLabel.text = "Lowercase letters (a-z)"
+        labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(labelSwitchView)
+        return labelSwitchView
+    }()
+    
+    lazy var uppercaseView: LabelSwitchView = {
+        let labelSwitchView = LabelSwitchView()
+        labelSwitchView.leftLabel.text = "Uppercase letters (A-Z)"
+        labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(labelSwitchView)
+        return labelSwitchView
+    }()
+    
+    lazy var digitsView: LabelSwitchView = {
+        let labelSwitchView = LabelSwitchView()
+        labelSwitchView.leftLabel.text = "Digits (0-9)"
+        labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(labelSwitchView)
+        return labelSwitchView
+    }()
+    
+    lazy var specialCharactersView: LabelSwitchView = {
+        let labelSwitchView = LabelSwitchView()
+        labelSwitchView.leftLabel.text = "Special characters (@#$%^&* ...)"
+        labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(labelSwitchView)
+        return labelSwitchView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +85,10 @@ class PasswordGenerationViewController: UIViewController {
         setPasswordTextViewConstraints()
         setLengthLabelConstraints()
         setLengthSliderConstraints()
+        setLowercaseViewConstraints()
+        setUppercaseViewConstraints()
+        setDigitsViewConstraints()
+        setSpecialCharactersViewConstraints()
     }
     
     override func viewDidLayoutSubviews() {
@@ -78,5 +113,33 @@ class PasswordGenerationViewController: UIViewController {
         lengthSlider.topAnchor.constraint(equalTo: lengthLabel.bottomAnchor, constant: 5).isActive = true
         lengthSlider.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         lengthSlider.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+    }
+    
+    func setLowercaseViewConstraints() {
+        lowercaseView.topAnchor.constraint(equalTo: lengthSlider.bottomAnchor, constant: 45).isActive = true
+        lowercaseView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        lowercaseView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        lowercaseView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setUppercaseViewConstraints() {
+        uppercaseView.topAnchor.constraint(equalTo: lowercaseView.bottomAnchor, constant: 10).isActive = true
+        uppercaseView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        uppercaseView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        uppercaseView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setDigitsViewConstraints() {
+        digitsView.topAnchor.constraint(equalTo: uppercaseView.bottomAnchor, constant: 10).isActive = true
+        digitsView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        digitsView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        digitsView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setSpecialCharactersViewConstraints() {
+        specialCharactersView.topAnchor.constraint(equalTo: digitsView.bottomAnchor, constant: 10).isActive = true
+        specialCharactersView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        specialCharactersView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        specialCharactersView.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }
