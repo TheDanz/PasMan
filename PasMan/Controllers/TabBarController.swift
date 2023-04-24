@@ -19,8 +19,10 @@ class TabBarController: UITabBarController {
     }()
     
     private let homeVC = HomeViewController()
+    private let passwordGenerationVC = PasswordGenerationViewController()
     private let passwordAddingVC = NewPasswordViewController()
     private let passwordTVC = TableViewController()
+    private let nothingVC = UIViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +32,12 @@ class TabBarController: UITabBarController {
         delegate = self
         
         let homeNC = UINavigationController(rootViewController: homeVC)
+        let passwordGenerationNC = UINavigationController(rootViewController: passwordGenerationVC)
         let passwordAddingNC = UINavigationController(rootViewController: passwordAddingVC)
         let passwordTableNC = UINavigationController(rootViewController: passwordTVC)
+        let nothingNC = UINavigationController(rootViewController: nothingVC)
 
-        setViewControllers([homeNC, passwordAddingNC, passwordTableNC], animated: false)
+        setViewControllers([homeNC, passwordGenerationNC, passwordAddingNC, passwordTableNC, nothingNC], animated: false)
         
         tabBar.tintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -41,7 +45,7 @@ class TabBarController: UITabBarController {
         
         if let items = tabBar.items {
             
-            let images = ["house.circle", nil, "lock.circle"]
+            let images = ["house.circle", "123.rectangle", nil, "lock.circle", "x.circle"]
             
             for i in 0..<items.count {
                 let config = UIImage.SymbolConfiguration(pointSize: 20)
@@ -73,7 +77,7 @@ extension TabBarController: UITabBarControllerDelegate {
             return true
         }
         
-        if selectedIndex == 1 {
+        if selectedIndex == 2 {
             return false
         }
         
