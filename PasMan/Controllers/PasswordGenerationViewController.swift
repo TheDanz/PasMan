@@ -108,6 +108,48 @@ class PasswordGenerationViewController: UIViewController {
         self.view.addSubview(button)
         return button
     }()
+    
+    lazy var regeneratePasswordButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "arrow.clockwise.circle"), for: .normal)
+        button.imageView?.tintColor = .black
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        button.layer.cornerRadius = 12
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        button.layer.shadowOpacity = 1
+        button.layer.shadowRadius = 4
+        button.layer.shadowOffset = CGSize(width: 1, height: 5)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let action = UIAction { _ in
+            
+            let length = Int(self.lengthSlider.value)
+            var options = Set<PasswordGeneration.CharacterSet>()
+            if self.lowercaseView.rightSwitch.isOn {
+                options.insert(.lowerCaseLetters)
+            }
+            if self.uppercaseView.rightSwitch.isOn {
+                options.insert(.upperCaseLetters)
+            }
+            if self.digitsView.rightSwitch.isOn {
+                options.insert(.numbers)
+            }
+            if self.specialCharactersView.rightSwitch.isOn {
+                options.insert(.specialCharacters)
+            }
+
+            let generator = PasswordGeneration()
+            let password = generator.generatePassword(length: length, using: options)
+            self.passwordTextView.text = password
+        }
+        button.addAction(action, for: .touchUpInside)
+        self.view.addSubview(button)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +163,7 @@ class PasswordGenerationViewController: UIViewController {
         setDigitsViewConstraints()
         setSpecialCharactersViewConstraints()
         setSaveButtonConstraints()
+        setRegeneratePasswordButtonConstraints()
     }
     
     override func viewDidLayoutSubviews() {
@@ -148,7 +191,7 @@ class PasswordGenerationViewController: UIViewController {
     }
     
     func setLowercaseViewConstraints() {
-        lowercaseView.topAnchor.constraint(equalTo: lengthSlider.bottomAnchor, constant: 45).isActive = true
+        lowercaseView.topAnchor.constraint(equalTo: lengthSlider.bottomAnchor, constant: 15).isActive = true
         lowercaseView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
         lowercaseView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
         lowercaseView.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -178,7 +221,14 @@ class PasswordGenerationViewController: UIViewController {
     func setSaveButtonConstraints() {
         saveButton.topAnchor.constraint(equalTo: specialCharactersView.bottomAnchor, constant: 10).isActive = true
         saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: regeneratePasswordButton.leftAnchor, constant: -10).isActive = true
         saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setRegeneratePasswordButtonConstraints() {
+        regeneratePasswordButton.topAnchor.constraint(equalTo: specialCharactersView.bottomAnchor, constant: 10).isActive = true
+        regeneratePasswordButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        regeneratePasswordButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        regeneratePasswordButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }

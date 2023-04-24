@@ -11,6 +11,10 @@ final class PasswordGeneration {
     
     func generatePassword(length: Int, using: Set<CharacterSet>) -> String {
         
+        if using.isEmpty {
+            return ""
+        }
+        
         var password = ""
         var characters: [Character] = []
         
