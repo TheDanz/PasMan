@@ -27,6 +27,7 @@
 		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
 		05DF085B29AFD5D8000F4373 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085A29AFD5D8000F4373 /* TableViewController.swift */; };
 		05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */; };
+		05E8096F29F6BA3100EB4972 /* LabelSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */; };
 		05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F16A1729CDE0AF001884FB /* Kuznyechik.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		05DF085A29AFD5D8000F4373 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewCell.swift; sourceTree = "<group>"; };
+		05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSwitchView.swift; sourceTree = "<group>"; };
 		05F16A1729CDE0AF001884FB /* Kuznyechik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuznyechik.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -88,6 +90,7 @@
 			children = (
 				05F16A1629CDDD8A001884FB /* Controllers */,
 				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
+				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
 				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
 				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
 				05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */,
@@ -195,6 +198,7 @@
 				05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */,
 				0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */,
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
+				05E8096F29F6BA3100EB4972 /* LabelSwitchView.swift in Sources */,
 				05BDF12E29E1624B004773B9 /* PasswordModel+CoreDataClass.swift in Sources */,
 				05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */,
 				05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */,
