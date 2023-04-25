@@ -22,7 +22,7 @@ class TabBarController: UITabBarController {
     private let passwordGenerationVC = PasswordGenerationViewController()
     private let passwordAddingVC = NewPasswordViewController()
     private let passwordTVC = TableViewController()
-    private let nothingVC = UIViewController()
+    private let informationVC = InformationViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +35,9 @@ class TabBarController: UITabBarController {
         let passwordGenerationNC = UINavigationController(rootViewController: passwordGenerationVC)
         let passwordAddingNC = UINavigationController(rootViewController: passwordAddingVC)
         let passwordTableNC = UINavigationController(rootViewController: passwordTVC)
-        let nothingNC = UINavigationController(rootViewController: nothingVC)
+        let informationNC = UINavigationController(rootViewController: informationVC)
 
-        setViewControllers([homeNC, passwordGenerationNC, passwordAddingNC, passwordTableNC, nothingNC], animated: false)
+        setViewControllers([homeNC, passwordGenerationNC, passwordAddingNC, passwordTableNC, informationNC], animated: false)
         
         tabBar.tintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         tabBar.unselectedItemTintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -45,7 +45,7 @@ class TabBarController: UITabBarController {
         
         if let items = tabBar.items {
             
-            let images = ["house.circle", "123.rectangle", nil, "lock.circle", "x.circle"]
+            let images = ["house.circle", "123.rectangle", nil, "lock.circle", "info.circle"]
             
             for i in 0..<items.count {
                 let config = UIImage.SymbolConfiguration(pointSize: 20)
