@@ -29,6 +29,11 @@ class TabBarController: UITabBarController {
         
         passwordTVC.updateNumberOfPasswordsLabelDelegate = homeVC
         
+        homeVC.title = "Home"
+        passwordGenerationVC.title = "Generate"
+        passwordTVC.title = "Passwords"
+        informationVC.title = "GitHub"
+        
         delegate = self
         
         let homeNC = UINavigationController(rootViewController: homeVC)
