@@ -114,6 +114,7 @@ class DetailsViewController: UIViewController {
         if let index = index {
             reloadRowsDelegate?.reloadRows(indexPath: [index], animation: .automatic)
         }
+        navigationController?.popViewController(animated: true)
     }
     
     private func setupScrollViewConstraints() {
