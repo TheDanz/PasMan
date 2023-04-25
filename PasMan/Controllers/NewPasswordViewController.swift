@@ -4,7 +4,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter title here ..."
+        textField.placeholder = "Caption"
         textField.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
         textField.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         textField.layer.borderColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -21,7 +21,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var loginTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter username here ..."
+        textField.placeholder = "Username"
         textField.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
         textField.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         textField.layer.borderColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -38,7 +38,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter title password ..."
+        textField.placeholder = "Password"
         textField.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
         textField.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         textField.layer.borderColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
