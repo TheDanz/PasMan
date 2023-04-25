@@ -91,25 +91,65 @@
 			isa = PBXGroup;
 			children = (
 				05F16A1629CDDD8A001884FB /* Controllers */,
-				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
-				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
-				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
-				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+				055A2A4929F81F380071C3A1 /* Models */,
+				055A2A4D29F8221B0071C3A1 /* Views */,
+				055A2A4B29F821500071C3A1 /* Managers */,
+				055A2A4F29F8224E0071C3A1 /* Encryption */,
+				055A2A4C29F821AE0071C3A1 /* Supporting Files */,
+				0545E8E829AD0A1700963D40 /* Info.plist */,
+			);
+			path = PasMan;
+			sourceTree = "<group>";
+		};
+		055A2A4929F81F380071C3A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */,
 				05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */,
 				05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */,
+				0517247829B905DC0003EE27 /* Model.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		055A2A4B29F821500071C3A1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
 				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
+				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		055A2A4C29F821AE0071C3A1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0545E8E329AD0A1700963D40 /* Assets.xcassets */,
+				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
+				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
+				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
+				050E25DF29E87FDC009254D7 /* Extensions.swift */,
 				056E160029BB6EDC003D6662 /* Delegates.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		055A2A4D29F8221B0071C3A1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
+				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		055A2A4F29F8224E0071C3A1 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
 				05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */,
 				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
-				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
-				050E25DF29E87FDC009254D7 /* Extensions.swift */,
-				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
-				0545E8E829AD0A1700963D40 /* Info.plist */,
-				0517247829B905DC0003EE27 /* Model.xcdatamodeld */,
-				0545E8E329AD0A1700963D40 /* Assets.xcassets */,
 			);
-			path = PasMan;
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 		05F16A1629CDDD8A001884FB /* Controllers */ = {
@@ -117,10 +157,10 @@
 			children = (
 				05DF085629AFBCFC000F4373 /* TabBarController.swift */,
 				05DF085829AFC7BB000F4373 /* HomeViewController.swift */,
+				05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */,
+				05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */,
 				05DF085A29AFD5D8000F4373 /* TableViewController.swift */,
 				055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */,
-				05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */,
-				05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */,
 				05ACC9F329F80C9F00A462EF /* InformationViewController.swift */,
 			);
 			path = Controllers;
