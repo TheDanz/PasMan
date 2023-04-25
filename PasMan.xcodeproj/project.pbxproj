@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		050E25E029E87FDC009254D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050E25DF29E87FDC009254D7 /* Extensions.swift */; };
 		0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0517247829B905DC0003EE27 /* Model.xcdatamodeld */; };
 		0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0517247F29B9088A0003EE27 /* DataStoreManager.swift */; };
 		0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545E8DA29AD0A1500963D40 /* AppDelegate.swift */; };
@@ -16,6 +17,9 @@
 		055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */; };
 		055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */; };
 		056E160129BB6EDC003D6662 /* Delegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 056E160029BB6EDC003D6662 /* Delegates.swift */; };
+		05ACC9F429F80C9F00A462EF /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05ACC9F329F80C9F00A462EF /* InformationViewController.swift */; };
+		05AFA44929EAD5BC005AA9A7 /* PasswordGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */; };
+		05AFA44B29EAE85D005AA9A7 /* PasswordGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */; };
 		05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B226A729DF45CF0086F1A7 /* KeychainManager.swift */; };
 		05BDF12E29E1624B004773B9 /* PasswordModel+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */; };
 		05BDF12F29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */; };
@@ -24,10 +28,12 @@
 		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
 		05DF085B29AFD5D8000F4373 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085A29AFD5D8000F4373 /* TableViewController.swift */; };
 		05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */; };
+		05E8096F29F6BA3100EB4972 /* LabelSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */; };
 		05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F16A1729CDE0AF001884FB /* Kuznyechik.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050E25DF29E87FDC009254D7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0517247929B905DC0003EE27 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		0517247F29B9088A0003EE27 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
 		0545E8D729AD0A1500963D40 /* PasMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PasMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +45,9 @@
 		055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailsView.swift; sourceTree = "<group>"; };
 		056E160029BB6EDC003D6662 /* Delegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegates.swift; sourceTree = "<group>"; };
+		05ACC9F329F80C9F00A462EF /* InformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationViewController.swift; sourceTree = "<group>"; };
+		05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneration.swift; sourceTree = "<group>"; };
+		05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGenerationViewController.swift; sourceTree = "<group>"; };
 		05B226A729DF45CF0086F1A7 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataClass.swift"; sourceTree = "<group>"; };
 		05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordModel+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -47,6 +56,7 @@
 		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		05DF085A29AFD5D8000F4373 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewCell.swift; sourceTree = "<group>"; };
+		05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSwitchView.swift; sourceTree = "<group>"; };
 		05F16A1729CDE0AF001884FB /* Kuznyechik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuznyechik.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,22 +91,65 @@
 			isa = PBXGroup;
 			children = (
 				05F16A1629CDDD8A001884FB /* Controllers */,
-				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
-				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
-				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+				055A2A4929F81F380071C3A1 /* Models */,
+				055A2A4D29F8221B0071C3A1 /* Views */,
+				055A2A4B29F821500071C3A1 /* Managers */,
+				055A2A4F29F8224E0071C3A1 /* Encryption */,
+				055A2A4C29F821AE0071C3A1 /* Supporting Files */,
+				0545E8E829AD0A1700963D40 /* Info.plist */,
+			);
+			path = PasMan;
+			sourceTree = "<group>";
+		};
+		055A2A4929F81F380071C3A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
 				05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */,
 				05BDF12C29E1624B004773B9 /* PasswordModel+CoreDataClass.swift */,
 				05BDF12D29E1624B004773B9 /* PasswordModel+CoreDataProperties.swift */,
-				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
-				056E160029BB6EDC003D6662 /* Delegates.swift */,
-				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
-				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
-				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
-				0545E8E829AD0A1700963D40 /* Info.plist */,
 				0517247829B905DC0003EE27 /* Model.xcdatamodeld */,
-				0545E8E329AD0A1700963D40 /* Assets.xcassets */,
 			);
-			path = PasMan;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		055A2A4B29F821500071C3A1 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
+				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		055A2A4C29F821AE0071C3A1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0545E8E329AD0A1700963D40 /* Assets.xcassets */,
+				0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */,
+				0545E8DA29AD0A1500963D40 /* AppDelegate.swift */,
+				0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */,
+				050E25DF29E87FDC009254D7 /* Extensions.swift */,
+				056E160029BB6EDC003D6662 /* Delegates.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		055A2A4D29F8221B0071C3A1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
+				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		055A2A4F29F8224E0071C3A1 /* Encryption */ = {
+			isa = PBXGroup;
+			children = (
+				05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */,
+				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
+			);
+			path = Encryption;
 			sourceTree = "<group>";
 		};
 		05F16A1629CDDD8A001884FB /* Controllers */ = {
@@ -104,9 +157,11 @@
 			children = (
 				05DF085629AFBCFC000F4373 /* TabBarController.swift */,
 				05DF085829AFC7BB000F4373 /* HomeViewController.swift */,
+				05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */,
+				05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */,
 				05DF085A29AFD5D8000F4373 /* TableViewController.swift */,
 				055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */,
-				05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */,
+				05ACC9F329F80C9F00A462EF /* InformationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -186,15 +241,20 @@
 				05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */,
 				0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */,
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
+				05ACC9F429F80C9F00A462EF /* InformationViewController.swift in Sources */,
+				05E8096F29F6BA3100EB4972 /* LabelSwitchView.swift in Sources */,
 				05BDF12E29E1624B004773B9 /* PasswordModel+CoreDataClass.swift in Sources */,
 				05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */,
 				05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */,
+				05AFA44929EAD5BC005AA9A7 /* PasswordGeneration.swift in Sources */,
 				0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */,
 				0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */,
 				055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */,
 				0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */,
+				05AFA44B29EAE85D005AA9A7 /* PasswordGenerationViewController.swift in Sources */,
 				05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */,
 				05D65E5029B12C20005DC1D2 /* NewPasswordViewController.swift in Sources */,
+				050E25E029E87FDC009254D7 /* Extensions.swift in Sources */,
 				05DF085B29AFD5D8000F4373 /* TableViewController.swift in Sources */,
 				056E160129BB6EDC003D6662 /* Delegates.swift in Sources */,
 			);
@@ -349,7 +409,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.DanilRyumin.PasMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -382,7 +442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.DanilRyumin.PasMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

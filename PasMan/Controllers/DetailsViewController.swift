@@ -38,6 +38,7 @@ class DetailsViewController: UIViewController {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Password"
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -67,6 +68,7 @@ class DetailsViewController: UIViewController {
         let action = UIAction { _ in
             guard let index = self.index else { return }
             self.deletePasswordModelDelegate?.deletePasswordModel(at: index)
+            self.updateNumberOfPasswordsLabelDelegate?.updateNumberOfPasswordsLabel()
             self.navigationController?.popViewController(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
@@ -90,6 +92,7 @@ class DetailsViewController: UIViewController {
     }
     
     var deletePasswordModelDelegate: DeletePasswordModelDelegate?
+    var updateNumberOfPasswordsLabelDelegate: UpdateNumberOfPasswordsLabelDelegate?
     var reloadRowsDelegate: ReloadRowsDelegate?
     var index: IndexPath?
 
@@ -111,6 +114,7 @@ class DetailsViewController: UIViewController {
         if let index = index {
             reloadRowsDelegate?.reloadRows(indexPath: [index], animation: .automatic)
         }
+        navigationController?.popViewController(animated: true)
     }
     
     private func setupScrollViewConstraints() {

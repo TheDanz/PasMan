@@ -1,18 +1,30 @@
 # PasMan
 
-<p>An easy to use iOS app to keep your passwords safe.</p>
-
-## Security
-
-<p>For the secure storage of your information we use the Russian encryption algorithm <a href="https://en.wikipedia.org/wiki/Kuznyechik">Kuznyechik</a>. This is a robust algorithm that uses a 256-bit long, randomly generated master key. You can be sure that your data will not be read.</p>
+<p>PasMan is a mobile application designed to securely store passwords and other sensitive information. This application allows you to store all your passwords in one place, generate secure passwords and use them to access your accounts.</p>
 
 ## Features
 
-* Save password and what it is for
-* Store additional information for the password
-* Edit any information
+* Keeping all your passwords in one place
+* Generation of strong and unique passwords
 * Password encryption
+* Simple and user friendly interface
+
+## Security
+
+<p>Your passwords are encrypted using the Russian encryption algorithm <a href="https://en.wikipedia.org/wiki/Kuznyechik">Kuznyechik</a>, which is considered one of the strongest encryption methods. This is a robust algorithm that uses a 256-bit long, randomly generated master key. Encryption keys are not stored in the app and are only used to encrypt and decrypt your passwords.
+</p>
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/88277492/226706481-8012eab7-b0f2-4e02-a29d-87ababf9b3bb.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/226706613-bc65fea2-e073-4b2e-b467-2e529c7355c5.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/226706679-cbc62c6c-c07f-4d5b-a174-5cc9937cdb4b.png" width="262" height="568">
+<img src="https://user-images.githubusercontent.com/88277492/234337413-69b6e30e-52f1-4389-aa11-de57c8299975.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337508-6bf0f997-ac15-4deb-9350-c09f58c92eb9.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234338092-49c03c72-3e53-400b-9860-b0bd7900e5b9.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337571-5955b408-9690-4d83-a815-88a008fad292.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337700-38423395-85b4-4999-aa6a-747e2c0e312a.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337816-f99d917d-a8a3-40cc-936c-dc708744638f.png" width="262" height="568">
+
+
+
+
+## AppStore
+
+You can find our app in the AppStore at https://apps.apple.com/us/app/pasman/id6446602182
+
+## Support
+
+If you have any questions or issues with the app, please contact the developer at nave.stone.0q@icloud.com
