@@ -2,11 +2,25 @@ import UIKit
 import LocalAuthentication
 
 class AuthorizationViewController: UIViewController {
+    
+    lazy var shieldImageView: UIImageView = {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
+        imageView.image = UIImage(systemName: "lock.shield")
+        imageView.tintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        self.view.addSubview(imageView)
+        return imageView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         login()
+        
+        shieldImageView.center = view.center
+        UIView.animate(withDuration: 1) {
+            self.shieldImageView.center = CGPoint(x: self.view.frame.maxX / 2,
+                                                  y: self.shieldImageView.frame.height)
+        }
     }
 
     private func login() {
