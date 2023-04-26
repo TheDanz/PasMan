@@ -22,6 +22,23 @@ class AuthorizationViewController: UIViewController {
         self.view.addSubview(label)
         return label
     }()
+    
+    lazy var againButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        button.isHidden = true
+        button.setTitle("Try again", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
+        button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        button.layer.cornerRadius = 12
+        let action = UIAction { _ in
+            button.isHidden = button.isHidden ? false : true
+            self.login()
+        }
+        button.addAction(action, for: .touchUpInside)
+        self.view.addSubview(button)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +46,9 @@ class AuthorizationViewController: UIViewController {
         
         login()
         
+        againButton.center = view.center
         shieldImageView.center = view.center
+        
         UIView.animate(withDuration: 1) {
             self.shieldImageView.center = CGPoint(x: self.view.frame.maxX / 2,
                                                   y: self.shieldImageView.frame.height)
@@ -50,10 +69,7 @@ class AuthorizationViewController: UIViewController {
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { [weak self] success, error in
                 DispatchQueue.main.async {
                     guard success, error == nil else {
-                        let alert = UIAlertController(title: "Authorization Error", message: "Please try again", preferredStyle: .alert)
-                        let action = UIAlertAction(title: "Dismiss", style: .cancel)
-                        alert.addAction(action)
-                        self?.present(alert, animated: true)
+                        self?.againButton.isHidden = false
                         return
                     }
                     (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(TabBarController())
