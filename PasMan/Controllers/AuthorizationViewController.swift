@@ -10,10 +10,23 @@ class AuthorizationViewController: UIViewController {
         self.view.addSubview(imageView)
         return imageView
     }()
+    
+    lazy var bottomLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Avenir Next Bold", size: 20)
+        label.text = "You must use local authorization methods (biometry, Apple Watch or the device passcode) to access the application"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(label)
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         login()
         
         shieldImageView.center = view.center
@@ -21,6 +34,8 @@ class AuthorizationViewController: UIViewController {
             self.shieldImageView.center = CGPoint(x: self.view.frame.maxX / 2,
                                                   y: self.shieldImageView.frame.height)
         }
+        
+        setupBottomLabelConstraints()
     }
 
     private func login() {
@@ -35,7 +50,7 @@ class AuthorizationViewController: UIViewController {
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { [weak self] success, error in
                 DispatchQueue.main.async {
                     guard success, error == nil else {
-                        let alert = UIAlertController(title: "Authorisation Error", message: "Please try again", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Authorization Error", message: "Please try again", preferredStyle: .alert)
                         let action = UIAlertAction(title: "Dismiss", style: .cancel)
                         alert.addAction(action)
                         self?.present(alert, animated: true)
@@ -52,5 +67,11 @@ class AuthorizationViewController: UIViewController {
                 self.present(alert, animated: true)
             }
         }
+    }
+    
+    private func setupBottomLabelConstraints() {
+        bottomLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        bottomLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        bottomLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0).isActive = true
     }
 }
