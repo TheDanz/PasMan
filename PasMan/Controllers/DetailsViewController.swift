@@ -100,6 +100,9 @@ class DetailsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        
         setupScrollViewConstraints()
         setupContentViewConstraints()
         setupTitleViewConstraints()
@@ -115,6 +118,11 @@ class DetailsViewController: UIViewController {
             reloadRowsDelegate?.reloadRows(indexPath: [index], animation: .automatic)
         }
         navigationController?.popViewController(animated: true)
+        self.view.endEditing(true)
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     private func setupScrollViewConstraints() {
