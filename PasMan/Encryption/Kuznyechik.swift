@@ -72,8 +72,8 @@ final class Kuznyechik {
         }
         generateIterationKeys(key: randomKey)
         
-        let keys = mergeIntoArray(blocks: iterationKeys)
-        let keysData = Data(bytes: keys, count: keys.count)
+        let keys = iterationKeys.joined()
+        let keysData = Data(bytes: Array(keys), count: keys.count)
         
         do {
             try KeychainManager.save(keysData, forTag: "ru.PasMan.KuznyechikKeys")
@@ -253,63 +253,38 @@ final class Kuznyechik {
         }
     }
     
-    private func completeBlock(_ block: [Int8]) -> [Int8] {
+    private func completeLastBlock(_ blocks: inout [[Int8]]) {
         
-        var block = block
-        let deficiency = 16 - block.count % 16
+        guard let lastBlock = blocks.last else { return }
         
-        for i in 0..<deficiency {
+        if lastBlock.count == 16 {
+            blocks.append([-128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+            return
+        }
+        
+        let difference = 16 - lastBlock.count % 16
+        
+        for i in 0..<difference {
             
             if i == 0 {
-                block.append(1)
+                blocks[blocks.count - 1].append(-128)
             } else {
-                block.append(0)
+                blocks[blocks.count - 1].append(0)
             }
         }
-        
-        return block
     }
     
-    private func splitIntoBlocks(bytes: [Int8]) -> [[Int8]] {
+    private func uncompleteLastBlock(_ blocks: inout [[Int8]]) {
         
-        var bytes = bytes
-        var blocks: [[Int8]] = []
+        guard let _ = blocks.last else { return }
         
-        while bytes.count > 0 {
-            
-            let prefix = [Int8](bytes.prefix(16))
-            blocks.append(prefix)
-            
-            let offsetBy = bytes.count >= 16 ? 16 : bytes.count
-            let leftBound = bytes.startIndex
-            let rightBound = bytes.index(bytes.startIndex, offsetBy: offsetBy)
-            let range = leftBound..<rightBound
-            bytes.removeSubrange(range)
+        let lastIndex = blocks.count - 1
+        
+        while blocks[lastIndex].last == 0 {
+            blocks[lastIndex].removeLast()
         }
         
-        if let lastBlock = blocks.last {
-            
-            if lastBlock.count % 16 != 0 {
-                
-                let lastIndex = blocks.count - 1
-                blocks[lastIndex] = completeBlock(blocks[lastIndex])
-            }
-        }
-        
-        return blocks
-    }
-    
-    private func mergeIntoArray(blocks: [[Int8]]) -> [Int8] {
-        
-        var array = Array<Int8>()
-        
-        for block in blocks {
-            for element in block {
-                array.append(element)
-            }
-        }
-        
-        return array
+        blocks[lastIndex].removeLast()
     }
     
     private func encrypt(block: [Int8]) -> [Int8] {
@@ -330,15 +305,16 @@ final class Kuznyechik {
     func encrypt(string: String) -> Data {
         
         let bytesToEncrypt = Array(string.utf8).map({ Int8(bitPattern: $0) })
-        let blocksToEncrypt = splitIntoBlocks(bytes: bytesToEncrypt)
+        var blocksToEncrypt = bytesToEncrypt.chunked(into: 16)
+        completeLastBlock(&blocksToEncrypt)
         
         var encryptedBlocks: [[Int8]] = []
         for block in blocksToEncrypt {
             encryptedBlocks.append(encrypt(block: block))
         }
         
-        let encrtypedBytes = mergeIntoArray(blocks: encryptedBlocks)
-        let encryptedData = Data(bytes: encrtypedBytes, count: encrtypedBytes.count)
+        let encrtypedBytes = encryptedBlocks.joined()
+        let encryptedData = Data(bytes: Array(encrtypedBytes), count: encrtypedBytes.count)
         
         return encryptedData
     }
@@ -361,26 +337,15 @@ final class Kuznyechik {
     func decrypt(data: Data) -> String {
         
         let bytesToDecrypt = Array(data).map({ Int8(bitPattern: $0) })
-        let blocksToDecrypt = splitIntoBlocks(bytes: bytesToDecrypt)
+        let blocksToDecrypt = bytesToDecrypt.chunked(into: 16)
         
         var decryptedBlocks: [[Int8]] = []
         for block in blocksToDecrypt {
             decryptedBlocks.append(decrypt(block: block))
         }
+        uncompleteLastBlock(&decryptedBlocks)
         
-        if let _ = decryptedBlocks.last {
-
-            let index = decryptedBlocks.count - 1
-
-            while decryptedBlocks[index].last == 0 {
-
-                decryptedBlocks[index].removeLast()
-            }
-            decryptedBlocks[index].removeLast()
-        }
-        
-        
-        let decrtypedBytes = mergeIntoArray(blocks: decryptedBlocks).map({ UInt8(bitPattern: $0) })
+        let decrtypedBytes = decryptedBlocks.joined().map({ UInt8(bitPattern: $0) })
         let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) ?? "Decryption Error"
         
         return decryptedString
