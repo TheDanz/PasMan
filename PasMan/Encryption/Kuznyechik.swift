@@ -66,7 +66,9 @@ final class Kuznyechik {
         
         var randomKey = Array<Int8>()
         for _ in 0..<32 {
-            randomKey.append(Int8.random(in: -128...127))
+            let randomUInt32 = arc4random_uniform(UInt32(255))
+            let randomByte = Int8(bitPattern: UInt8(randomUInt32))
+            randomKey.append(randomByte)
         }
         generateIterationKeys(key: randomKey)
         
@@ -168,7 +170,7 @@ final class Kuznyechik {
         return output
     }
     
-     func inverseR(_ input: [Int8]) -> [Int8] {
+    private func inverseR(_ input: [Int8]) -> [Int8] {
           
         var output: [Int8] = Array(repeating: 0, count: 16)
         var a15 = input[0]
