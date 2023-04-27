@@ -27,6 +27,10 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
+            UIPasteboard.general.string = ""
+        }
+        
         passwordTVC.updateNumberOfPasswordsLabelDelegate = homeVC
         
         homeVC.title = "Home"
