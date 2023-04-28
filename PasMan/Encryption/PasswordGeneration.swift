@@ -12,7 +12,7 @@ final class PasswordGeneration {
     func generatePassword(length: Int, using: Set<CharacterSet>) -> String {
         
         if using.isEmpty {
-            return "YOUR STRONG PASSWORD"
+            return "YOUR STRONG PASSWORD".localized()
         }
         
         var password = ""

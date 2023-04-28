@@ -5,7 +5,7 @@ class HomeViewController: UIViewController {
     lazy var welcomingLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir Next Bold", size: 55)
-        label.text = "KEEP YOUR\nPASSWORDS\nSAFE"
+        label.text = "welcomingLabel".localized()
         label.textAlignment = .right
         label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         label.numberOfLines = 3

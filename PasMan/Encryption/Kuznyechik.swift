@@ -354,7 +354,7 @@ final class Kuznyechik {
         uncompleteLastBlock(&decryptedBlocks)
         
         let decrtypedBytes = decryptedBlocks.joined().map({ UInt8(bitPattern: $0) })
-        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) ?? "Decryption Error"
+        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) ?? "Decryption Error".localized()
         
         return decryptedString
     }

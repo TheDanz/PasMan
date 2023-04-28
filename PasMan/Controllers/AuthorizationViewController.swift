@@ -14,7 +14,7 @@ class AuthorizationViewController: UIViewController {
     lazy var bottomLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir Next Bold", size: 20)
-        label.text = "You must use local authorization methods (biometry, Apple Watch or the device passcode) to access the application"
+        label.text = "You must use local authorization methods (biometry, Apple Watch or the device passcode) to access the application".localized()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -26,7 +26,7 @@ class AuthorizationViewController: UIViewController {
     lazy var againButton: UIButton = {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         button.isHidden = true
-        button.setTitle("Try again", for: .normal)
+        button.setTitle("Try again".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
         button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -64,7 +64,7 @@ class AuthorizationViewController: UIViewController {
         
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
             
-            let reason = "Please login with Local Authentication"
+            let reason = "Please login with Local Authentication".localized()
             
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { [weak self] success, error in
                 DispatchQueue.main.async {
@@ -77,8 +77,8 @@ class AuthorizationViewController: UIViewController {
             }
         } else {
             DispatchQueue.main.async {
-                let alert = UIAlertController(title: "ERROR", message: error?.localizedDescription, preferredStyle: .alert)
-                let action = UIAlertAction(title: "Dismiss", style: .cancel)
+                let alert = UIAlertController(title: "ERROR".localized(), message: error?.localizedDescription, preferredStyle: .alert)
+                let action = UIAlertAction(title: "Dismiss".localized(), style: .cancel)
                 alert.addAction(action)
                 self.present(alert, animated: true)
             }
