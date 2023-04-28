@@ -49,20 +49,24 @@ final class Kuznyechik {
     
     init() {
         
-        if let keysData = try? KeychainManager.get("ru.PasMan.KuznyechikKeys") {
-            var keys = Array(keysData).map({ Int8(bitPattern: $0) })
-            
-            for i in 0..<iterationKeys.count {
-                
-                iterationKeys[i] = Array(keys.prefix(16))
-                
-                let leftBound = keys.startIndex
-                let rightBound = keys.index(keys.startIndex, offsetBy: 16)
-                let range = leftBound..<rightBound
-                keys.removeSubrange(range)
-            }
-            return
-        }
+        if getKeysFromKeychain() { return }
+        
+        let randomMasterKey = generateRandomMasterKey()
+        generateIterationKeys(key: randomMasterKey)
+        
+        saveKeysIntoKeychain()
+    }
+    
+    private func getKeysFromKeychain() -> Bool {
+        
+        guard let keysData = try? KeychainManager.get("ru.PasMan.KuznyechikKeys") else { return false }
+        let keysBytes = Array(keysData).map({ Int8(bitPattern: $0) })
+        iterationKeys = keysBytes.chunked(into: 16)
+        
+        return true
+    }
+    
+    private func generateRandomMasterKey() -> [Int8] {
         
         var randomKey = Array<Int8>()
         for _ in 0..<32 {
@@ -70,10 +74,14 @@ final class Kuznyechik {
             let randomByte = Int8(bitPattern: UInt8(randomUInt32))
             randomKey.append(randomByte)
         }
-        generateIterationKeys(key: randomKey)
         
-        let keys = iterationKeys.joined()
-        let keysData = Data(bytes: Array(keys), count: keys.count)
+        return randomKey
+    }
+    
+    private func saveKeysIntoKeychain() {
+        
+        let keysBytes = iterationKeys.joined()
+        let keysData = Data(bytes: Array(keysBytes), count: keysBytes.count)
         
         do {
             try KeychainManager.save(keysData, forTag: "ru.PasMan.KuznyechikKeys")
