@@ -15,7 +15,7 @@ class KeychainManager {
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
-        guard status == errSecDuplicateItem else {
+        guard status != errSecDuplicateItem else {
             throw KeychainError.duplicateItem
         }
         

@@ -7,6 +7,7 @@
 * Keeping all your passwords in one place
 * Generation of strong and unique passwords
 * Password encryption
+* Screen capture protection
 * Simple and user friendly interface
 
 ## Security

@@ -68,7 +68,7 @@ extension TableViewController: UITableViewDataSource {
             
             let noDataLabel = UILabel(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height))
             noDataLabel.font = UIFont(name: "Avenir Next Bold", size: 30)
-            noDataLabel.text = "You haven't saved any passwords yet"
+            noDataLabel.text = "You haven't saved any passwords yet".localized()
             noDataLabel.textAlignment = .center
             noDataLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
             noDataLabel.numberOfLines = 0

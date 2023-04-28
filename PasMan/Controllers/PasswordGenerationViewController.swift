@@ -4,8 +4,9 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var passwordLabel: UILabel = {
         let label = UILabel()
+        label.setScreenCaptureProtection()
         label.font = UIFont(name: "Avenir Next Bold", size: 24)
-        label.text = "YOUR STRONG PASSWORD"
+        label.text = "YOUR STRONG PASSWORD".localized()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -20,7 +21,7 @@ class PasswordGenerationViewController: UIViewController {
     lazy var lengthLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Avenir Next Demi Bold", size: 18)
-        label.text = "Password length: 8"
+        label.text = "Password length: 8".localized()
         label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         label.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(label)
@@ -36,7 +37,7 @@ class PasswordGenerationViewController: UIViewController {
         slider.minimumValueImage = UIImage(systemName: "8.circle", withConfiguration: config)
         slider.maximumValueImage = UIImage(systemName: "20.circle", withConfiguration: config)
         let action = UIAction { _ in
-            self.lengthLabel.text = "Password length: \(Int(slider.value))"
+            self.lengthLabel.text = "Password length: ".localized() + "\(Int(slider.value))"
         }
         slider.addAction(action, for: .valueChanged)
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +47,7 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var lowercaseView: LabelSwitchView = {
         let labelSwitchView = LabelSwitchView()
-        labelSwitchView.leftLabel.text = "Lowercase letters"
+        labelSwitchView.leftLabel.text = "Lowercase letters".localized()
         labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(labelSwitchView)
         return labelSwitchView
@@ -54,7 +55,7 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var uppercaseView: LabelSwitchView = {
         let labelSwitchView = LabelSwitchView()
-        labelSwitchView.leftLabel.text = "Uppercase letters"
+        labelSwitchView.leftLabel.text = "Uppercase letters".localized()
         labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(labelSwitchView)
         return labelSwitchView
@@ -62,7 +63,7 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var digitsView: LabelSwitchView = {
         let labelSwitchView = LabelSwitchView()
-        labelSwitchView.leftLabel.text = "Digits"
+        labelSwitchView.leftLabel.text = "Digits".localized()
         labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(labelSwitchView)
         return labelSwitchView
@@ -70,7 +71,7 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var specialCharactersView: LabelSwitchView = {
         let labelSwitchView = LabelSwitchView()
-        labelSwitchView.leftLabel.text = "Special characters"
+        labelSwitchView.leftLabel.text = "Special characters".localized()
         labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(labelSwitchView)
         return labelSwitchView
@@ -78,7 +79,7 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save password", for: .normal)
+        button.setTitle("Save password".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
         button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)

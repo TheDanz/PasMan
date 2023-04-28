@@ -4,7 +4,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var titleTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Caption"
+        textField.placeholder = "Caption".localized()
         textField.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
         textField.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         textField.layer.borderColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -14,6 +14,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
         textField.returnKeyType = .done
+        textField.setScreenCaptureProtection()
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField
@@ -21,7 +22,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var loginTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Username"
+        textField.placeholder = "Username".localized()
         textField.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
         textField.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         textField.layer.borderColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -31,6 +32,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
         textField.returnKeyType = .done
+        textField.setScreenCaptureProtection()
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField
@@ -38,7 +40,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Password"
+        textField.placeholder = "Password".localized()
         textField.font = UIFont(name: "Avenir Next Demi Bold", size: 15)
         textField.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         textField.layer.borderColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -56,7 +58,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Save password", for: .normal)
+        button.setTitle("Save password".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
         button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -76,7 +78,7 @@ class NewPasswordViewController: UIViewController {
                   !login.isEmpty,
                   !password.isEmpty else {
                 
-                let alert = UIAlertController(title: "ERROR", message: "Fill in all the fields", preferredStyle: .alert)
+                let alert = UIAlertController(title: "ERROR".localized(), message: "Fill in all the fields".localized(), preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(action)
                 

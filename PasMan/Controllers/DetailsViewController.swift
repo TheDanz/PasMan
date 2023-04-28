@@ -18,8 +18,9 @@ class DetailsViewController: UIViewController {
     
     lazy var titleView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Title"
+        passwordDetailsView.titleLabel.text = "Title".localized()
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -27,8 +28,9 @@ class DetailsViewController: UIViewController {
     
     lazy var loginView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Username"
+        passwordDetailsView.titleLabel.text = "Username".localized()
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -36,7 +38,7 @@ class DetailsViewController: UIViewController {
     
     lazy var passwordView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Password"
+        passwordDetailsView.titleLabel.text = "Password".localized()
         passwordDetailsView.inputTextView.delegate = self
         passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,9 +48,10 @@ class DetailsViewController: UIViewController {
     
     lazy var additionalInformationView: PasswordDetailsView = {
         let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Additional Information"
+        passwordDetailsView.titleLabel.text = "Additional Information".localized()
         passwordDetailsView.inputTextView.textContainer.maximumNumberOfLines = 10
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -61,7 +64,7 @@ class DetailsViewController: UIViewController {
         button.layer.borderColor = UIColor.red.cgColor
         button.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0, alpha: 0.2)
         button.setTitleColor(.systemRed, for: .normal)
-        button.setTitle("Delete password", for: .normal)
+        button.setTitle("Delete password".localized(), for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
         

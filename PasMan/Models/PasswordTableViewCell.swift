@@ -20,6 +20,7 @@ class PasswordTableViewCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         var view = UILabel()
+        view.setScreenCaptureProtection()
         view.frame = CGRect(x: 0, y: 0, width: 310, height: 40)
         view.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,6 +30,7 @@ class PasswordTableViewCell: UITableViewCell {
     
     lazy var loginLabel: UILabel = {
         var view = UILabel()
+        view.setScreenCaptureProtection()
         view.frame = CGRect(x: 0, y: 0, width: 310, height: 40)
         view.font = UIFont(name: "Avenir Next", size: 16)
         view.translatesAutoresizingMaskIntoConstraints = false
