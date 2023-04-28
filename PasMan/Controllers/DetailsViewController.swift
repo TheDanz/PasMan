@@ -20,6 +20,7 @@ class DetailsViewController: UIViewController {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Title".localized()
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -29,6 +30,7 @@ class DetailsViewController: UIViewController {
         let passwordDetailsView = PasswordDetailsView()
         passwordDetailsView.titleLabel.text = "Username".localized()
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView
@@ -49,6 +51,7 @@ class DetailsViewController: UIViewController {
         passwordDetailsView.titleLabel.text = "Additional Information".localized()
         passwordDetailsView.inputTextView.textContainer.maximumNumberOfLines = 10
         passwordDetailsView.inputTextView.delegate = self
+        passwordDetailsView.inputTextView.setScreenCaptureProtection()
         passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(passwordDetailsView)
         return passwordDetailsView

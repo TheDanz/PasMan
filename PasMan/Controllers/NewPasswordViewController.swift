@@ -14,6 +14,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
         textField.returnKeyType = .done
+        textField.setScreenCaptureProtection()
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField
@@ -31,6 +32,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
         textField.returnKeyType = .done
+        textField.setScreenCaptureProtection()
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField

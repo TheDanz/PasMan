@@ -4,6 +4,7 @@ class PasswordGenerationViewController: UIViewController {
     
     lazy var passwordLabel: UILabel = {
         let label = UILabel()
+        label.setScreenCaptureProtection()
         label.font = UIFont(name: "Avenir Next Bold", size: 24)
         label.text = "YOUR STRONG PASSWORD".localized()
         label.textAlignment = .center
