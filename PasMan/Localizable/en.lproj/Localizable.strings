@@ -6,7 +6,7 @@
 "Home" = "Home";
 "Generate" = "Generate";
 "Passwords" = "Passwords";
-"welcomingLabel" = "KEEP YOUR\nPASSWORDS\nSAFE";
+"mainLabel" = "KEEP YOUR\nPASSWORDS\nSAFE";
 "YOUR STRONG PASSWORD" = "YOUR STRONG PASSWORD";
 "Password length: 8" = "Password length: 8";
 "Password length: " = "Password length: ";

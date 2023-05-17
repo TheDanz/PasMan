@@ -14,8 +14,6 @@ class TableViewController: UIViewController {
         return tableView
     }()
     
-    var updateNumberOfPasswordsLabelDelegate: UpdateNumberOfPasswordsLabelDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -105,7 +103,6 @@ extension TableViewController: UITableViewDataSource {
             
             let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
             dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
-            updateNumberOfPasswordsLabelDelegate?.updateNumberOfPasswordsLabel()
         }
     }
     
@@ -116,7 +113,6 @@ extension TableViewController: UITableViewDataSource {
         destinationVC.data = passwordModel
         destinationVC.deletePasswordModelDelegate = self
         destinationVC.reloadRowsDelegate = self
-        destinationVC.updateNumberOfPasswordsLabelDelegate = self.updateNumberOfPasswordsLabelDelegate
         destinationVC.index = indexPath
         navigationController?.pushViewController(destinationVC, animated: true)
     }

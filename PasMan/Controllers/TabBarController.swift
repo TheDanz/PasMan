@@ -13,8 +13,6 @@ class TabBarController: UITabBarController {
             UIPasteboard.general.string = ""
         }
         
-        passwordTVC.updateNumberOfPasswordsLabelDelegate = homeVC
-        
         homeVC.title = "Home".localized()
         passwordGenerationVC.title = "Generate".localized()
         passwordTVC.title = "Passwords".localized()

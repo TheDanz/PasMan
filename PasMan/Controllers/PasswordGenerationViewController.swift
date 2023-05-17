@@ -98,7 +98,6 @@ class PasswordGenerationViewController: UIViewController {
             
             let destinationVC = NewPasswordViewController()
             destinationVC.reloadDataDelegate = passwordTVC
-            destinationVC.updateNumberOfPasswordsLabelDelegate = homeVC
             
             self.present(destinationVC, animated: true)
             destinationVC.passwordTextField.text = self.passwordLabel.text

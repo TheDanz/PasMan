@@ -3,10 +3,10 @@
 "Please login with Local Authentication" = "Пожалуйста, войдите с локальной аутентификацией";
 "ERROR" = "ОШИБКА";
 "Dismiss" = "Выйти";
-"Home" = "Дом";
+"Home" = "Главная";
 "Generate" = "Генерация";
 "Passwords" = "Пароли";
-"welcomingLabel" = "ХРАНИТЕ\nПАРОЛИ В\nСЕКРЕТЕ";
+"mainLabel" = "ХРАНИТЕ\nПАРОЛИ В\nСЕКРЕТЕ";
 "YOUR STRONG PASSWORD" = "Ваш сильный пароль";
 "Password length: 8" = "Длина пароля: 8";
 "Password length: " = "Длина пароля: ";
