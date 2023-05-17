@@ -91,7 +91,7 @@ class PasswordGenerationViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         let action = UIAction { _ in
             
-            let passwordTableNC = self.tabBarController?.viewControllers?[3] as? UINavigationController
+            let passwordTableNC = self.tabBarController?.viewControllers?[2] as? UINavigationController
             let homeNC = self.tabBarController?.viewControllers?[0] as? UINavigationController
             let passwordTVC = passwordTableNC?.topViewController as? TableViewController
             let homeVC = homeNC?.topViewController as? HomeViewController
