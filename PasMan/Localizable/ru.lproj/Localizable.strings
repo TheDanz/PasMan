@@ -24,3 +24,5 @@
 "Additional Information" = "Дополнительная информация";
 "Delete password" = "Удалить";
 "Decryption Error" = "Ошибка расшифрования";
+"Add password lifetime?" = "Добавить время жизни?";
+"Amount of days" = "Количество дней";
