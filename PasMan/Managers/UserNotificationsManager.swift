@@ -15,17 +15,23 @@ final class UserNotificationsManager {
         }
     }
     
-    func sendNotifications(on date: DateComponents) {
+    func sendNotifications(after days: Int, body: String, uuid: String) {
+        
+        let date = Calendar.current.date(byAdding: .day, value: days, to: Date())!
+        let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
         let content = UNMutableNotificationContent()
-        content.title = "First notification"
-        content.body = "My first notification"
+        content.title = "Password expiration".localized()
+        content.body = body
+        content.badge = 1
         content.sound = UNNotificationSound.default
-        
-        let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: "notification", content: content, trigger: calendarTrigger)
-        
+ 
+        let calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        let request = UNNotificationRequest(identifier: uuid, content: content, trigger: calendarTrigger)
         notificationCenter.add(request)
+    }
+    
+    func deleteNotification(withUUID: String) {
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [withUUID])
     }
 }

@@ -26,3 +26,6 @@
 "Decryption Error" = "Ошибка расшифрования";
 "Add password lifetime?" = "Добавить время жизни?";
 "Amount of days" = "Количество дней";
+"Your " = "Срок действия пароля от ";
+" password has expired!" = " истек!";
+"Password expiration" = "Истечение срока действия пароля";

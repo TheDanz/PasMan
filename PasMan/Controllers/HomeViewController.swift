@@ -44,6 +44,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
+        let userNotificationsManager = UserNotificationsManager()
+        userNotificationsManager.requestAuthorization()
+        
         setupAllConstraints()
     }
     

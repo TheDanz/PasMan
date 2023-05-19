@@ -37,12 +37,13 @@ class DataStoreManager {
         }
     }
     
-    func createPasswordModel(title: String, login: String, password: String) {
+    func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil) {
         let kuznyechik = Kuznyechik()
         let passwordModel = PasswordModel(context: viewContext)
         passwordModel.title = title
         passwordModel.login = kuznyechik.encrypt(string: login)
         passwordModel.password = kuznyechik.encrypt(string: password)
+        passwordModel.uuid = uuid
         try? viewContext.save()
     }
     

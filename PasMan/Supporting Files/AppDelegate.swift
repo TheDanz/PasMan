@@ -4,6 +4,12 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
+        let userNotificationsManager = UserNotificationsManager()
+        userNotificationsManager.notificationCenter.delegate = self
+        
         return true
     }
 
@@ -22,3 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.sound, .banner])
+    }
+}

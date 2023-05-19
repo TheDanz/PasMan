@@ -28,3 +28,6 @@
 "Decryption Error" = "Decryption Error";
 "Add password lifetime?" = "Add password lifetime?";
 "Amount of days" = "Amount of days";
+"Your " = "Your ";
+" password has expired!" = " password has expired!";
+"Password expiration" = "Password expiration";

@@ -13,6 +13,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.returnKeyType = .done
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
@@ -30,6 +31,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.returnKeyType = .done
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
@@ -47,6 +49,7 @@ class NewPasswordViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.returnKeyType = .done
         textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -106,7 +109,16 @@ class NewPasswordViewController: UIViewController {
                 return
             }
             
-            DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password)
+            let uuidString: String? = nil
+            if self.lifeTimeView.rightSwitch.isOn {
+                
+                let userNotificationsManager = UserNotificationsManager()
+                let days = Int(self.stepperView.rightStepper.value)
+                let uuidString = UUID().uuidString
+                userNotificationsManager.sendNotifications(after: days, body: "Your ".localized() + title + " password has expired!".localized(), uuid: uuidString)
+            }
+            
+            DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password, uuid: uuidString)
             self.reloadDataDelegate?.reloadData()
             
             self.dismiss(animated: true)
