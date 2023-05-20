@@ -34,4 +34,25 @@ final class UserNotificationsManager {
     func deleteNotification(withUUID: String) {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [withUUID])
     }
+    
+    func updateNotificationBody(withUUID: String, newBody: String) {
+                
+        notificationCenter.getPendingNotificationRequests { notifications in
+            for notification in notifications {
+                if notification.identifier == withUUID {
+                    
+                    let newContent = UNMutableNotificationContent()
+                    newContent.title = notification.content.title
+                    newContent.body = newBody
+                    newContent.badge = notification.content.badge
+                    newContent.sound = notification.content.sound
+        
+                    let request = UNNotificationRequest(identifier: withUUID, content: newContent, trigger: notification.trigger)
+                    self.notificationCenter.add(request)
+                    
+                    break
+                }
+            }
+        }
+    }
 }

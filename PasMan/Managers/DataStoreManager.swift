@@ -48,11 +48,23 @@ class DataStoreManager {
     }
     
     func deletePasswordModel(object: PasswordModel) {
+                
+        if let uuid = object.uuid {
+            let userNotificationsManager = UserNotificationsManager()
+            userNotificationsManager.deleteNotification(withUUID: uuid)
+        }
+        
         viewContext.delete(object)
         try? viewContext.save()
     }
     
     func updateTitle(for object: PasswordModel, title: String) {
+        
+        if let uuid = object.uuid {
+            let userNotificationsManager = UserNotificationsManager()
+            userNotificationsManager.updateNotificationBody(withUUID: uuid, newBody: "Your ".localized() + title + " password has expired!".localized())
+        }
+        
         object.title = title
         try? viewContext.save()
     }
