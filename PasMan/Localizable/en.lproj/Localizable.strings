@@ -31,3 +31,9 @@
 "Your " = "Your ";
 " password has expired!" = " password has expired!";
 "Password expiration" = "Password expiration";
+"Change expiration date" = "Change expiration date";
+"Set the number of days to expire" = "Set the number of days to expire";
+"Invalid number of days" = "Invalid number of days";
+"This password expires on " = "This password expires on ";
+"This password does not expire" = "This password does not expire";
+"Cancel" = "Cancel";

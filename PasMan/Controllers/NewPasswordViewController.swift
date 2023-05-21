@@ -109,16 +109,19 @@ class NewPasswordViewController: UIViewController {
                 return
             }
             
-            var uuidString: String? = nil
+            var uuidString = UUID().uuidString
+            var expirationDate: Date? = nil
+            
             if self.lifeTimeView.rightSwitch.isOn {
                 
                 let userNotificationsManager = UserNotificationsManager()
                 let days = Int(self.stepperView.rightStepper.value)
-                uuidString = UUID().uuidString
-                userNotificationsManager.sendNotifications(after: days, body: "Your ".localized() + title + " password has expired!".localized(), uuid: uuidString!)
+                userNotificationsManager.sendNotifications(after: days, body: "Your ".localized() + title + " password has expired!".localized(), uuid: uuidString)
+                
+                expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
             }
             
-            DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password, uuid: uuidString)
+            DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password, uuid: uuidString, expirationDate: expirationDate)
             self.reloadDataDelegate?.reloadData()
             
             self.dismiss(animated: true)

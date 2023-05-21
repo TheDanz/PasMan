@@ -37,13 +37,14 @@ class DataStoreManager {
         }
     }
     
-    func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil) {
+    func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil, expirationDate: Date? = nil) {
         let kuznyechik = Kuznyechik()
         let passwordModel = PasswordModel(context: viewContext)
         passwordModel.title = title
         passwordModel.login = kuznyechik.encrypt(string: login)
         passwordModel.password = kuznyechik.encrypt(string: password)
         passwordModel.uuid = uuid
+        passwordModel.expirationDate = expirationDate
         try? viewContext.save()
     }
     
@@ -84,6 +85,11 @@ class DataStoreManager {
     func updateAdditionalInformation(for object: PasswordModel, information: String) {
         let kuznyechik = Kuznyechik()
         object.additionalInformation = kuznyechik.encrypt(string: information)
+        try? viewContext.save()
+    }
+    
+    func updateExpirationDate(for object: PasswordModel, expirationDate: Date) {
+        object.expirationDate = expirationDate
         try? viewContext.save()
     }
 }

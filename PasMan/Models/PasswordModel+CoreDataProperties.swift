@@ -13,6 +13,7 @@ extension PasswordModel {
     @NSManaged public var password: Data?
     @NSManaged public var title: String?
     @NSManaged public var uuid: String?
+    @NSManaged public var expirationDate: Date?
 
 }
 

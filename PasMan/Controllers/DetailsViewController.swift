@@ -104,13 +104,9 @@ class DetailsViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         
-        setupScrollViewConstraints()
-        setupContentViewConstraints()
-        setupTitleViewConstraints()
-        setupLoginViewConstraints()
-        setupPasswordViewConstraints()
-        setupAdditionalInformationViewConstraints()
-        setupDeleteButtonPasswordConstraints()
+        setupAllConstraints()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.clock"), style: .plain, target: self, action: #selector(rightBarButtonClick))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,8 +118,66 @@ class DetailsViewController: UIViewController {
         self.view.endEditing(true)
     }
     
-    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+    @objc
+    func rightBarButtonClick() {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        
+        var message = String()
+        if let expirationDate = data?.expirationDate, expirationDate >= Date() {
+            message = "This password expires on ".localized() + dateFormatter.string(from: expirationDate)
+        } else {
+            message = "This password does not expire".localized()
+        }
+        
+        let alert = UIAlertController(title: "Change expiration date".localized(),
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Set the number of days to expire".localized()
+            textField.autocorrectionType = .no
+            textField.returnKeyType = .done
+            textField.keyboardType = .numberPad
+        }
+
+        let actionOK = UIAlertAction(title: "OK", style: .default) { _ in
+            
+            if let numberOfDays = Int((alert.textFields?.first?.text)!), numberOfDays >= 1 && numberOfDays <= 360 {
+                let userNotificationsManager = UserNotificationsManager()
+                userNotificationsManager.updateNotificationTrigger(withUUID: (self.data?.uuid)!, body: "Your ".localized() + (self.data?.title)! + " password has expired!".localized(), afterDays: numberOfDays)
+                let date = Calendar.current.date(byAdding: .day, value: numberOfDays, to: Date())!
+                DataStoreManager.shared.updateExpirationDate(for: self.data!, expirationDate: date)
+            } else {
+                let alert = UIAlertController(title: "Invalid number of days".localized(), message: nil, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(action)
+                self.present(alert, animated: true)
+            }
+        }
+        
+        let actionCancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
+        
+        alert.addAction(actionOK)
+        alert.addAction(actionCancel)
+        
+        present(alert, animated: true)
+    }
+    
+    @objc
+    func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    private func setupAllConstraints() {
+        setupScrollViewConstraints()
+        setupContentViewConstraints()
+        setupTitleViewConstraints()
+        setupLoginViewConstraints()
+        setupPasswordViewConstraints()
+        setupAdditionalInformationViewConstraints()
+        setupDeleteButtonPasswordConstraints()
     }
     
     private func setupScrollViewConstraints() {
