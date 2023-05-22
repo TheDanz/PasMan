@@ -17,7 +17,7 @@ final class UserNotificationsManager {
     
     func sendNotifications(after days: Int, body: String, uuid: String) {
         
-        let date = Calendar.current.date(byAdding: .second, value: days, to: Date())!
+        let date = Calendar.current.date(byAdding: .day, value: days, to: Date())!
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
         let content = UNMutableNotificationContent()
@@ -57,8 +57,7 @@ final class UserNotificationsManager {
     }
     
     func updateNotificationTrigger(withUUID: String, body: String, afterDays: Int) {
-        
-        let date = Calendar.current.date(byAdding: .second, value: afterDays, to: Date())!
+        let date = Calendar.current.date(byAdding: .day, value: afterDays, to: Date())!
         let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
         
         let content = UNMutableNotificationContent()

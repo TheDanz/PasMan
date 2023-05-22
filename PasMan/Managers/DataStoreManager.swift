@@ -37,6 +37,36 @@ class DataStoreManager {
         }
     }
     
+    func getPasswordModelWithExpirationDateOfLess14days() -> [PasswordModel]? {
+        
+        var request = PasswordModel.fetchRequest()
+        var passwordModels = try? viewContext.fetch(request)
+        
+        
+        guard let passwordModels = passwordModels else { return nil }
+        
+        var output: [PasswordModel] = []
+        for passwordModel in passwordModels {
+            
+            if let expirationDate = passwordModel.expirationDate {
+                
+                let calendar = Calendar.current
+                let date1 = calendar.startOfDay(for: Date())
+                let date2 = calendar.startOfDay(for: expirationDate)
+                let components = calendar.dateComponents([.day], from: date1, to: date2)
+                
+                if components.day! < 14 {
+                    output.append(passwordModel)
+                }
+            }
+        }
+        
+        if output.isEmpty {
+            return nil
+        }
+        return output
+    }
+    
     func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil, expirationDate: Date? = nil) {
         let kuznyechik = Kuznyechik()
         let passwordModel = PasswordModel(context: viewContext)
