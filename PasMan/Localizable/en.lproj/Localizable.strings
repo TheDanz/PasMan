@@ -37,6 +37,6 @@
 "This password expires on " = "This password expires on ";
 "This password does not expire" = "This password does not expire";
 "Cancel" = "Cancel";
-"These passwords will expire within 14 days:\n" = "These passwords will expire within 14 days:\n";
+"These passwords will expire within 14 days:\n\n" = "These passwords will expire within 14 days:\n\n";
 "You don't have passwords that expire after 14 days" = "You don't have passwords that expire after 14 days";
-" on " = " on ";
+"You don't have weak passwords" = "You don't have weak passwords";

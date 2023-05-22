@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0503AA722A1BF277008E324B /* HomeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0503AA712A1BF277008E324B /* HomeLabelView.swift */; };
 		050E25E029E87FDC009254D7 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050E25DF29E87FDC009254D7 /* Extensions.swift */; };
 		0517247A29B905DC0003EE27 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0517247829B905DC0003EE27 /* Model.xcdatamodeld */; };
 		0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0517247F29B9088A0003EE27 /* DataStoreManager.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0503AA712A1BF277008E324B /* HomeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLabelView.swift; sourceTree = "<group>"; };
 		050E25DF29E87FDC009254D7 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0517247929B905DC0003EE27 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		0517247F29B9088A0003EE27 /* DataStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreManager.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
 				05695F352A15590F00FB9234 /* LabelStepperView.swift */,
 				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+				0503AA712A1BF277008E324B /* HomeLabelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			files = (
 				05AA515929F97BFD00F23C74 /* AuthorizationViewController.swift in Sources */,
 				055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */,
+				0503AA722A1BF277008E324B /* HomeLabelView.swift in Sources */,
 				05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */,
 				0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */,
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,

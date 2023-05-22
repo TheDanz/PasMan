@@ -2,41 +2,52 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    lazy var mainLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Avenir Next Bold", size: 50)
-        label.text = "mainLabel".localized()
-        label.textAlignment = .right
-        label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
-        label.numberOfLines = 3
-        label.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(label)
-        return label
+    lazy var mainView: HomeLabelView = {
+        let homeLabelView = HomeLabelView()
+        homeLabelView.mainLabel.font = UIFont(name: "Avenir Next Bold", size: 45)
+        homeLabelView.mainLabel.text = "mainLabel".localized()
+        homeLabelView.mainLabel.textAlignment = .center
+        homeLabelView.mainLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        homeLabelView.mainLabel.numberOfLines = 3
+        homeLabelView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(homeLabelView)
+        return homeLabelView
     }()
     
-    lazy var expirationPasswordsLabel: UILabel = {
-        let label = UILabel()
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
+    lazy var leftExpirationView: HomeLabelView = {
+        let homeLabelView = HomeLabelView()
         
         let passwordModels = DataStoreManager.shared.getPasswordModelWithExpirationDateOfLess14days()
         if let passwordModels = passwordModels {
-            label.text = "These passwords will expire within 14 days:\n".localized()
+            homeLabelView.mainLabel.text = "These passwords will expire within 14 days:\n\n".localized()
             for passwordModel in passwordModels {
-                label.text! += "\(passwordModel.title!)" + " on ".localized() + "\(dateFormatter.string(from: passwordModel.expirationDate!))\n"
+                homeLabelView.mainLabel.text! += "\(passwordModel.title!)\n"
             }
         } else {
-            label.text = "You don't have passwords that expire after 14 days".localized()
+            homeLabelView.mainLabel.text = "You don't have passwords that expire after 14 days".localized()
         }
         
-        label.font = UIFont(name: "Avenir Next Bold", size: 20)
-        label.textAlignment = .left
-        label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(label)
-        return label
+        homeLabelView.mainLabel.font = UIFont(name: "Avenir Next Bold", size: 16)
+        homeLabelView.mainLabel.textAlignment = .left
+        homeLabelView.mainLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        homeLabelView.mainLabel.numberOfLines = 0
+        homeLabelView.sizeToFit()
+        homeLabelView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(homeLabelView)
+        return homeLabelView
+    }()
+    
+    lazy var rightWeaknessView: HomeLabelView = {
+        let homeLabelView = HomeLabelView()
+        homeLabelView.mainLabel.text = "You don't have weak passwords".localized()
+        homeLabelView.mainLabel.font = UIFont(name: "Avenir Next Bold", size: 16)
+        homeLabelView.mainLabel.textAlignment = .right
+        homeLabelView.mainLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
+        homeLabelView.mainLabel.numberOfLines = 0
+        homeLabelView.sizeToFit()
+        homeLabelView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(homeLabelView)
+        return homeLabelView
     }()
 
     lazy var addPasswordButton: UIButton = {
@@ -76,29 +87,37 @@ class HomeViewController: UIViewController {
     }
     
     private func setupAllConstraints() {
-        setupMainLabelConstraints()
-        setupExpirationPasswordsLabelConstraints()
+        setupMainViewConstraints()
+        setupLeftExpirationViewConstraints()
+        setupRightWeaknessViewConstraints()
         setupAddPasswordButtonConstraints()
     }
     
-    private func setupMainLabelConstraints() {
-        mainLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        mainLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
-        mainLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
-        mainLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
+    private func setupMainViewConstraints() {
+        mainView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
+        mainView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+        mainView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        mainView.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.25).isActive = true
     }
     
-    private func setupExpirationPasswordsLabelConstraints() {
-        expirationPasswordsLabel.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 10).isActive = true
-        expirationPasswordsLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
-        expirationPasswordsLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
-        expirationPasswordsLabel.heightAnchor.constraint(equalTo: self.view.heightAnchor, multiplier: 0.3).isActive = true
+    private func setupLeftExpirationViewConstraints() {
+        leftExpirationView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
+        leftExpirationView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+        leftExpirationView.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.47).isActive = true
+        leftExpirationView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
+    }
+    
+    private func setupRightWeaknessViewConstraints() {
+        rightWeaknessView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
+        rightWeaknessView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        rightWeaknessView.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.47).isActive = true
+        rightWeaknessView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }
     
     private func setupAddPasswordButtonConstraints() {
-        addPasswordButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -35).isActive = true
+        addPasswordButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -15).isActive = true
         addPasswordButton.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -25).isActive = true
-        addPasswordButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        addPasswordButton.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        addPasswordButton.heightAnchor.constraint(equalToConstant: 55).isActive = true
+        addPasswordButton.widthAnchor.constraint(equalToConstant: 55).isActive = true
     }
 }
