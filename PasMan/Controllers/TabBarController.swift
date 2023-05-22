@@ -9,6 +9,8 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        delegate = self
+        
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: nil) { _ in
             UIPasteboard.general.string = ""
         }
@@ -35,6 +37,19 @@ class TabBarController: UITabBarController {
                 let config = UIImage.SymbolConfiguration(pointSize: 20)
                 items[i].image = UIImage(systemName: images[i], withConfiguration: config)
             }
+        }
+    }
+}
+
+extension TabBarController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
+        let tabBarIndex = tabBarController.selectedIndex
+        switch tabBarIndex {
+        case 0:
+            self.homeVC.updateLeftExpirationViewText()
+        default:
+            break
         }
     }
 }

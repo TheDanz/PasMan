@@ -16,17 +16,6 @@ class HomeViewController: UIViewController {
     
     lazy var leftExpirationView: HomeLabelView = {
         let homeLabelView = HomeLabelView()
-        
-        let passwordModels = DataStoreManager.shared.getPasswordModelWithExpirationDateOfLess14days()
-        if let passwordModels = passwordModels {
-            homeLabelView.mainLabel.text = "These passwords will expire within 14 days:\n\n".localized()
-            for passwordModel in passwordModels {
-                homeLabelView.mainLabel.text! += "\(passwordModel.title!)\n"
-            }
-        } else {
-            homeLabelView.mainLabel.text = "You don't have passwords that expire after 14 days".localized()
-        }
-        
         homeLabelView.mainLabel.font = UIFont(name: "Avenir Next Bold", size: 16)
         homeLabelView.mainLabel.textAlignment = .left
         homeLabelView.mainLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -80,10 +69,25 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
+        updateLeftExpirationViewText()
+        
         let userNotificationsManager = UserNotificationsManager()
         userNotificationsManager.requestAuthorization()
         
         setupAllConstraints()
+    }
+    
+    func updateLeftExpirationViewText() {
+        
+        let passwordModels = DataStoreManager.shared.getPasswordModelWithExpirationDateOfLess14days()
+        if let passwordModels = passwordModels {
+            leftExpirationView.mainLabel.text = "These passwords will expire within 14 days:\n\n".localized()
+            for passwordModel in passwordModels {
+                leftExpirationView.mainLabel.text! += "\(passwordModel.title!)\n"
+            }
+        } else {
+            leftExpirationView.mainLabel.text = "You don't have passwords that expire after 14 days".localized()
+        }
     }
     
     private func setupAllConstraints() {
