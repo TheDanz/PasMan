@@ -50,13 +50,7 @@ class HomeViewController: UIViewController {
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 0, height: 5)
         let action = UIAction { _ in
-                        
-            let passwordTableNC = self.tabBarController?.viewControllers?[2] as? UINavigationController
-            let passwordTVC = passwordTableNC?.topViewController as? TableViewController
-            
             let destinationVC = NewPasswordViewController()
-            destinationVC.reloadDataDelegate = passwordTVC
-            
             self.present(destinationVC, animated: true)
         }
         button.addAction(action, for: .touchUpInside)

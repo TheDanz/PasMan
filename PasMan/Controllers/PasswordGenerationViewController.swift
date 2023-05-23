@@ -90,15 +90,7 @@ class PasswordGenerationViewController: UIViewController {
         button.layer.shadowOffset = CGSize(width: 1, height: 5)
         button.translatesAutoresizingMaskIntoConstraints = false
         let action = UIAction { _ in
-            
-            let passwordTableNC = self.tabBarController?.viewControllers?[2] as? UINavigationController
-            let homeNC = self.tabBarController?.viewControllers?[0] as? UINavigationController
-            let passwordTVC = passwordTableNC?.topViewController as? TableViewController
-            let homeVC = homeNC?.topViewController as? HomeViewController
-            
             let destinationVC = NewPasswordViewController()
-            destinationVC.reloadDataDelegate = passwordTVC
-            
             self.present(destinationVC, animated: true)
             destinationVC.passwordTextField.text = self.passwordLabel.text
         }

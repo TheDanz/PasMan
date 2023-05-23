@@ -122,7 +122,6 @@ class NewPasswordViewController: UIViewController {
             }
             
             DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password, uuid: uuidString, expirationDate: expirationDate)
-            self.reloadDataDelegate?.reloadData()
             
             self.dismiss(animated: true)
         }
@@ -132,8 +131,6 @@ class NewPasswordViewController: UIViewController {
         self.view.addSubview(button)
         return button
     }()
-    
-    var reloadDataDelegate: ReloadDataDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

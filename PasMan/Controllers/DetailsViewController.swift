@@ -69,8 +69,8 @@ class DetailsViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         
         let action = UIAction { _ in
-            guard let index = self.index else { return }
-            self.deletePasswordModelDelegate?.deletePasswordModel(at: index)
+            guard let data = self.data else { return }
+            DataStoreManager.shared.deletePasswordModel(object: data)
             self.navigationController?.popViewController(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
@@ -92,10 +92,6 @@ class DetailsViewController: UIViewController {
             }
         }
     }
-    
-    var deletePasswordModelDelegate: DeletePasswordModelDelegate?
-    var reloadRowsDelegate: ReloadRowsDelegate?
-    var index: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,9 +107,6 @@ class DetailsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if let index = index {
-            reloadRowsDelegate?.reloadRows(indexPath: [index], animation: .automatic)
-        }
         navigationController?.popViewController(animated: true)
         self.view.endEditing(true)
     }

@@ -14,6 +14,14 @@ class TableViewController: UIViewController {
         return tableView
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.passwordsTableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -111,9 +119,6 @@ extension TableViewController: UITableViewDataSource {
         let destinationVC = DetailsViewController()
         let passwordModel = fetchedResultsController.object(at: indexPath)
         destinationVC.data = passwordModel
-        destinationVC.deletePasswordModelDelegate = self
-        destinationVC.reloadRowsDelegate = self
-        destinationVC.index = indexPath
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
@@ -136,31 +141,5 @@ extension TableViewController: NSFetchedResultsControllerDelegate {
         default:
             break
         }
-    }
-}
-
-// MARK: - Delegates
-
-extension TableViewController: ReloadDataDelegate {
-    
-    func reloadData() {
-        DispatchQueue.main.async {
-            self.passwordsTableView.reloadData()
-        }
-    }
-}
-
-extension TableViewController: DeletePasswordModelDelegate {
-    
-    func deletePasswordModel(at indexPath: IndexPath) {
-        let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
-        dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
-    }
-}
-
-extension TableViewController: ReloadRowsDelegate {
-    
-    func reloadRows(indexPath: [IndexPath], animation: UITableView.RowAnimation) {
-        passwordsTableView.reloadRows(at: indexPath, with: animation)
     }
 }
