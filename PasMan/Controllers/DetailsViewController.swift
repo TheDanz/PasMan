@@ -107,8 +107,19 @@ class DetailsViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.popViewController(animated: true)
         self.view.endEditing(true)
+
+        if titleView.inputTextView.text.isEmpty {
+            DataStoreManager.shared.updateLogin(for: data!, login: "Caption".localized())
+        }
+
+        if loginView.inputTextView.text.isEmpty {
+            DataStoreManager.shared.updateLogin(for: data!, login: "Username".localized())
+        }
+
+        if passwordView.inputTextView.text.isEmpty {
+            DataStoreManager.shared.updateLogin(for: data!, login: "Password".localized())
+        }
     }
     
     @objc
@@ -247,6 +258,35 @@ extension DetailsViewController: UITextViewDelegate {
         case additionalInformationView.inputTextView:
             if let text = self.additionalInformationView.inputTextView.text {
                 DataStoreManager.shared.updateAdditionalInformation(for: data!, information: text)
+            }
+        default:
+            break
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+    
+        switch textView {
+        case titleView.inputTextView:
+            if titleView.inputTextView.text.isEmpty {
+                let alert = AlertManager.createOKAlert(with: "Don't leave an empty caption field".localized())
+                present(alert, animated: true)
+                titleView.inputTextView.text = "Caption".localized()
+                DataStoreManager.shared.updateTitle(for: data!, title: "Caption".localized())
+            }
+        case loginView.inputTextView:
+            if loginView.inputTextView.text.isEmpty {
+                let alert = AlertManager.createOKAlert(with: "Don't leave an empty username field".localized())
+                present(alert, animated: true)
+                loginView.inputTextView.text = "Username".localized()
+                DataStoreManager.shared.updateLogin(for: data!, login: "Username".localized())
+            }
+        case passwordView.inputTextView:
+            if passwordView.inputTextView.text.isEmpty {
+                let alert = AlertManager.createOKAlert(with: "Don't leave an empty password field".localized())
+                present(alert, animated: true)
+                passwordView.inputTextView.text = "Password".localized()
+                DataStoreManager.shared.updatePassword(for: data!, password: "Password".localized())
             }
         default:
             break

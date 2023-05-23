@@ -121,8 +121,10 @@ class NewPasswordViewController: UIViewController {
                 expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
             }
             
-            DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password, uuid: uuidString, expirationDate: expirationDate)
-            
+            DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
+                                                        login: login.trimmingCharacters(in: [" "]),
+                                                        password: password, uuid: uuidString,
+                                                        expirationDate: expirationDate)
             self.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)

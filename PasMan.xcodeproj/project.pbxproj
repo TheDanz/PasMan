@@ -15,6 +15,7 @@
 		0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0545E8DC29AD0A1500963D40 /* SceneDelegate.swift */; };
 		0545E8E429AD0A1700963D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E329AD0A1700963D40 /* Assets.xcassets */; };
 		0545E8E729AD0A1700963D40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */; };
+		0559FCCD2A1D018E00E65A4E /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559FCCC2A1D018E00E65A4E /* AlertManager.swift */; };
 		055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */; };
 		055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */; };
 		05695F362A15590F00FB9234 /* LabelStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05695F352A15590F00FB9234 /* LabelStepperView.swift */; };
@@ -46,6 +47,7 @@
 		0545E8E329AD0A1700963D40 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0545E8E629AD0A1700963D40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0545E8E829AD0A1700963D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0559FCCC2A1D018E00E65A4E /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailsView.swift; sourceTree = "<group>"; };
 		05695F352A15590F00FB9234 /* LabelStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStepperView.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
 				05B226A729DF45CF0086F1A7 /* KeychainManager.swift */,
 				05695F372A1567DA00FB9234 /* UserNotificationsManager.swift */,
+				0559FCCC2A1D018E00E65A4E /* AlertManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */,
 				05E8096F29F6BA3100EB4972 /* LabelSwitchView.swift in Sources */,
 				05C893592A1A7B5B0047A58B /* PasswordModel+CoreDataClass.swift in Sources */,
+				0559FCCD2A1D018E00E65A4E /* AlertManager.swift in Sources */,
 				05695F362A15590F00FB9234 /* LabelStepperView.swift in Sources */,
 				05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */,
 				05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */,

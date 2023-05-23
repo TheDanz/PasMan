@@ -38,3 +38,6 @@
 "These passwords will expire within 14 days:\n\n" = "Срок действия этих паролей истекает в течение 14 дней:\n\n";
 "You don't have passwords that expire after 14 days" = "У вас нет паролей, которые истекают через 14 дней";
 "You don't have weak passwords" = "У вас нет слабых паролей";
+"Don't leave an empty caption field" = "Не оставляйте заголовок пустым";
+"Don't leave an empty username field" = "Не оставляйте имя пользователя пустым";
+"Don't leave an empty password field" = "Не оставляйте пароль пустым";
