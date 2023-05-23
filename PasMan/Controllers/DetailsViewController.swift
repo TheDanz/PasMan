@@ -88,6 +88,9 @@ class DetailsViewController: UIViewController {
             }
         }
     }
+    
+    private var calendarButton = UIBarButtonItem()
+    private var eyeButton = UIBarButtonItem()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,9 +99,17 @@ class DetailsViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
         
-        setupAllConstraints()
+        calendarButton = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.clock"),
+                                             style: .plain, target: self,
+                                             action: #selector(calendarButtonClick))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.badge.clock"), style: .plain, target: self, action: #selector(rightBarButtonClick))
+        eyeButton = UIBarButtonItem(image: UIImage(systemName: "eye"),
+                                        style: .plain, target: self,
+                                        action: #selector(eyeButtonClick))
+        
+        navigationItem.rightBarButtonItems = [calendarButton, eyeButton]
+        
+        setupAllConstraints()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,7 +130,19 @@ class DetailsViewController: UIViewController {
     }
     
     @objc
-    func rightBarButtonClick() {
+    func eyeButtonClick() {
+        
+        if passwordView.textField.isSecureTextEntry {
+            passwordView.textField.isSecureTextEntry = false
+            eyeButton.image = UIImage(systemName: "eye.slash")
+        } else {
+            passwordView.textField.isSecureTextEntry = true
+            eyeButton.image = UIImage(systemName: "eye")
+        }
+    }
+    
+    @objc
+    func calendarButtonClick() {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
