@@ -16,8 +16,9 @@
 		0545E8E429AD0A1700963D40 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E329AD0A1700963D40 /* Assets.xcassets */; };
 		0545E8E729AD0A1700963D40 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0545E8E529AD0A1700963D40 /* LaunchScreen.storyboard */; };
 		0559FCCD2A1D018E00E65A4E /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559FCCC2A1D018E00E65A4E /* AlertManager.swift */; };
+		0559FCCF2A1D46EA00E65A4E /* LabelTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0559FCCE2A1D46EA00E65A4E /* LabelTextView.swift */; };
 		055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */; };
-		055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */; };
+		055DAD8129BFA4AB007DFEF1 /* LabelTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055DAD8029BFA4AB007DFEF1 /* LabelTextFieldView.swift */; };
 		05695F362A15590F00FB9234 /* LabelStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05695F352A15590F00FB9234 /* LabelStepperView.swift */; };
 		05695F382A1567DA00FB9234 /* UserNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05695F372A1567DA00FB9234 /* UserNotificationsManager.swift */; };
 		05A5CBA629FBF32F0056C6F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05A5CBA829FBF32F0056C6F3 /* Localizable.strings */; };
@@ -48,8 +49,9 @@
 		0545E8E629AD0A1700963D40 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0545E8E829AD0A1700963D40 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0559FCCC2A1D018E00E65A4E /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		0559FCCE2A1D46EA00E65A4E /* LabelTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextView.swift; sourceTree = "<group>"; };
 		055DAD7C29BF96B9007DFEF1 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordDetailsView.swift; sourceTree = "<group>"; };
+		055DAD8029BFA4AB007DFEF1 /* LabelTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelTextFieldView.swift; sourceTree = "<group>"; };
 		05695F352A15590F00FB9234 /* LabelStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStepperView.swift; sourceTree = "<group>"; };
 		05695F372A1567DA00FB9234 /* UserNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsManager.swift; sourceTree = "<group>"; };
 		05A5CB9C29FBEF870056C6F3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -151,7 +153,8 @@
 			children = (
 				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
 				05695F352A15590F00FB9234 /* LabelStepperView.swift */,
-				055DAD8029BFA4AB007DFEF1 /* PasswordDetailsView.swift */,
+				055DAD8029BFA4AB007DFEF1 /* LabelTextFieldView.swift */,
+				0559FCCE2A1D46EA00E65A4E /* LabelTextView.swift */,
 				0503AA712A1BF277008E324B /* HomeLabelView.swift */,
 			);
 			path = Views;
@@ -261,7 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				05AA515929F97BFD00F23C74 /* AuthorizationViewController.swift in Sources */,
-				055DAD8129BFA4AB007DFEF1 /* PasswordDetailsView.swift in Sources */,
+				055DAD8129BFA4AB007DFEF1 /* LabelTextFieldView.swift in Sources */,
 				0503AA722A1BF277008E324B /* HomeLabelView.swift in Sources */,
 				05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */,
 				0545E8DB29AD0A1500963D40 /* AppDelegate.swift in Sources */,
@@ -280,6 +283,7 @@
 				0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */,
 				05AFA44B29EAE85D005AA9A7 /* PasswordGenerationViewController.swift in Sources */,
 				05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */,
+				0559FCCF2A1D46EA00E65A4E /* LabelTextView.swift in Sources */,
 				05D65E5029B12C20005DC1D2 /* NewPasswordViewController.swift in Sources */,
 				050E25E029E87FDC009254D7 /* Extensions.swift in Sources */,
 				05DF085B29AFD5D8000F4373 /* TableViewController.swift in Sources */,

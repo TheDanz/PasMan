@@ -16,45 +16,41 @@ class DetailsViewController: UIViewController {
         return view
     }()
     
-    lazy var titleView: PasswordDetailsView = {
-        let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Title".localized()
-        passwordDetailsView.inputTextView.delegate = self
-        passwordDetailsView.inputTextView.setScreenCaptureProtection()
-        passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(passwordDetailsView)
-        return passwordDetailsView
+    lazy var titleView: LabelTextFieldView = {
+        let labelTextFieldView = LabelTextFieldView()
+        labelTextFieldView.titleLabel.text = "Title".localized()
+        labelTextFieldView.textField.delegate = self
+        labelTextFieldView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(labelTextFieldView)
+        return labelTextFieldView
     }()
     
-    lazy var loginView: PasswordDetailsView = {
-        let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Username".localized()
-        passwordDetailsView.inputTextView.delegate = self
-        passwordDetailsView.inputTextView.setScreenCaptureProtection()
-        passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(passwordDetailsView)
-        return passwordDetailsView
+    lazy var loginView: LabelTextFieldView = {
+        let labelTextFieldView = LabelTextFieldView()
+        labelTextFieldView.titleLabel.text = "Username".localized()
+        labelTextFieldView.textField.delegate = self
+        labelTextFieldView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(labelTextFieldView)
+        return labelTextFieldView
     }()
     
-    lazy var passwordView: PasswordDetailsView = {
-        let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Password".localized()
-        passwordDetailsView.inputTextView.delegate = self
-        passwordDetailsView.inputTextView.setScreenCaptureProtection()
-        passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(passwordDetailsView)
-        return passwordDetailsView
+    lazy var passwordView: LabelTextFieldView = {
+        let labelTextFieldView = LabelTextFieldView()
+        labelTextFieldView.titleLabel.text = "Password".localized()
+        labelTextFieldView.textField.delegate = self
+        labelTextFieldView.textField.isSecureTextEntry = true
+        labelTextFieldView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(labelTextFieldView)
+        return labelTextFieldView
     }()
     
-    lazy var additionalInformationView: PasswordDetailsView = {
-        let passwordDetailsView = PasswordDetailsView()
-        passwordDetailsView.titleLabel.text = "Additional Information".localized()
-        passwordDetailsView.inputTextView.textContainer.maximumNumberOfLines = 10
-        passwordDetailsView.inputTextView.delegate = self
-        passwordDetailsView.inputTextView.setScreenCaptureProtection()
-        passwordDetailsView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(passwordDetailsView)
-        return passwordDetailsView
+    lazy var additionalInformationView: LabelTextView = {
+        let labelTextView = LabelTextView()
+        labelTextView.titleLabel.text = "Additional Information".localized()
+        labelTextView.textView.delegate = self
+        labelTextView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(labelTextView)
+        return labelTextView
     }()
     
     lazy var deletePasswordButton: UIButton = {
@@ -84,11 +80,11 @@ class DetailsViewController: UIViewController {
             guard let data = data else { return }
             DispatchQueue.main.async {
                 let kuznyechik = Kuznyechik()
-                self.titleView.inputTextView.text = data.title
-                self.loginView.inputTextView.text = kuznyechik.decrypt(data: data.login!)
-                self.passwordView.inputTextView.text = kuznyechik.decrypt(data: data.password!)
+                self.titleView.textField.text = data.title
+                self.loginView.textField.text = kuznyechik.decrypt(data: data.login!)
+                self.passwordView.textField.text = kuznyechik.decrypt(data: data.password!)
                 guard let additionalInformation = data.additionalInformation else { return }
-                self.additionalInformationView.inputTextView.text = kuznyechik.decrypt(data: additionalInformation)
+                self.additionalInformationView.textView.text = kuznyechik.decrypt(data: additionalInformation)
             }
         }
     }
@@ -109,15 +105,15 @@ class DetailsViewController: UIViewController {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)
 
-        if titleView.inputTextView.text.isEmpty {
+        if titleView.textField.text!.isEmpty {
             DataStoreManager.shared.updateLogin(for: data!, login: "Caption".localized())
         }
 
-        if loginView.inputTextView.text.isEmpty {
+        if loginView.textField.text!.isEmpty {
             DataStoreManager.shared.updateLogin(for: data!, login: "Username".localized())
         }
 
-        if passwordView.inputTextView.text.isEmpty {
+        if passwordView.textField.text!.isEmpty {
             DataStoreManager.shared.updateLogin(for: data!, login: "Password".localized())
         }
     }
@@ -238,55 +234,66 @@ class DetailsViewController: UIViewController {
     }
 }
 
-extension DetailsViewController: UITextViewDelegate {
+extension DetailsViewController: UITextFieldDelegate {
     
-    func textViewDidChange(_ textView: UITextView) {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
         
-        switch textView {
-        case titleView.inputTextView:
-            if let text = self.titleView.inputTextView.text {
+        switch textField {
+        case titleView.textField:
+            if let text = self.titleView.textField.text {
                 DataStoreManager.shared.updateTitle(for: data!, title: text)
             }
-        case loginView.inputTextView:
-            if let text = self.loginView.inputTextView.text {
+        case loginView.textField:
+            if let text = self.loginView.textField.text {
                 DataStoreManager.shared.updateLogin(for: data!, login: text)
             }
-        case passwordView.inputTextView:
-            if let text = self.passwordView.inputTextView.text {
+        case passwordView.textField:
+            if let text = self.passwordView.textField.text {
                 DataStoreManager.shared.updatePassword(for: data!, password: text)
-            }
-        case additionalInformationView.inputTextView:
-            if let text = self.additionalInformationView.inputTextView.text {
-                DataStoreManager.shared.updateAdditionalInformation(for: data!, information: text)
             }
         default:
             break
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-    
-        switch textView {
-        case titleView.inputTextView:
-            if titleView.inputTextView.text.isEmpty {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        switch textField {
+        case titleView.textField:
+            if titleView.textField.text!.isEmpty {
                 let alert = AlertManager.createOKAlert(with: "Don't leave an empty caption field".localized())
                 present(alert, animated: true)
-                titleView.inputTextView.text = "Caption".localized()
+                titleView.textField.text = "Caption".localized()
                 DataStoreManager.shared.updateTitle(for: data!, title: "Caption".localized())
             }
-        case loginView.inputTextView:
-            if loginView.inputTextView.text.isEmpty {
+        case loginView.textField:
+            if loginView.textField.text!.isEmpty {
                 let alert = AlertManager.createOKAlert(with: "Don't leave an empty username field".localized())
                 present(alert, animated: true)
-                loginView.inputTextView.text = "Username".localized()
+                loginView.textField.text = "Username".localized()
                 DataStoreManager.shared.updateLogin(for: data!, login: "Username".localized())
             }
-        case passwordView.inputTextView:
-            if passwordView.inputTextView.text.isEmpty {
+        case passwordView.textField:
+            if passwordView.textField.text!.isEmpty {
                 let alert = AlertManager.createOKAlert(with: "Don't leave an empty password field".localized())
                 present(alert, animated: true)
-                passwordView.inputTextView.text = "Password".localized()
+                passwordView.textField.text = "Password".localized()
                 DataStoreManager.shared.updatePassword(for: data!, password: "Password".localized())
+            }
+        default:
+            break
+        }
+    }
+}
+
+extension DetailsViewController: UITextViewDelegate {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        switch textView {
+        case additionalInformationView.textView:
+            if let text = self.additionalInformationView.textView.text {
+                DataStoreManager.shared.updateAdditionalInformation(for: data!, information: text)
             }
         default:
             break
