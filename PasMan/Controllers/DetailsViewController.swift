@@ -284,21 +284,21 @@ extension DetailsViewController: UITextFieldDelegate {
         switch textField {
         case titleView.textField:
             if titleView.textField.text!.isEmpty {
-                let alert = AlertManager.createOKAlert(with: "Don't leave an empty caption field".localized())
+                let alert = AlertManager.createOKAlert(title: "Don't leave an empty caption field".localized())
                 present(alert, animated: true)
                 titleView.textField.text = "Caption".localized()
                 DataStoreManager.shared.updateTitle(for: data!, title: "Caption".localized())
             }
         case loginView.textField:
             if loginView.textField.text!.isEmpty {
-                let alert = AlertManager.createOKAlert(with: "Don't leave an empty username field".localized())
+                let alert = AlertManager.createOKAlert(title: "Don't leave an empty username field".localized())
                 present(alert, animated: true)
                 loginView.textField.text = "Username".localized()
                 DataStoreManager.shared.updateLogin(for: data!, login: "Username".localized())
             }
         case passwordView.textField:
             if passwordView.textField.text!.isEmpty {
-                let alert = AlertManager.createOKAlert(with: "Don't leave an empty password field".localized())
+                let alert = AlertManager.createOKAlert(title: "Don't leave an empty password field".localized())
                 present(alert, animated: true)
                 passwordView.textField.text = "Password".localized()
                 DataStoreManager.shared.updatePassword(for: data!, password: "Password".localized())

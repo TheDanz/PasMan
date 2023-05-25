@@ -24,7 +24,7 @@
 "Additional Information" = "Дополнительная информация";
 "Delete password" = "Удалить";
 "Decryption Error" = "Ошибка расшифрования";
-"Add password lifetime?" = "Добавить время жизни?";
+"Add expiration time?" = "Добавить срок действия?";
 "Amount of days" = "Количество дней";
 "Your " = "Срок действия пароля от ";
 " password has expired!" = " истек!";
@@ -41,3 +41,5 @@
 "Don't leave an empty caption field" = "Не оставляйте заголовок пустым";
 "Don't leave an empty username field" = "Не оставляйте имя пользователя пустым";
 "Don't leave an empty password field" = "Не оставляйте пароль пустым";
+"Password strength is too low" = "Пароль слишком слабый";
+"Are you sure you want to save your password?" = "Вы уверены, что хотите сохранить пароль?";

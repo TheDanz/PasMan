@@ -26,7 +26,7 @@
 "Additional Information" = "Additional Information";
 "Delete password" = "Delete password";
 "Decryption Error" = "Decryption Error";
-"Add password lifetime?" = "Add password lifetime?";
+"Add expiration time?" = "Add expiration time?";
 "Amount of days" = "Amount of days";
 "Your " = "Your ";
 " password has expired!" = " password has expired!";
@@ -43,3 +43,5 @@
 "Don't leave an empty caption field" = "Don't leave an empty caption field";
 "Don't leave an empty username field" = "Don't leave an empty username field";
 "Don't leave an empty password field" = "Don't leave an empty password field";
+"Password strength is too low" = "Password strength is too low";
+"Are you sure you want to save your password?" = "Are you sure you want to save your password?";

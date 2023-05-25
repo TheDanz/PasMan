@@ -108,6 +108,7 @@ class HomeViewController: UIViewController {
     private func setupRightWeaknessViewConstraints() {
         rightWeaknessView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
         rightWeaknessView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        rightWeaknessView.heightAnchor.constraint(greaterThanOrEqualTo: leftExpirationView.heightAnchor).isActive = true
         rightWeaknessView.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.47).isActive = true
         rightWeaknessView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }

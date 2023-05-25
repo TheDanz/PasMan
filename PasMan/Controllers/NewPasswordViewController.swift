@@ -59,7 +59,7 @@ class NewPasswordViewController: UIViewController {
     
     lazy var lifeTimeView: LabelSwitchView = {
         let labelSwitchView = LabelSwitchView()
-        labelSwitchView.leftLabel.text = "Add password lifetime?".localized()
+        labelSwitchView.leftLabel.text = "Add expiration time?".localized()
         labelSwitchView.rightSwitch.addTarget(self, action: #selector(lifeTimeSwitchChangedValue), for: .valueChanged)
         labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(labelSwitchView)
@@ -119,6 +119,22 @@ class NewPasswordViewController: UIViewController {
                 userNotificationsManager.sendNotifications(after: days, body: "Your ".localized() + title + " password has expired!".localized(), uuid: uuidString)
                 
                 expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
+            }
+            
+            let passwordStrength = WeaknessChecker.check(password: password)
+            guard passwordStrength != .veryWeak && passwordStrength != .weak else {
+                
+                let alert = AlertManager.createOKCancelAlert(title: "Password strength is too low".localized(),
+                                                             message: "Are you sure you want to save your password?".localized()) {
+                    
+                    DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
+                                                                login: login.trimmingCharacters(in: [" "]),
+                                                                password: password, uuid: uuidString,
+                                                                expirationDate: expirationDate)
+                    self.dismiss(animated: true)
+                }
+                self.present(alert, animated: true)
+                return
             }
             
             DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
