@@ -68,11 +68,12 @@ final class Kuznyechik {
     
     private func generateRandomMasterKey() -> [Int8] {
         
-        var randomKey = Array<Int8>()
-        for _ in 0..<32 {
-            let randomUInt32 = arc4random_uniform(UInt32(255))
-            let randomByte = Int8(bitPattern: UInt8(randomUInt32))
-            randomKey.append(randomByte)
+        var randomKey = [Int8](repeating: 0, count: 32)
+        
+        let status = SecRandomCopyBytes(kSecRandomDefault, 32, &randomKey)
+        
+        if status != errSecSuccess {
+            print("Random key generation error")
         }
         
         return randomKey
