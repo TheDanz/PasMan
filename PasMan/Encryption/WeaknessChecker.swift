@@ -10,14 +10,22 @@ final class WeaknessChecker {
         case veryHigh
     }
     
-    static func check(password: String) -> PasswordStrength {
+    static func check(password: String) -> (PasswordStrength, Int) {
         
         let N = Set(password).count
         let L = password.count
+        var bits: Double = 0
         
-        let bits = Double(L) * log2(Double(N))
-                
-        switch Int(bits) {
+        if N > 0 {
+            bits = Double(L) * log2(Double(N))
+        }
+        
+        return (WeaknessChecker.getStrengthFrom(bits: Int(bits)), Int(bits))
+    }
+
+    static func getStrengthFrom(bits: Int) -> PasswordStrength {
+        
+        switch bits {
         case ..<28:
             return .veryWeak
         case 28...35:

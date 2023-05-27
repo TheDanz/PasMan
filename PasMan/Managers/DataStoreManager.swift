@@ -39,9 +39,8 @@ class DataStoreManager {
     
     func getPasswordModelWithExpirationDateOfLess14days() -> [PasswordModel]? {
         
-        var request = PasswordModel.fetchRequest()
-        var passwordModels = try? viewContext.fetch(request)
-        
+        let request = PasswordModel.fetchRequest()
+        let passwordModels = try? viewContext.fetch(request)
         
         guard let passwordModels = passwordModels else { return nil }
         
@@ -67,7 +66,27 @@ class DataStoreManager {
         return output
     }
     
-    func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil, expirationDate: Date? = nil) {
+    func getPasswordModelWithStrengthOfLess36bits() -> [PasswordModel]? {
+        
+        let request = PasswordModel.fetchRequest()
+        let passwordModels = try? viewContext.fetch(request)
+        
+        guard let passwordModels = passwordModels else { return nil }
+        
+        var output: [PasswordModel] = []
+        for passwordModel in passwordModels {
+            if passwordModel.bitStrength < 36 {
+                output.append(passwordModel)
+            }
+        }
+        
+        if output.isEmpty {
+            return nil
+        }
+        return output
+    }
+    
+    func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil, expirationDate: Date? = nil, bitStrength: Int) {
         let kuznyechik = Kuznyechik()
         let passwordModel = PasswordModel(context: viewContext)
         passwordModel.title = title
@@ -75,6 +94,7 @@ class DataStoreManager {
         passwordModel.password = kuznyechik.encrypt(string: password)
         passwordModel.uuid = uuid
         passwordModel.expirationDate = expirationDate
+        passwordModel.bitStrength = Int32(bitStrength)
         try? viewContext.save()
     }
     
@@ -107,6 +127,9 @@ class DataStoreManager {
     }
     
     func updatePassword(for object: PasswordModel, password: String) {
+    
+        updateBitStrength(for: object, bitStrength: WeaknessChecker.check(password: password).1)
+        
         let kuznyechik = Kuznyechik()
         object.password = kuznyechik.encrypt(string: password)
         try? viewContext.save()
@@ -120,6 +143,11 @@ class DataStoreManager {
     
     func updateExpirationDate(for object: PasswordModel, expirationDate: Date) {
         object.expirationDate = expirationDate
+        try? viewContext.save()
+    }
+    
+    private func updateBitStrength(for object: PasswordModel, bitStrength: Int) {
+        object.bitStrength = Int32(bitStrength)
         try? viewContext.save()
     }
 }

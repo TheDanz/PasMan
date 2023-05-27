@@ -48,6 +48,7 @@ extension TabBarController: UITabBarControllerDelegate {
         switch tabBarIndex {
         case 0:
             self.homeVC.updateLeftExpirationViewText()
+            self.homeVC.updateRightWeaknessViewText()
         case 2:
             DispatchQueue.main.async {
                 self.passwordTVC.passwordsTableView.reloadData()

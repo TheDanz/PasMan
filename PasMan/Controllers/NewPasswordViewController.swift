@@ -121,7 +121,9 @@ class NewPasswordViewController: UIViewController {
                 expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
             }
             
-            let passwordStrength = WeaknessChecker.check(password: password)
+            let passwordStrength = WeaknessChecker.check(password: password).0
+            let passwordBitStrength = WeaknessChecker.check(password: password).1
+        
             guard passwordStrength != .veryWeak && passwordStrength != .weak else {
                 
                 let alert = AlertManager.createOKCancelAlert(title: "Password strength is too low".localized(),
@@ -130,7 +132,8 @@ class NewPasswordViewController: UIViewController {
                     DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
                                                                 login: login.trimmingCharacters(in: [" "]),
                                                                 password: password, uuid: uuidString,
-                                                                expirationDate: expirationDate)
+                                                                expirationDate: expirationDate,
+                                                                bitStrength: passwordBitStrength)
                     self.dismiss(animated: true)
                 }
                 self.present(alert, animated: true)
@@ -140,7 +143,8 @@ class NewPasswordViewController: UIViewController {
             DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
                                                         login: login.trimmingCharacters(in: [" "]),
                                                         password: password, uuid: uuidString,
-                                                        expirationDate: expirationDate)
+                                                        expirationDate: expirationDate,
+                                                        bitStrength: passwordBitStrength)
             self.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)

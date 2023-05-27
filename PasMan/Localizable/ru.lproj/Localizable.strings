@@ -43,3 +43,4 @@
 "Don't leave an empty password field" = "Не оставляйте пароль пустым";
 "Password strength is too low" = "Пароль слишком слабый";
 "Are you sure you want to save your password?" = "Вы уверены, что хотите сохранить пароль?";
+"These passwords are too weak:\n\n" = "Эти пароли слишком слабые:\n\n";

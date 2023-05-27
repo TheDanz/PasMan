@@ -64,6 +64,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         updateLeftExpirationViewText()
+        updateRightWeaknessViewText()
         
         let userNotificationsManager = UserNotificationsManager()
         userNotificationsManager.requestAuthorization()
@@ -84,6 +85,19 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func updateRightWeaknessViewText() {
+        
+        let passwordModels = DataStoreManager.shared.getPasswordModelWithStrengthOfLess36bits()
+        if let passwordModels = passwordModels {
+            rightWeaknessView.mainLabel.text = "These passwords are too weak:\n\n".localized()
+            for passwordModel in passwordModels {
+                rightWeaknessView.mainLabel.text! += "\(passwordModel.title!)\n"
+            }
+        } else {
+            rightWeaknessView.mainLabel.text = "You don't have weak passwords".localized()
+        }
+    }
+    
     private func setupAllConstraints() {
         setupMainViewConstraints()
         setupLeftExpirationViewConstraints()
@@ -101,6 +115,7 @@ class HomeViewController: UIViewController {
     private func setupLeftExpirationViewConstraints() {
         leftExpirationView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
         leftExpirationView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+        leftExpirationView.heightAnchor.constraint(greaterThanOrEqualTo: rightWeaknessView.heightAnchor).isActive = true
         leftExpirationView.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.47).isActive = true
         leftExpirationView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }
