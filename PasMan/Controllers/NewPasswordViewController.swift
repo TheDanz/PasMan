@@ -101,7 +101,7 @@ class NewPasswordViewController: UIViewController {
                   !login.isEmpty,
                   !password.isEmpty else {
                 
-                let alert = UIAlertController(title: "ERROR".localized(), message: "Fill in all the fields".localized(), preferredStyle: .alert)
+                let alert = UIAlertController(title: "Don't leave empty fields".localized(), message: nil, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(action)
                 

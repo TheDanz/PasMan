@@ -18,7 +18,6 @@
 "Caption" = "Caption";
 "Username" = "Username";
 "Password" = "Password";
-"Fill in all the fields" = "Fill in all the fields";
 "You haven't saved any passwords yet" = "You haven't saved any passwords yet";
 "Title" = "Title";
 "Username" = "Username";
@@ -40,6 +39,7 @@
 "These passwords will expire within 14 days:\n\n" = "These passwords will expire within 14 days:\n\n";
 "You don't have passwords that expire after 14 days" = "You don't have passwords that expire after 14 days";
 "You don't have weak passwords" = "You don't have weak passwords";
+"Don't leave empty fields" = "Don't leave empty fields";
 "Don't leave an empty caption field" = "Don't leave an empty caption field";
 "Don't leave an empty username field" = "Don't leave an empty username field";
 "Don't leave an empty password field" = "Don't leave an empty password field";
