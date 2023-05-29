@@ -47,26 +47,11 @@ final class Kuznyechik {
     private var iterationСonstants: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
     private var iterationKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
     
-    init() {
-        
-        if getKeysFromKeychain() { return }
-        
-        let randomMasterKey = generateRandomMasterKey()
-        generateIterationKeys(key: randomMasterKey)
-        
-        saveKeysIntoKeychain()
+    init(key: [Int8]) {
+        generateIterationKeys(key: key)
     }
     
-    private func getKeysFromKeychain() -> Bool {
-        
-        guard let keysData = try? KeychainManager.get("ru.PasMan.KuznyechikKeys") else { return false }
-        let keysBytes = Array(keysData).map({ Int8(bitPattern: $0) })
-        iterationKeys = keysBytes.chunked(into: 16)
-        
-        return true
-    }
-    
-    private func generateRandomMasterKey() -> [Int8] {
+    func generateRandomKey() -> [Int8] {
         
         var randomKey = [Int8](repeating: 0, count: 32)
         
@@ -311,6 +296,31 @@ final class Kuznyechik {
         return output
     }
     
+    func encrypt(key: [Int8]) -> [Int8] {
+
+        var keys = key.chunked(into: 16)
+
+        for i in 0..<9 {
+
+            keys[0] = X(iterationKeys[i], keys[0])
+            keys[0] = S(keys[0])
+            keys[0] = L(keys[0])
+        }
+
+        keys[0] = X(keys[0], iterationKeys[9])
+
+        for i in 0..<9 {
+
+            keys[1] = X(iterationKeys[i], keys[1])
+            keys[1] = S(keys[1])
+            keys[1] = L(keys[1])
+        }
+
+        keys[1] = X(keys[1], iterationKeys[9])
+
+        return [Int8](keys.joined())
+    }
+    
     func encrypt(string: String) -> Data {
         
         let bytesToEncrypt = Array(string.utf8).map({ Int8(bitPattern: $0) })
@@ -343,7 +353,32 @@ final class Kuznyechik {
         return output
     }
 
-    func decrypt(data: Data) -> String {
+    func decrypt(key: [Int8]) -> [Int8] {
+
+        var keys = key.chunked(into: 16)
+
+        keys[0] = X(keys[0], iterationKeys[9])
+        
+        for i in stride(from: 8, through: 0, by: -1) {
+            
+            keys[0] = inverseL(keys[0])
+            keys[0] = inverseS(keys[0])
+            keys[0] = X(iterationKeys[i], keys[0])
+        }
+        
+        keys[1] = X(keys[1], iterationKeys[9])
+        
+        for i in stride(from: 8, through: 0, by: -1) {
+            
+            keys[1] = inverseL(keys[1])
+            keys[1] = inverseS(keys[1])
+            keys[1] = X(iterationKeys[i], keys[1])
+        }
+
+        return [Int8](keys.joined())
+    }
+
+    func decrypt(data: Data) throws -> String {
         
         let bytesToDecrypt = Array(data).map({ Int8(bitPattern: $0) })
         let blocksToDecrypt = bytesToDecrypt.chunked(into: 16)
@@ -355,8 +390,13 @@ final class Kuznyechik {
         uncompleteLastBlock(&decryptedBlocks)
         
         let decrtypedBytes = decryptedBlocks.joined().map({ UInt8(bitPattern: $0) })
-        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) ?? "Decryption Error".localized()
+        
+        guard let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) else { throw KuznyechikError.decryptionError }
         
         return decryptedString
+    }
+    
+    enum KuznyechikError: Error {
+        case decryptionError
     }
 }

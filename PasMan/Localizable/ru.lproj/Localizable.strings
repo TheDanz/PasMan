@@ -22,14 +22,13 @@
 "Title" = "Загаловок";
 "Additional Information" = "Дополнительная информация";
 "Delete password" = "Удалить";
-"Decryption Error" = "Ошибка расшифрования";
 "Add expiration time?" = "Добавить срок действия?";
 "Amount of days" = "Количество дней";
 "Your " = "Срок действия пароля от ";
 " password has expired!" = " истек!";
 "Password expiration" = "Истечение срока действия пароля";
 "Change expiration date" = "Изменить срок дейсвтия";
-"Set the number of days to expire" = "Установите количество дней истечения срока действия";
+"Set the number of days to expire" = "Установите количество дней";
 "Invalid number of days" = "Некорректное число дней";
 "This password expires on " = "Этот пароль истекает ";
 "This password does not expire" = "У этого пароля нет срока действия";

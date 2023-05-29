@@ -96,11 +96,10 @@ extension TableViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let kuznyechik = Kuznyechik()
         let passwordModel = fetchedResultsController?.object(at: indexPath)
         DispatchQueue.main.async {
             cell.titleLabel.text = passwordModel?.title
-            cell.loginLabel.text = kuznyechik.decrypt(data: (passwordModel?.login)!)
+            cell.loginLabel.text = DataStoreManager.shared.getLogin(for: passwordModel!)
         }
         return cell
     }

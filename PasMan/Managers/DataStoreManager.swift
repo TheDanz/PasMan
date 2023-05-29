@@ -31,11 +31,7 @@ class DataStoreManager {
         }
     }
     
-    var countOfPasswords: Int {
-        get {
-            return try! viewContext.fetch(PasswordModel.fetchRequest()).count
-        }
-    }
+    static var masterKuznyechik: Kuznyechik?
     
     func getPasswordModelWithExpirationDateOfLess14days() -> [PasswordModel]? {
         
@@ -86,8 +82,50 @@ class DataStoreManager {
         return output
     }
     
+    func getLogin(for object: PasswordModel) -> String {
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return "N/A" }
+        
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+                
+        guard let login = try? Kuznyechik(key: decryptedKey).decrypt(data: object.login!) else { return "N/A" }
+    
+        return login
+    }
+    
+    func getPassword(for object: PasswordModel) -> String {
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return "N/A" }
+        
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+                
+        guard let password = try? Kuznyechik(key: decryptedKey).decrypt(data: object.password!) else { return "N/A" }
+    
+        return password
+    }
+    
+    func getAdditionalInformation(for object: PasswordModel) -> String {
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return "N/A" }
+        
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+                
+        guard let additionalInformation = try? Kuznyechik(key: decryptedKey).decrypt(data: object.additionalInformation!) else { return "N/A" }
+    
+        return additionalInformation
+    }
+    
     func createPasswordModel(title: String, login: String, password: String, uuid: String? = nil, expirationDate: Date? = nil, bitStrength: Int) {
-        let kuznyechik = Kuznyechik()
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return }
+        
+        let randomKey = masterKuznyechik.generateRandomKey()
+        let encryptedKey = masterKuznyechik.encrypt(key: randomKey)
+        let kuznyechik = Kuznyechik(key: randomKey)
+        
         let passwordModel = PasswordModel(context: viewContext)
         passwordModel.title = title
         passwordModel.login = kuznyechik.encrypt(string: login)
@@ -95,6 +133,8 @@ class DataStoreManager {
         passwordModel.uuid = uuid
         passwordModel.expirationDate = expirationDate
         passwordModel.bitStrength = Int32(bitStrength)
+        passwordModel.key = Data(bytes: encryptedKey, count: encryptedKey.count)
+        
         try? viewContext.save()
     }
     
@@ -121,23 +161,37 @@ class DataStoreManager {
     }
     
     func updateLogin(for object: PasswordModel, login: String) {
-        let kuznyechik = Kuznyechik()
-        object.login = kuznyechik.encrypt(string: login)
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return }
+        
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+        
+        object.login = Kuznyechik(key: decryptedKey).encrypt(string: login)
         try? viewContext.save()
     }
     
     func updatePassword(for object: PasswordModel, password: String) {
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return }
     
         updateBitStrength(for: object, bitStrength: WeaknessChecker.check(password: password).1)
         
-        let kuznyechik = Kuznyechik()
-        object.password = kuznyechik.encrypt(string: password)
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+        
+        object.password = Kuznyechik(key: decryptedKey).encrypt(string: password)
         try? viewContext.save()
     }
     
     func updateAdditionalInformation(for object: PasswordModel, information: String) {
-        let kuznyechik = Kuznyechik()
-        object.additionalInformation = kuznyechik.encrypt(string: information)
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return }
+        
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+        
+        object.additionalInformation = Kuznyechik(key: decryptedKey).encrypt(string: information)
         try? viewContext.save()
     }
     
