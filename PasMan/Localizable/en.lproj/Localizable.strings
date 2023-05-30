@@ -50,3 +50,4 @@
 "Repeat passphrase" = "Repeat passphrase";
 "Passphrase must be 12 characters or more" = "Passphrase must be 12 characters or more";
 "Passphrases do not match" = "Passphrases do not match";
+"Enter a passphrase that will decrypt your passwords" = "Enter a passphrase that will decrypt your passwords";

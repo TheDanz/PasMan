@@ -48,3 +48,4 @@
 "Repeat passphrase" = "Повторите фразу-пароль";
 "Passphrase must be 12 characters or more" = "Фраза-пароль должна содержать 12 или более символов";
 "Passphrases do not match" = "Фразы-пароли не совпадают";
+"Enter a passphrase that will decrypt your passwords" = "Введите фразу-пароль, с помощтю которой будут расшифрованы ваши пароли";

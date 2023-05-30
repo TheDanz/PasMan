@@ -22,6 +22,7 @@
 		05695F362A15590F00FB9234 /* LabelStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05695F352A15590F00FB9234 /* LabelStepperView.swift */; };
 		05695F382A1567DA00FB9234 /* UserNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05695F372A1567DA00FB9234 /* UserNotificationsManager.swift */; };
 		057708692A2529E6009929FF /* CreatePassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057708682A2529E6009929FF /* CreatePassphraseViewController.swift */; };
+		0577086B2A253899009929FF /* EntryPassphraseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0577086A2A253899009929FF /* EntryPassphraseViewController.swift */; };
 		05A5CBA629FBF32F0056C6F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05A5CBA829FBF32F0056C6F3 /* Localizable.strings */; };
 		05AA515929F97BFD00F23C74 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AA515829F97BFD00F23C74 /* AuthorizationViewController.swift */; };
 		05AFA44929EAD5BC005AA9A7 /* PasswordGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */; };
@@ -57,6 +58,7 @@
 		05695F352A15590F00FB9234 /* LabelStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelStepperView.swift; sourceTree = "<group>"; };
 		05695F372A1567DA00FB9234 /* UserNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationsManager.swift; sourceTree = "<group>"; };
 		057708682A2529E6009929FF /* CreatePassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePassphraseViewController.swift; sourceTree = "<group>"; };
+		0577086A2A253899009929FF /* EntryPassphraseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryPassphraseViewController.swift; sourceTree = "<group>"; };
 		05A5CB9C29FBEF870056C6F3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		05A5CBA729FBF32F0056C6F3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		05A5CBA929FBF3310056C6F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				05AA515829F97BFD00F23C74 /* AuthorizationViewController.swift */,
+				0577086A2A253899009929FF /* EntryPassphraseViewController.swift */,
 				05DF085629AFBCFC000F4373 /* TabBarController.swift */,
 				05DF085829AFC7BB000F4373 /* HomeViewController.swift */,
 				05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */,
@@ -286,6 +289,7 @@
 				05F88C082A23F5EC00912519 /* PasswordModel+CoreDataProperties.swift in Sources */,
 				0517248029B9088A0003EE27 /* DataStoreManager.swift in Sources */,
 				055DAD7D29BF96B9007DFEF1 /* DetailsViewController.swift in Sources */,
+				0577086B2A253899009929FF /* EntryPassphraseViewController.swift in Sources */,
 				05F88C072A23F5EC00912519 /* PasswordModel+CoreDataClass.swift in Sources */,
 				05695F382A1567DA00FB9234 /* UserNotificationsManager.swift in Sources */,
 				0545E8DD29AD0A1500963D40 /* SceneDelegate.swift in Sources */,
