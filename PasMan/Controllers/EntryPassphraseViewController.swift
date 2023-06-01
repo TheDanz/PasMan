@@ -58,7 +58,7 @@ class EntryPassphraseViewController: UIViewController {
             guard let passphraseFromKeychain = try? KeychainManager.get("ru.PasMan.Passphrase") else { return }
             
             guard Data(hash) == passphraseFromKeychain else {
-                let alert = AlertManager.createOKAlert(title: "Passphrases do not match")
+                let alert = AlertManager.createOKAlert(title: "Passphrases do not match".localized())
                 self.present(alert, animated: true)
                 return
             }

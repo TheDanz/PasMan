@@ -7,7 +7,7 @@
         <attribute name="key" optional="YES" attributeType="Binary"/>
         <attribute name="login" attributeType="Binary"/>
         <attribute name="password" attributeType="Binary"/>
-        <attribute name="title" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="Binary"/>
         <attribute name="uuid" optional="YES" attributeType="String"/>
     </entity>
 </model>

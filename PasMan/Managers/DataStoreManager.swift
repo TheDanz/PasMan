@@ -33,14 +33,16 @@ class DataStoreManager {
     
     static var masterKuznyechik: Kuznyechik?
     
-    func getPasswordModelWithExpirationDateOfLess14days() -> [PasswordModel]? {
+    func getTitlesWithExpirationDateOfLess14days() -> [String]? {
         
         let request = PasswordModel.fetchRequest()
         let passwordModels = try? viewContext.fetch(request)
         
         guard let passwordModels = passwordModels else { return nil }
         
-        var output: [PasswordModel] = []
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return nil }
+        
+        var output: [String] = []
         for passwordModel in passwordModels {
             
             if let expirationDate = passwordModel.expirationDate {
@@ -50,8 +52,13 @@ class DataStoreManager {
                 let date2 = calendar.startOfDay(for: expirationDate)
                 let components = calendar.dateComponents([.day], from: date1, to: date2)
                 
+                let objectKey = Array(passwordModel.key!).map({ Int8(bitPattern: $0) })
+                let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+                
+                guard let title = try? Kuznyechik(key: decryptedKey).decrypt(data: passwordModel.title!) else { return nil }
+                
                 if components.day! < 14 {
-                    output.append(passwordModel)
+                    output.append(title)
                 }
             }
         }
@@ -62,17 +69,25 @@ class DataStoreManager {
         return output
     }
     
-    func getPasswordModelWithStrengthOfLess36bits() -> [PasswordModel]? {
+    func getTitlesWithStrengthOfLess36bits() -> [String]? {
         
         let request = PasswordModel.fetchRequest()
         let passwordModels = try? viewContext.fetch(request)
         
         guard let passwordModels = passwordModels else { return nil }
         
-        var output: [PasswordModel] = []
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return nil }
+        
+        var output: [String] = []
         for passwordModel in passwordModels {
+            
+            let objectKey = Array(passwordModel.key!).map({ Int8(bitPattern: $0) })
+            let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+            
+            guard let title = try? Kuznyechik(key: decryptedKey).decrypt(data: passwordModel.title!) else { return nil }
+            
             if passwordModel.bitStrength < 36 {
-                output.append(passwordModel)
+                output.append(title)
             }
         }
         
@@ -80,6 +95,18 @@ class DataStoreManager {
             return nil
         }
         return output
+    }
+    
+    func getTitle(for object: PasswordModel) -> String {
+        
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return "N/A" }
+        
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+                
+        guard let title = try? Kuznyechik(key: decryptedKey).decrypt(data: object.title!) else { return "N/A" }
+    
+        return title
     }
     
     func getLogin(for object: PasswordModel) -> String {
@@ -127,7 +154,7 @@ class DataStoreManager {
         let kuznyechik = Kuznyechik(key: randomKey)
         
         let passwordModel = PasswordModel(context: viewContext)
-        passwordModel.title = title
+        passwordModel.title = kuznyechik.encrypt(string: title)
         passwordModel.login = kuznyechik.encrypt(string: login)
         passwordModel.password = kuznyechik.encrypt(string: password)
         passwordModel.uuid = uuid
@@ -151,12 +178,17 @@ class DataStoreManager {
     
     func updateTitle(for object: PasswordModel, title: String) {
         
+        guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return }
+        
         if let uuid = object.uuid {
             let userNotificationsManager = UserNotificationsManager()
             userNotificationsManager.updateNotificationBody(withUUID: uuid, newBody: "Your ".localized() + title + " password has expired!".localized())
         }
         
-        object.title = title
+        let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
+        let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
+        
+        object.title = Kuznyechik(key: decryptedKey).encrypt(string: title)
         try? viewContext.save()
     }
     

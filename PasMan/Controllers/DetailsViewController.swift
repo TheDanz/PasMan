@@ -79,7 +79,7 @@ class DetailsViewController: UIViewController {
         didSet {
             guard let data = data else { return }
             DispatchQueue.main.async {
-                self.titleView.textField.text = data.title
+                self.titleView.textField.text = DataStoreManager.shared.getTitle(for: data)
                 self.loginView.textField.text = DataStoreManager.shared.getLogin(for: data)
                 self.passwordView.textField.text = DataStoreManager.shared.getPassword(for: data)
                 guard let _ = data.additionalInformation else { return }
@@ -168,7 +168,7 @@ class DetailsViewController: UIViewController {
             
             if let numberOfDays = Int((alert.textFields?.first?.text)!), numberOfDays >= 1 && numberOfDays <= 360 {
                 let userNotificationsManager = UserNotificationsManager()
-                userNotificationsManager.updateNotificationTrigger(withUUID: (self.data?.uuid)!, body: "Your ".localized() + (self.data?.title)! + " password has expired!".localized(), afterDays: numberOfDays)
+                userNotificationsManager.updateNotificationTrigger(withUUID: (self.data?.uuid)!, body: "Your ".localized() + DataStoreManager.shared.getLogin(for: self.data!) + " password has expired!".localized(), afterDays: numberOfDays)
                 let date = Calendar.current.date(byAdding: .day, value: numberOfDays, to: Date())!
                 DataStoreManager.shared.updateExpirationDate(for: self.data!, expirationDate: date)
             } else {

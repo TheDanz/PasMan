@@ -36,7 +36,7 @@ class TableViewController: UIViewController {
     func setupFetchedResultsContoller() {
         
         let fetchRequest: NSFetchRequest<PasswordModel> = PasswordModel.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "uuid", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.fetchLimit = 15
         
@@ -98,7 +98,7 @@ extension TableViewController: UITableViewDataSource {
         
         let passwordModel = fetchedResultsController?.object(at: indexPath)
         DispatchQueue.main.async {
-            cell.titleLabel.text = passwordModel?.title
+            cell.titleLabel.text = DataStoreManager.shared.getTitle(for: passwordModel!)
             cell.loginLabel.text = DataStoreManager.shared.getLogin(for: passwordModel!)
         }
         return cell

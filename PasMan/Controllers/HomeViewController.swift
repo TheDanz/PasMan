@@ -74,11 +74,11 @@ class HomeViewController: UIViewController {
     
     func updateLeftExpirationViewText() {
         
-        let passwordModels = DataStoreManager.shared.getPasswordModelWithExpirationDateOfLess14days()
-        if let passwordModels = passwordModels {
+        let titles = DataStoreManager.shared.getTitlesWithExpirationDateOfLess14days()
+        if let titles = titles {
             leftExpirationView.mainLabel.text = "These passwords will expire within 14 days:\n\n".localized()
-            for passwordModel in passwordModels {
-                leftExpirationView.mainLabel.text! += "\(passwordModel.title!)\n"
+            for title in titles {
+                leftExpirationView.mainLabel.text! += "\(title)\n"
             }
         } else {
             leftExpirationView.mainLabel.text = "You don't have passwords that expire after 14 days".localized()
@@ -87,11 +87,11 @@ class HomeViewController: UIViewController {
     
     func updateRightWeaknessViewText() {
         
-        let passwordModels = DataStoreManager.shared.getPasswordModelWithStrengthOfLess36bits()
-        if let passwordModels = passwordModels {
+        let titles = DataStoreManager.shared.getTitlesWithStrengthOfLess36bits()
+        if let titles = titles {
             rightWeaknessView.mainLabel.text = "These passwords are too weak:\n\n".localized()
-            for passwordModel in passwordModels {
-                rightWeaknessView.mainLabel.text! += "\(passwordModel.title!)\n"
+            for title in titles {
+                rightWeaknessView.mainLabel.text! += "\(title)\n"
             }
         } else {
             rightWeaknessView.mainLabel.text = "You don't have weak passwords".localized()
