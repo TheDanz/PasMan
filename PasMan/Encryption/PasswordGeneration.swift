@@ -23,8 +23,14 @@ final class PasswordGeneration {
         }
         
         for _ in 0..<length {
-            let randomIndex = Int(arc4random_uniform(UInt32(characters.count)))
-            password += String(characters[randomIndex])
+            
+            var randomByte = UInt8()
+            let status = SecRandomCopyBytes(kSecRandomDefault, 1, &randomByte)
+            
+            guard status == errSecSuccess else { return "YOUR STRONG PASSWORD".localized() }
+            
+            let index = Int(randomByte) % characters.count
+            password += String(characters[index])
         }
         
         return password

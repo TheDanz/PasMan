@@ -39,9 +39,11 @@ class TabBarController: UITabBarController {
             
             let images = ["house.circle", "123.rectangle", "lock.circle"]
             
+            let config = UIImage.SymbolConfiguration(pointSize: 20)
+            let defaultImage = UIImage(systemName: "square.slash", withConfiguration: config)
+            
             for i in 0..<items.count {
-                let config = UIImage.SymbolConfiguration(pointSize: 20)
-                items[i].image = UIImage(systemName: images[i], withConfiguration: config)
+                items[i].image = UIImage(systemName: images[i], withConfiguration: config) ?? defaultImage
             }
         }
     }
@@ -50,9 +52,10 @@ class TabBarController: UITabBarController {
     private func setTabBarItemImage(index: Int, systemName: String) {
         
         let config = UIImage.SymbolConfiguration(pointSize: 20)
+        let defaultImage = UIImage(systemName: "square.slash.fill", withConfiguration: config)
         
         if let items = tabBar.items {
-            items[index].image = UIImage(systemName: systemName, withConfiguration: config)
+            items[index].image = UIImage(systemName: systemName, withConfiguration: config) ?? defaultImage
         }
     }
 }
