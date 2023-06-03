@@ -121,8 +121,9 @@ class NewPasswordViewController: UIViewController {
                 expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
             }
             
-            let passwordStrength = WeaknessChecker.check(password: password).0
-            let passwordBitStrength = WeaknessChecker.check(password: password).1
+            let weaknessPasswordChecker = WeaknessPasswordChecker()
+            let passwordStrength = weaknessPasswordChecker.getStrengthFrom(password: password).strength
+            let passwordBitStrength = weaknessPasswordChecker.getStrengthFrom(password: password).bits
         
             guard passwordStrength != .veryWeak && passwordStrength != .weak else {
                 

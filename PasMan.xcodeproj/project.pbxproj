@@ -30,6 +30,7 @@
 		05AFA44929EAD5BC005AA9A7 /* PasswordGeneration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */; };
 		05AFA44B29EAE85D005AA9A7 /* PasswordGenerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */; };
 		05B226A829DF45CF0086F1A7 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05B226A729DF45CF0086F1A7 /* KeychainManager.swift */; };
+		05B827852A2BBD8C002C7000 /* WeakPasswords.txt in Resources */ = {isa = PBXBuildFile; fileRef = 05B827842A2BBD8C002C7000 /* WeakPasswords.txt */; };
 		05D65E5029B12C20005DC1D2 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */; };
 		05DF085729AFBCFC000F4373 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085629AFBCFC000F4373 /* TabBarController.swift */; };
 		05DF085929AFC7BB000F4373 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085829AFC7BB000F4373 /* HomeViewController.swift */; };
@@ -37,7 +38,7 @@
 		05DF085D29AFDBAB000F4373 /* PasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */; };
 		05E8096F29F6BA3100EB4972 /* LabelSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */; };
 		05F16A1829CDE0AF001884FB /* Kuznyechik.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F16A1729CDE0AF001884FB /* Kuznyechik.swift */; };
-		05FAD11C2A1FD00D002697CE /* WeaknessChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FAD11B2A1FD00D002697CE /* WeaknessChecker.swift */; };
+		05FAD11C2A1FD00D002697CE /* WeaknessPasswordChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FAD11B2A1FD00D002697CE /* WeaknessPasswordChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGeneration.swift; sourceTree = "<group>"; };
 		05AFA44A29EAE85D005AA9A7 /* PasswordGenerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordGenerationViewController.swift; sourceTree = "<group>"; };
 		05B226A729DF45CF0086F1A7 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		05B827842A2BBD8C002C7000 /* WeakPasswords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = WeakPasswords.txt; sourceTree = "<group>"; };
 		05D65E4F29B12C20005DC1D2 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		05DF085629AFBCFC000F4373 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		05DF085829AFC7BB000F4373 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		05DF085C29AFDBAB000F4373 /* PasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTableViewCell.swift; sourceTree = "<group>"; };
 		05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelSwitchView.swift; sourceTree = "<group>"; };
 		05F16A1729CDE0AF001884FB /* Kuznyechik.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kuznyechik.swift; sourceTree = "<group>"; };
-		05FAD11B2A1FD00D002697CE /* WeaknessChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaknessChecker.swift; sourceTree = "<group>"; };
+		05FAD11B2A1FD00D002697CE /* WeaknessPasswordChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaknessPasswordChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 		0545E8D929AD0A1500963D40 /* PasMan */ = {
 			isa = PBXGroup;
 			children = (
+				05B827842A2BBD8C002C7000 /* WeakPasswords.txt */,
 				05F16A1629CDDD8A001884FB /* Controllers */,
 				055A2A4929F81F380071C3A1 /* Models */,
 				055A2A4D29F8221B0071C3A1 /* Views */,
@@ -171,7 +174,7 @@
 			children = (
 				05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */,
 				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
-				05FAD11B2A1FD00D002697CE /* WeaknessChecker.swift */,
+				05FAD11B2A1FD00D002697CE /* WeaknessPasswordChecker.swift */,
 			);
 			path = Encryption;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0545E8E729AD0A1700963D40 /* LaunchScreen.storyboard in Resources */,
+				05B827852A2BBD8C002C7000 /* WeakPasswords.txt in Resources */,
 				05A5CBA629FBF32F0056C6F3 /* Localizable.strings in Resources */,
 				0545E8E429AD0A1700963D40 /* Assets.xcassets in Resources */,
 			);
@@ -299,7 +303,7 @@
 				05D65E5029B12C20005DC1D2 /* NewPasswordViewController.swift in Sources */,
 				050E25E029E87FDC009254D7 /* Extensions.swift in Sources */,
 				05DF085B29AFD5D8000F4373 /* TableViewController.swift in Sources */,
-				05FAD11C2A1FD00D002697CE /* WeaknessChecker.swift in Sources */,
+				05FAD11C2A1FD00D002697CE /* WeaknessPasswordChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

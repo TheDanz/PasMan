@@ -206,8 +206,11 @@ class DataStoreManager {
     func updatePassword(for object: PasswordModel, password: String) {
         
         guard let masterKuznyechik = DataStoreManager.masterKuznyechik else { return }
+        
+        let weaknessPasswordChecker = WeaknessPasswordChecker()
+        let strength = weaknessPasswordChecker.getStrengthFrom(password: password)
     
-        updateBitStrength(for: object, bitStrength: WeaknessChecker.check(password: password).1)
+        updateBitStrength(for: object, bitStrength: strength.bits)
         
         let objectKey = Array(object.key!).map({ Int8(bitPattern: $0) })
         let decryptedKey = masterKuznyechik.decrypt(key: objectKey)
