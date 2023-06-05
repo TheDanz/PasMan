@@ -6,9 +6,12 @@ final class UserNotificationsManager {
     
     func requestAuthorization() {
         
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { success, error in
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) {
+            [weak self] success, error in
             
+            guard let self = self else { return }
             guard success else { return }
+            
             self.notificationCenter.getNotificationSettings { settings in
                 guard settings.authorizationStatus == .authorized else { return }
             }

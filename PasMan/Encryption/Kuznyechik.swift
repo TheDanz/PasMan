@@ -51,31 +51,6 @@ final class Kuznyechik {
         generateIterationKeys(key: key)
     }
     
-    func generateRandomKey() -> [Int8] {
-        
-        var randomKey = [Int8](repeating: 0, count: 32)
-        
-        let status = SecRandomCopyBytes(kSecRandomDefault, 32, &randomKey)
-        
-        if status != errSecSuccess {
-            print("Random key generation error")
-        }
-        
-        return randomKey
-    }
-    
-    private func saveKeysIntoKeychain() {
-        
-        let keysBytes = iterationKeys.joined()
-        let keysData = Data(bytes: Array(keysBytes), count: keysBytes.count)
-        
-        do {
-            try KeychainManager.save(keysData, forTag: "ru.PasMan.KuznyechikKeys")
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
-    
     private func X(_ first: [Int8], _ second: [Int8]) -> [Int8] {
 
         var output: [Int8] = Array(repeating: 0, count: 16)
@@ -296,31 +271,6 @@ final class Kuznyechik {
         return output
     }
     
-    func encrypt(key: [Int8]) -> [Int8] {
-
-        var keys = key.chunked(into: 16)
-
-        for i in 0..<9 {
-
-            keys[0] = X(iterationKeys[i], keys[0])
-            keys[0] = S(keys[0])
-            keys[0] = L(keys[0])
-        }
-
-        keys[0] = X(keys[0], iterationKeys[9])
-
-        for i in 0..<9 {
-
-            keys[1] = X(iterationKeys[i], keys[1])
-            keys[1] = S(keys[1])
-            keys[1] = L(keys[1])
-        }
-
-        keys[1] = X(keys[1], iterationKeys[9])
-
-        return [Int8](keys.joined())
-    }
-    
     func encrypt(string: String) -> Data {
         
         let bytesToEncrypt = Array(string.utf8).map({ Int8(bitPattern: $0) })
@@ -351,31 +301,6 @@ final class Kuznyechik {
         }
         
         return output
-    }
-
-    func decrypt(key: [Int8]) -> [Int8] {
-
-        var keys = key.chunked(into: 16)
-
-        keys[0] = X(keys[0], iterationKeys[9])
-        
-        for i in stride(from: 8, through: 0, by: -1) {
-            
-            keys[0] = inverseL(keys[0])
-            keys[0] = inverseS(keys[0])
-            keys[0] = X(iterationKeys[i], keys[0])
-        }
-        
-        keys[1] = X(keys[1], iterationKeys[9])
-        
-        for i in stride(from: 8, through: 0, by: -1) {
-            
-            keys[1] = inverseL(keys[1])
-            keys[1] = inverseS(keys[1])
-            keys[1] = X(iterationKeys[i], keys[1])
-        }
-
-        return [Int8](keys.joined())
     }
 
     func decrypt(data: Data) throws -> String {

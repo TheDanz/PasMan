@@ -73,7 +73,9 @@ class AuthorizationViewController: UIViewController {
                         return
                     }
                     
-                    if let _ = try? KeychainManager.get("ru.PasMan.Passphrase") {
+                    let isPassphraseSet = UserDefaults.standard.bool(forKey: "isPassphraseSet")
+                    
+                    if isPassphraseSet {
                         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(EntryPassphraseViewController())
                     } else {
                         (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(CreatePassphraseViewController())

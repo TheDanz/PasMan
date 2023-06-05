@@ -89,8 +89,9 @@ class CreatePassphraseViewController: UIViewController {
             let hashString = hash.compactMap { String(format: "%02x", $0) }.joined()
             let bytes = hashString.hexaBytes.map({ Int8(bitPattern: $0) })
             
-            try? KeychainManager.save(Data(hash), forTag: "ru.PasMan.Passphrase")
-            DataStoreManager.masterKuznyechik = Kuznyechik(key: bytes)
+            DataStoreManager.kuznyechik = Kuznyechik(key: bytes)
+            UserDefaults.standard.set(true, forKey: "isPassphraseSet")
+            UserDefaults.standard.set(DataStoreManager.kuznyechik?.encrypt(string: "Kuznyechik"), forKey: "checkPhrase")
             
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(TabBarController())
         }

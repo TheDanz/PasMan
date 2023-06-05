@@ -20,6 +20,7 @@ class DetailsViewController: UIViewController {
         let labelTextFieldView = LabelTextFieldView()
         labelTextFieldView.titleLabel.text = "Title".localized()
         labelTextFieldView.textField.delegate = self
+        labelTextFieldView.textField.setScreenCaptureProtection()
         labelTextFieldView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(labelTextFieldView)
         return labelTextFieldView
@@ -29,6 +30,7 @@ class DetailsViewController: UIViewController {
         let labelTextFieldView = LabelTextFieldView()
         labelTextFieldView.titleLabel.text = "Username".localized()
         labelTextFieldView.textField.delegate = self
+        labelTextFieldView.textField.setScreenCaptureProtection()
         labelTextFieldView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(labelTextFieldView)
         return labelTextFieldView
@@ -39,6 +41,7 @@ class DetailsViewController: UIViewController {
         labelTextFieldView.titleLabel.text = "Password".localized()
         labelTextFieldView.textField.delegate = self
         labelTextFieldView.textField.isSecureTextEntry = true
+        labelTextFieldView.textField.setScreenCaptureProtection()
         labelTextFieldView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(labelTextFieldView)
         return labelTextFieldView
@@ -48,6 +51,7 @@ class DetailsViewController: UIViewController {
         let labelTextView = LabelTextView()
         labelTextView.titleLabel.text = "Additional Information".localized()
         labelTextView.textView.delegate = self
+        labelTextView.textView.setScreenCaptureProtection()
         labelTextView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(labelTextView)
         return labelTextView

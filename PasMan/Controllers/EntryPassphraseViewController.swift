@@ -55,15 +55,15 @@ class EntryPassphraseViewController: UIViewController {
             let hashString = hash.compactMap { String(format: "%02x", $0) }.joined()
             let bytes = hashString.hexaBytes.map({ Int8(bitPattern: $0) })
             
-            guard let passphraseFromKeychain = try? KeychainManager.get("ru.PasMan.Passphrase") else { return }
+            DataStoreManager.kuznyechik = Kuznyechik(key: bytes)
             
-            guard Data(hash) == passphraseFromKeychain else {
+            guard let checkPhrase = UserDefaults.standard.data(forKey: "checkPhrase") else { return }
+            
+            guard let _ = try? DataStoreManager.kuznyechik?.decrypt(data: checkPhrase) else {
                 let alert = AlertManager.createOKAlert(title: "Passphrases do not match".localized())
                 self.present(alert, animated: true)
                 return
             }
-            
-            DataStoreManager.masterKuznyechik = Kuznyechik(key: bytes)
             
             (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(TabBarController())
         }
