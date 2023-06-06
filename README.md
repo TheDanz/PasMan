@@ -17,10 +17,7 @@
 
 ## Screenshots
 
-<img src="https://user-images.githubusercontent.com/88277492/234337413-69b6e30e-52f1-4389-aa11-de57c8299975.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337508-6bf0f997-ac15-4deb-9350-c09f58c92eb9.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234338092-49c03c72-3e53-400b-9860-b0bd7900e5b9.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337571-5955b408-9690-4d83-a815-88a008fad292.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337700-38423395-85b4-4999-aa6a-747e2c0e312a.png" width="262" height="568"> <img src="https://user-images.githubusercontent.com/88277492/234337816-f99d917d-a8a3-40cc-936c-dc708744638f.png" width="262" height="568">
-
-
-
+<img src="https://github.com/TheDanz/PasMan/assets/88277492/f51b8a78-65ef-4fbd-aa88-62a7957900ac" width="262" height="568"> <img src="https://github.com/TheDanz/PasMan/assets/88277492/bc22bc06-a37f-4a22-9d4b-f86063e0d454" width="262" height="568"> <img src="https://github.com/TheDanz/PasMan/assets/88277492/0b95569e-a8f6-4e2d-9bc3-2cdfa2ff2d03" width="262" height="568"> <img src="https://github.com/TheDanz/PasMan/assets/88277492/608f498c-a6cd-4448-a702-08535a799c74" width="262" height="568"> <img src="https://github.com/TheDanz/PasMan/assets/88277492/e2d4c801-f571-421d-a0c0-bb2e3c9eaac6" width="262" height="568">
 
 ## AppStore
 
