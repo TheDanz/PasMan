@@ -7,7 +7,7 @@ class EntryPassphraseViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: "Avenir Next Bold", size: 20)
         label.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
-        label.text = "Enter a passphrase that will decrypt your passwords.".localized()
+        label.text = "Enter a passphrase that will decrypt your passwords".localized()
         label.textAlignment = .center
         label.numberOfLines = 0
         label.sizeToFit()
