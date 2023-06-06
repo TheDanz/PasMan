@@ -36,7 +36,8 @@ class PasswordGenerationViewController: UIViewController {
         let config = UIImage.SymbolConfiguration(pointSize: 30)
         slider.minimumValueImage = UIImage(systemName: "8.circle", withConfiguration: config)
         slider.maximumValueImage = UIImage(systemName: "20.circle", withConfiguration: config)
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
             self.lengthLabel.text = "Password length: ".localized() + "\(Int(slider.value))"
         }
         slider.addAction(action, for: .valueChanged)
@@ -89,17 +90,9 @@ class PasswordGenerationViewController: UIViewController {
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 1, height: 5)
         button.translatesAutoresizingMaskIntoConstraints = false
-        let action = UIAction { _ in
-            
-            let passwordTableNC = self.tabBarController?.viewControllers?[3] as? UINavigationController
-            let homeNC = self.tabBarController?.viewControllers?[0] as? UINavigationController
-            let passwordTVC = passwordTableNC?.topViewController as? TableViewController
-            let homeVC = homeNC?.topViewController as? HomeViewController
-            
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
             let destinationVC = NewPasswordViewController()
-            destinationVC.reloadDataDelegate = passwordTVC
-            destinationVC.updateNumberOfPasswordsLabelDelegate = homeVC
-            
             self.present(destinationVC, animated: true)
             destinationVC.passwordTextField.text = self.passwordLabel.text
         }
@@ -124,7 +117,9 @@ class PasswordGenerationViewController: UIViewController {
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 1, height: 5)
         button.translatesAutoresizingMaskIntoConstraints = false
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
+            
+            guard let self = self else { return }
             
             let length = Int(self.lengthSlider.value)
             var options = Set<PasswordGeneration.CharacterSet>()
@@ -154,75 +149,79 @@ class PasswordGenerationViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
     
-        setPasswordLabelConstraints()
-        setLengthLabelConstraints()
-        setLengthSliderConstraints()
-        setLowercaseViewConstraints()
-        setUppercaseViewConstraints()
-        setDigitsViewConstraints()
-        setSpecialCharactersViewConstraints()
-        setSaveButtonConstraints()
-        setRegeneratePasswordButtonConstraints()
+        setupAllConstraints()
     }
     
-    func setPasswordLabelConstraints() {
-        passwordLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+    private func setupAllConstraints() {
+        setupPasswordLabelConstraints()
+        setupLengthLabelConstraints()
+        setupLengthSliderConstraints()
+        setupLowercaseViewConstraints()
+        setupUppercaseViewConstraints()
+        setupDigitsViewConstraints()
+        setupSpecialCharactersViewConstraints()
+        setupSaveButtonConstraints()
+        setupRegeneratePasswordButtonConstraints()
+    }
+    
+    private func setupPasswordLabelConstraints() {
+        passwordLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         passwordLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         passwordLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         passwordLabel.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.2).isActive = true
     }
     
-    func setLengthLabelConstraints() {
-        lengthLabel.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 20).isActive = true
+    private func setupLengthLabelConstraints() {
+        lengthLabel.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 10).isActive = true
         lengthLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         lengthLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
     }
     
-    func setLengthSliderConstraints() {
+    private func setupLengthSliderConstraints() {
         lengthSlider.topAnchor.constraint(equalTo: lengthLabel.bottomAnchor, constant: 5).isActive = true
         lengthSlider.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         lengthSlider.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
     }
     
-    func setLowercaseViewConstraints() {
+    private func setupLowercaseViewConstraints() {
         lowercaseView.topAnchor.constraint(equalTo: lengthSlider.bottomAnchor, constant: 15).isActive = true
         lowercaseView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         lowercaseView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        lowercaseView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        lowercaseView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07).isActive = true
     }
     
-    func setUppercaseViewConstraints() {
+    private func setupUppercaseViewConstraints() {
         uppercaseView.topAnchor.constraint(equalTo: lowercaseView.bottomAnchor, constant: 10).isActive = true
         uppercaseView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         uppercaseView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        uppercaseView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        uppercaseView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07).isActive = true
     }
     
-    func setDigitsViewConstraints() {
+    private func setupDigitsViewConstraints() {
         digitsView.topAnchor.constraint(equalTo: uppercaseView.bottomAnchor, constant: 10).isActive = true
         digitsView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         digitsView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        digitsView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        digitsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07).isActive = true
     }
     
-    func setSpecialCharactersViewConstraints() {
+    private func setupSpecialCharactersViewConstraints() {
         specialCharactersView.topAnchor.constraint(equalTo: digitsView.bottomAnchor, constant: 10).isActive = true
         specialCharactersView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         specialCharactersView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        specialCharactersView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        specialCharactersView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07).isActive = true
     }
     
-    func setSaveButtonConstraints() {
+    private func setupSaveButtonConstraints() {
         saveButton.topAnchor.constraint(equalTo: specialCharactersView.bottomAnchor, constant: 10).isActive = true
         saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         saveButton.rightAnchor.constraint(equalTo: regeneratePasswordButton.leftAnchor, constant: -10).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        saveButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07).isActive = true
     }
     
-    func setRegeneratePasswordButtonConstraints() {
+    private func setupRegeneratePasswordButtonConstraints() {
         regeneratePasswordButton.topAnchor.constraint(equalTo: specialCharactersView.bottomAnchor, constant: 10).isActive = true
         regeneratePasswordButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        regeneratePasswordButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        regeneratePasswordButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        regeneratePasswordButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.07).isActive = true
+        regeneratePasswordButton.widthAnchor.constraint(equalTo: regeneratePasswordButton.heightAnchor).isActive = true
     }
 }

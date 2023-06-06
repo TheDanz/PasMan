@@ -13,8 +13,8 @@ class NewPasswordViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.returnKeyType = .done
-        textField.setScreenCaptureProtection()
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField
@@ -31,8 +31,8 @@ class NewPasswordViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.returnKeyType = .done
-        textField.setScreenCaptureProtection()
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField
@@ -49,11 +49,34 @@ class NewPasswordViewController: UIViewController {
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
         textField.leftViewMode = .always
         textField.autocorrectionType = .no
+        textField.textContentType = .oneTimeCode
         textField.returnKeyType = .done
         textField.isSecureTextEntry = true
         textField.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(textField)
         return textField
+    }()
+    
+    lazy var lifeTimeView: LabelSwitchView = {
+        let labelSwitchView = LabelSwitchView()
+        labelSwitchView.leftLabel.text = "Add expiration time?".localized()
+        labelSwitchView.rightSwitch.addTarget(self, action: #selector(lifeTimeSwitchChangedValue), for: .valueChanged)
+        labelSwitchView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(labelSwitchView)
+        return labelSwitchView
+    }()
+    
+    lazy var stepperView: LabelStepperView = {
+        let labelStepperView = LabelStepperView()
+        labelStepperView.isHidden = true
+        labelStepperView.rightStepper.minimumValue = 1
+        labelStepperView.rightStepper.maximumValue = 360
+        labelStepperView.rightStepper.stepValue = 1
+        labelStepperView.leftLabel.text = "Amount of days".localized() + ": 1"
+        labelStepperView.rightStepper.addTarget(self, action: #selector(stepperChangedValue), for: .valueChanged)
+        labelStepperView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(labelStepperView)
+        return labelStepperView
     }()
     
     lazy var saveButton: UIButton = {
@@ -78,7 +101,7 @@ class NewPasswordViewController: UIViewController {
                   !login.isEmpty,
                   !password.isEmpty else {
                 
-                let alert = UIAlertController(title: "ERROR".localized(), message: "Fill in all the fields".localized(), preferredStyle: .alert)
+                let alert = UIAlertController(title: "Don't leave empty fields".localized(), message: nil, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(action)
                 
@@ -86,10 +109,43 @@ class NewPasswordViewController: UIViewController {
                 return
             }
             
-            DataStoreManager.shared.createPasswordModel(title: title, login: login, password: password)
-            self.reloadDataDelegate?.reloadData()
-            self.updateNumberOfPasswordsLabelDelegate?.updateNumberOfPasswordsLabel()
+            var uuidString = UUID().uuidString
+            var expirationDate: Date? = nil
             
+            if self.lifeTimeView.rightSwitch.isOn {
+                
+                let userNotificationsManager = UserNotificationsManager()
+                let days = Int(self.stepperView.rightStepper.value)
+                userNotificationsManager.sendNotifications(after: days, body: "Your ".localized() + title + " password has expired!".localized(), uuid: uuidString)
+                
+                expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
+            }
+            
+            let weaknessPasswordChecker = WeaknessPasswordChecker()
+            let passwordStrength = weaknessPasswordChecker.getStrengthFrom(password: password).strength
+            let passwordBitStrength = weaknessPasswordChecker.getStrengthFrom(password: password).bits
+        
+            guard passwordStrength != .veryWeak && passwordStrength != .weak else {
+                
+                let alert = AlertManager.createOKCancelAlert(title: "Password strength is too low".localized(),
+                                                             message: "Are you sure you want to save your password?".localized()) {
+                    
+                    DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
+                                                                login: login.trimmingCharacters(in: [" "]),
+                                                                password: password, uuid: uuidString,
+                                                                expirationDate: expirationDate,
+                                                                bitStrength: passwordBitStrength)
+                    self.dismiss(animated: true)
+                }
+                self.present(alert, animated: true)
+                return
+            }
+            
+            DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
+                                                        login: login.trimmingCharacters(in: [" "]),
+                                                        password: password, uuid: uuidString,
+                                                        expirationDate: expirationDate,
+                                                        bitStrength: passwordBitStrength)
             self.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
@@ -98,45 +154,80 @@ class NewPasswordViewController: UIViewController {
         self.view.addSubview(button)
         return button
     }()
-    
-    var reloadDataDelegate: ReloadDataDelegate?
-    var updateNumberOfPasswordsLabelDelegate: UpdateNumberOfPasswordsLabelDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         
-        setupSaveButtonConstraints()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
+        self.view.addGestureRecognizer(tapGesture)
+        
+        setupAllConstraints()
+    }
+    
+    @objc
+    private func lifeTimeSwitchChangedValue(_ sender: UISwitch) {
+        stepperView.isHidden = stepperView.isHidden ? false : true
+    }
+    
+    @objc
+    private func stepperChangedValue(_ sender: UIStepper) {
+        stepperView.leftLabel.text = "Amount of days".localized() + ": " + String(Int(stepperView.rightStepper.value))
+    }
+    
+    @objc
+    private func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    private func setupAllConstraints() {
         setupTitleTextFieldConstraints()
         setupLoginTextFieldConstraints()
         setupPasswordTextFieldConstraints()
-    }
-
-    func setupSaveButtonConstraints() {
-        saveButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 60).isActive = true
-        saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        setupLifeTimeViewConstraints()
+        setupSaveButtonConstraints()
+        setupStepperViewConstraints()
     }
     
-    func setupTitleTextFieldConstraints() {
+    private func setupTitleTextFieldConstraints() {
         titleTextField.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         titleTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         titleTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         titleTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func setupLoginTextFieldConstraints() {
+    private func setupLoginTextFieldConstraints() {
         loginTextField.topAnchor.constraint(equalTo: titleTextField.bottomAnchor, constant: 5).isActive = true
         loginTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         loginTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         loginTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
     
-    func setupPasswordTextFieldConstraints() {
+    private func setupPasswordTextFieldConstraints() {
         passwordTextField.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 5).isActive = true
         passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    private func setupLifeTimeViewConstraints() {
+        lifeTimeView.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30).isActive = true
+        lifeTimeView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        lifeTimeView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        lifeTimeView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    private func setupStepperViewConstraints() {
+        stepperView.topAnchor.constraint(equalTo: lifeTimeView.bottomAnchor, constant: 5).isActive = true
+        stepperView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        stepperView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        stepperView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    private func setupSaveButtonConstraints() {
+        saveButton.topAnchor.constraint(equalTo: stepperView.bottomAnchor, constant: 30).isActive = true
+        saveButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        saveButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        saveButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
 }

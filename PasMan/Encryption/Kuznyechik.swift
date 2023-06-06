@@ -47,47 +47,8 @@ final class Kuznyechik {
     private var iterationСonstants: [[Int8]] = Array(repeating: Array(repeating: 0, count: 16) , count: 32)
     private var iterationKeys: [[Int8]] = Array(repeating: Array(repeating: 0, count: 64) , count: 10)
     
-    init() {
-        
-        if getKeysFromKeychain() { return }
-        
-        let randomMasterKey = generateRandomMasterKey()
-        generateIterationKeys(key: randomMasterKey)
-        
-        saveKeysIntoKeychain()
-    }
-    
-    private func getKeysFromKeychain() -> Bool {
-        
-        guard let keysData = try? KeychainManager.get("ru.PasMan.KuznyechikKeys") else { return false }
-        let keysBytes = Array(keysData).map({ Int8(bitPattern: $0) })
-        iterationKeys = keysBytes.chunked(into: 16)
-        
-        return true
-    }
-    
-    private func generateRandomMasterKey() -> [Int8] {
-        
-        var randomKey = Array<Int8>()
-        for _ in 0..<32 {
-            let randomUInt32 = arc4random_uniform(UInt32(255))
-            let randomByte = Int8(bitPattern: UInt8(randomUInt32))
-            randomKey.append(randomByte)
-        }
-        
-        return randomKey
-    }
-    
-    private func saveKeysIntoKeychain() {
-        
-        let keysBytes = iterationKeys.joined()
-        let keysData = Data(bytes: Array(keysBytes), count: keysBytes.count)
-        
-        do {
-            try KeychainManager.save(keysData, forTag: "ru.PasMan.KuznyechikKeys")
-        } catch let error {
-            print(error.localizedDescription)
-        }
+    init(key: [Int8]) {
+        generateIterationKeys(key: key)
     }
     
     private func X(_ first: [Int8], _ second: [Int8]) -> [Int8] {
@@ -342,7 +303,7 @@ final class Kuznyechik {
         return output
     }
 
-    func decrypt(data: Data) -> String {
+    func decrypt(data: Data) throws -> String {
         
         let bytesToDecrypt = Array(data).map({ Int8(bitPattern: $0) })
         let blocksToDecrypt = bytesToDecrypt.chunked(into: 16)
@@ -354,8 +315,13 @@ final class Kuznyechik {
         uncompleteLastBlock(&decryptedBlocks)
         
         let decrtypedBytes = decryptedBlocks.joined().map({ UInt8(bitPattern: $0) })
-        let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) ?? "Decryption Error".localized()
+        
+        guard let decryptedString = String(bytes: decrtypedBytes, encoding: .utf8) else { throw KuznyechikError.decryptionError }
         
         return decryptedString
+    }
+    
+    enum KuznyechikError: Error {
+        case decryptionError
     }
 }

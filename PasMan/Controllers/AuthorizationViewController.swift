@@ -72,7 +72,14 @@ class AuthorizationViewController: UIViewController {
                         self?.againButton.isHidden = false
                         return
                     }
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(TabBarController())
+                    
+                    let isPassphraseSet = UserDefaults.standard.bool(forKey: "isPassphraseSet")
+                    
+                    if isPassphraseSet {
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(EntryPassphraseViewController())
+                    } else {
+                        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootViewController(CreatePassphraseViewController())
+                    }
                 }
             }
         } else {

@@ -1,6 +1,6 @@
 import UIKit
 
-class PasswordDetailsView: UIView {
+class LabelTextFieldView: UIView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -11,18 +11,15 @@ class PasswordDetailsView: UIView {
         return label
     }()
     
-    lazy var inputTextView: UITextView = {
-        let textView = UITextView()
-        textView.font = UIFont(name: "Avenir Next", size: 15)
-        textView.autocorrectionType = .no
-        textView.autocapitalizationType = .none
-        textView.textContainer.maximumNumberOfLines = 1
-        textView.textContainer.lineBreakMode = .byTruncatingTail
-        textView.isScrollEnabled = false
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.backgroundColor = .none
-        self.addSubview(textView)
-        return textView
+    lazy var textField: UITextField = {
+        let textField = UITextField()
+        textField.font = UIFont(name: "Avenir Next", size: 15)
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
+        textField.backgroundColor = .none
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(textField)
+        return textField
     }()
     
     required init?(coder: NSCoder) {
@@ -47,9 +44,9 @@ class PasswordDetailsView: UIView {
     }
     
     func setInputTextViewConstraints() {
-        inputTextView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
-        inputTextView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
-        inputTextView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
-        inputTextView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
+        textField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
+        textField.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
+        textField.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
+        textField.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0).isActive = true
     }
 }

@@ -14,8 +14,14 @@ class TableViewController: UIViewController {
         return tableView
     }()
     
-    var updateNumberOfPasswordsLabelDelegate: UpdateNumberOfPasswordsLabelDelegate?
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.passwordsTableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +36,7 @@ class TableViewController: UIViewController {
     func setupFetchedResultsContoller() {
         
         let fetchRequest: NSFetchRequest<PasswordModel> = PasswordModel.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "uuid", ascending: true)
         fetchRequest.sortDescriptors = [sortDescriptor]
         fetchRequest.fetchLimit = 15
         
@@ -90,11 +96,10 @@ extension TableViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let kuznyechik = Kuznyechik()
         let passwordModel = fetchedResultsController?.object(at: indexPath)
         DispatchQueue.main.async {
-            cell.titleLabel.text = passwordModel?.title
-            cell.loginLabel.text = kuznyechik.decrypt(data: (passwordModel?.login)!)
+            cell.titleLabel.text = DataStoreManager.shared.getTitle(for: passwordModel!)
+            cell.loginLabel.text = DataStoreManager.shared.getLogin(for: passwordModel!)
         }
         return cell
     }
@@ -105,7 +110,6 @@ extension TableViewController: UITableViewDataSource {
             
             let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
             dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
-            updateNumberOfPasswordsLabelDelegate?.updateNumberOfPasswordsLabel()
         }
     }
     
@@ -114,10 +118,6 @@ extension TableViewController: UITableViewDataSource {
         let destinationVC = DetailsViewController()
         let passwordModel = fetchedResultsController.object(at: indexPath)
         destinationVC.data = passwordModel
-        destinationVC.deletePasswordModelDelegate = self
-        destinationVC.reloadRowsDelegate = self
-        destinationVC.updateNumberOfPasswordsLabelDelegate = self.updateNumberOfPasswordsLabelDelegate
-        destinationVC.index = indexPath
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
@@ -140,31 +140,5 @@ extension TableViewController: NSFetchedResultsControllerDelegate {
         default:
             break
         }
-    }
-}
-
-// MARK: - Delegates
-
-extension TableViewController: ReloadDataDelegate {
-    
-    func reloadData() {
-        DispatchQueue.main.async {
-            self.passwordsTableView.reloadData()
-        }
-    }
-}
-
-extension TableViewController: DeletePasswordModelDelegate {
-    
-    func deletePasswordModel(at indexPath: IndexPath) {
-        let passwordModelToDelete = fetchedResultsController.object(at: indexPath)
-        dataStoreManager.deletePasswordModel(object: passwordModelToDelete)
-    }
-}
-
-extension TableViewController: ReloadRowsDelegate {
-    
-    func reloadRows(indexPath: [IndexPath], animation: UITableView.RowAnimation) {
-        passwordsTableView.reloadRows(at: indexPath, with: animation)
     }
 }

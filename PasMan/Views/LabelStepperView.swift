@@ -1,6 +1,6 @@
 import UIKit
 
-class LabelSwitchView: UIView {
+class LabelStepperView: UIView {
     
     lazy var leftLabel: UILabel = {
         let label = UILabel()
@@ -11,12 +11,11 @@ class LabelSwitchView: UIView {
         return label
     }()
     
-    lazy var rightSwitch: UISwitch = {
-        let switcher = UISwitch()
-        switcher.onTintColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
-        switcher.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(switcher)
-        return switcher
+    lazy var rightStepper: UIStepper = {
+        let stepper = UIStepper()
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(stepper)
+        return stepper
     }()
     
     required init?(coder: NSCoder) {
@@ -34,7 +33,7 @@ class LabelSwitchView: UIView {
     
     private func setupAllConstraints() {
         setupLeftLabelConstraints()
-        setupRightSwitchConstraints()
+        setupRightStepperConstraints()
     }
     
     private func setupLeftLabelConstraints() {
@@ -42,8 +41,8 @@ class LabelSwitchView: UIView {
         leftLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
     }
     
-    private func setupRightSwitchConstraints() {
-        rightSwitch.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
-        rightSwitch.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+    private func setupRightStepperConstraints() {
+        rightStepper.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -10).isActive = true
+        rightStepper.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
     }
 }
