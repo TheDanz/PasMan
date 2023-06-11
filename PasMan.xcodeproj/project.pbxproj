@@ -111,9 +111,8 @@
 				05B827842A2BBD8C002C7000 /* WeakPasswords.txt */,
 				05F16A1629CDDD8A001884FB /* Controllers */,
 				055A2A4929F81F380071C3A1 /* Models */,
-				055A2A4D29F8221B0071C3A1 /* Views */,
+				055A2A4D29F8221B0071C3A1 /* CustomViews */,
 				055A2A4B29F821500071C3A1 /* Managers */,
-				055A2A4F29F8224E0071C3A1 /* Encryption */,
 				055A2A4C29F821AE0071C3A1 /* Supporting Files */,
 				05A5CBA329FBF2EF0056C6F3 /* Localizable */,
 				0545E8E829AD0A1700963D40 /* Info.plist */,
@@ -138,6 +137,9 @@
 				0517247F29B9088A0003EE27 /* DataStoreManager.swift */,
 				05695F372A1567DA00FB9234 /* UserNotificationsManager.swift */,
 				0559FCCC2A1D018E00E65A4E /* AlertManager.swift */,
+				05FAD11B2A1FD00D002697CE /* WeaknessPasswordChecker.swift */,
+				05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */,
+				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -154,7 +156,7 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		055A2A4D29F8221B0071C3A1 /* Views */ = {
+		055A2A4D29F8221B0071C3A1 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
 				05E8096E29F6BA3100EB4972 /* LabelSwitchView.swift */,
@@ -163,17 +165,7 @@
 				0559FCCE2A1D46EA00E65A4E /* LabelTextView.swift */,
 				0503AA712A1BF277008E324B /* HomeLabelView.swift */,
 			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		055A2A4F29F8224E0071C3A1 /* Encryption */ = {
-			isa = PBXGroup;
-			children = (
-				05AFA44829EAD5BC005AA9A7 /* PasswordGeneration.swift */,
-				05F16A1729CDE0AF001884FB /* Kuznyechik.swift */,
-				05FAD11B2A1FD00D002697CE /* WeaknessPasswordChecker.swift */,
-			);
-			path = Encryption;
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 		05A5CBA329FBF2EF0056C6F3 /* Localizable */ = {
