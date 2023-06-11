@@ -24,14 +24,15 @@ class AuthorizationViewController: UIViewController {
     }()
     
     lazy var againButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 250, height: 50))
         button.isHidden = true
         button.setTitle("Try again".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 20)
         button.backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
         button.layer.cornerRadius = 12
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
             button.isHidden = button.isHidden ? false : true
             self.login()
         }
