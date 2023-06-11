@@ -65,17 +65,11 @@ class CreatePassphraseViewController: UIViewController {
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 1, height: 5)
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
             
+            guard let self = self else { return }
             guard let firstText = self.firstTextField.text else { return }
             guard let secondText = self.secondTextField.text else { return }
-            
-            guard firstText.count >= 12 && secondText.count >= 12 else {
-                
-                let alert = AlertManager.createOKAlert(title: "Passphrase must be 12 characters or more".localized())
-                self.present(alert, animated: true)
-                return
-            }
             
             guard firstText == secondText else {
                 
@@ -83,6 +77,16 @@ class CreatePassphraseViewController: UIViewController {
                 self.present(alert, animated: true)
                 return
             }
+            
+            let passwordStrength = WeaknessPasswordChecker().getStrengthFrom(password: firstText)
+            
+            guard passwordStrength.strength != .veryWeak && passwordStrength.strength != .weak else {
+                
+                let alert = AlertManager.createOKAlert(title: "Password strength is too low".localized())
+                self.present(alert, animated: true)
+                return
+            }
+        
             
             let data = Data(firstText.utf8)
             let hash = SHA256.hash(data: data)

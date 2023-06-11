@@ -49,7 +49,8 @@ class HomeViewController: UIViewController {
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 0, height: 5)
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
             let destinationVC = NewPasswordViewController()
             self.present(destinationVC, animated: true)
         }
@@ -66,8 +67,7 @@ class HomeViewController: UIViewController {
         updateLeftExpirationViewText()
         updateRightWeaknessViewText()
         
-        let userNotificationsManager = UserNotificationsManager()
-        userNotificationsManager.requestAuthorization()
+        UserNotificationsManager().requestAuthorization()
         
         setupAllConstraints()
     }

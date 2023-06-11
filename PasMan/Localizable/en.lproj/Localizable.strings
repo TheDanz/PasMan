@@ -48,6 +48,5 @@
 "Enter a passphrase that will be used to generate a master key to encrypt your passwords. You will need to enter it every time you enter the application." = "Enter a passphrase that will be used to generate a master key to encrypt your passwords. You will need to enter it every time you enter the application.";
 "Passphrase" = "Passphrase";
 "Repeat passphrase" = "Repeat passphrase";
-"Passphrase must be 12 characters or more" = "Passphrase must be 12 characters or more";
 "Passphrases do not match" = "Passphrases do not match";
 "Enter a passphrase that will decrypt your passwords" = "Enter a passphrase that will decrypt your passwords";

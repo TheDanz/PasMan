@@ -67,14 +67,13 @@ class DetailsViewController: UIViewController {
         button.setTitle("Delete password".localized(), for: .normal)
         button.titleLabel?.font = UIFont(name: "Avenir Next Demi Bold", size: 18)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
+            guard let self = self else { return }
             guard let data = self.data else { return }
             DataStoreManager.shared.deletePasswordModel(object: data)
             self.navigationController?.popViewController(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
-        
         self.contentView.addSubview(button)
         return button
     }()
@@ -82,7 +81,8 @@ class DetailsViewController: UIViewController {
     var data: PasswordModel? {
         didSet {
             guard let data = data else { return }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.titleView.textField.text = DataStoreManager.shared.getTitle(for: data)
                 self.loginView.textField.text = DataStoreManager.shared.getLogin(for: data)
                 self.passwordView.textField.text = DataStoreManager.shared.getPassword(for: data)

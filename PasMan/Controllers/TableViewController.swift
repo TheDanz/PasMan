@@ -29,11 +29,11 @@ class TableViewController: UIViewController {
         passwordsTableView.delegate = self
         passwordsTableView.dataSource = self
         
-        setPasswordsTableViewConstants()
+        setupPasswordsTableViewConstants()
         setupFetchedResultsContoller()
     }
     
-    func setupFetchedResultsContoller() {
+    private func setupFetchedResultsContoller() {
         
         let fetchRequest: NSFetchRequest<PasswordModel> = PasswordModel.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "uuid", ascending: true)
@@ -47,7 +47,7 @@ class TableViewController: UIViewController {
         try! fetchedResultsController.performFetch()
     }
     
-    func setPasswordsTableViewConstants() {
+    private func setupPasswordsTableViewConstants() {
         passwordsTableView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
         passwordsTableView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
         passwordsTableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
