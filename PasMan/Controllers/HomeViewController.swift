@@ -4,7 +4,7 @@ class HomeViewController: UIViewController {
     
     lazy var mainView: HomeLabelView = {
         let homeLabelView = HomeLabelView()
-        homeLabelView.mainLabel.font = UIFont(name: "Avenir Next Bold", size: 45)
+        homeLabelView.mainLabel.font = UIFont(name: "Avenir Next Bold", size: 35)
         homeLabelView.mainLabel.text = "mainLabel".localized()
         homeLabelView.mainLabel.textAlignment = .center
         homeLabelView.mainLabel.textColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 1)
@@ -80,6 +80,7 @@ class HomeViewController: UIViewController {
             for title in titles {
                 leftExpirationView.mainLabel.text! += "\(title)\n"
             }
+            leftExpirationView.mainLabel.text?.removeLast()
         } else {
             leftExpirationView.mainLabel.text = "You don't have passwords that expire after 14 days".localized()
         }
@@ -93,6 +94,7 @@ class HomeViewController: UIViewController {
             for title in titles {
                 rightWeaknessView.mainLabel.text! += "\(title)\n"
             }
+            rightWeaknessView.mainLabel.text?.removeLast()
         } else {
             rightWeaknessView.mainLabel.text = "You don't have weak passwords".localized()
         }
@@ -115,16 +117,12 @@ class HomeViewController: UIViewController {
     private func setupLeftExpirationViewConstraints() {
         leftExpirationView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
         leftExpirationView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
-        leftExpirationView.heightAnchor.constraint(greaterThanOrEqualTo: rightWeaknessView.heightAnchor).isActive = true
-        leftExpirationView.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.47).isActive = true
         leftExpirationView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }
     
     private func setupRightWeaknessViewConstraints() {
         rightWeaknessView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
         rightWeaknessView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
-        rightWeaknessView.heightAnchor.constraint(greaterThanOrEqualTo: leftExpirationView.heightAnchor).isActive = true
-        rightWeaknessView.heightAnchor.constraint(lessThanOrEqualTo: self.view.heightAnchor, multiplier: 0.47).isActive = true
         rightWeaknessView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }
     
