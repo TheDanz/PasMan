@@ -90,11 +90,12 @@ class NewPasswordViewController: UIViewController {
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 1, height: 5)
-        
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
             
-            guard let title = self.titleTextField.text,
-                  let login = self.loginTextField.text,
+            guard let self = self else { return }
+            
+            guard let title = self.titleTextField.text?.trimmingCharacters(in: [" "]),
+                  let login = self.loginTextField.text?.trimmingCharacters(in: [" "]),
                   let password = self.passwordTextField.text else { return }
             
             guard !title.isEmpty,
@@ -104,8 +105,8 @@ class NewPasswordViewController: UIViewController {
                 let alert = UIAlertController(title: "Don't leave empty fields".localized(), message: nil, preferredStyle: .alert)
                 let action = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(action)
-                
                 self.present(alert, animated: true)
+                
                 return
             }
             
@@ -114,11 +115,12 @@ class NewPasswordViewController: UIViewController {
             
             if self.lifeTimeView.rightSwitch.isOn {
                 
-                let userNotificationsManager = UserNotificationsManager()
                 let days = Int(self.stepperView.rightStepper.value)
-                userNotificationsManager.sendNotifications(after: days, body: "Your ".localized() + title + " password has expired!".localized(), uuid: uuidString)
+                expirationDate = Calendar.current.date(byAdding: .day, value: days, to: Date())!
                 
-                expirationDate = Calendar.current.date(byAdding: .day, value: Int(self.stepperView.rightStepper.value), to: Date())!
+                UserNotificationsManager().sendNotifications(after: days,
+                                                             body: "Your ".localized() + title + " password has expired!".localized(),
+                                                             uuid: uuidString)
             }
             
             let weaknessPasswordChecker = WeaknessPasswordChecker()
@@ -130,8 +132,8 @@ class NewPasswordViewController: UIViewController {
                 let alert = AlertManager.createOKCancelAlert(title: "Password strength is too low".localized(),
                                                              message: "Are you sure you want to save your password?".localized()) {
                     
-                    DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
-                                                                login: login.trimmingCharacters(in: [" "]),
+                    DataStoreManager.shared.createPasswordModel(title: title,
+                                                                login: login,
                                                                 password: password, uuid: uuidString,
                                                                 expirationDate: expirationDate,
                                                                 bitStrength: passwordBitStrength)
@@ -141,15 +143,14 @@ class NewPasswordViewController: UIViewController {
                 return
             }
             
-            DataStoreManager.shared.createPasswordModel(title: title.trimmingCharacters(in: [" "]),
-                                                        login: login.trimmingCharacters(in: [" "]),
+            DataStoreManager.shared.createPasswordModel(title: title,
+                                                        login: login,
                                                         password: password, uuid: uuidString,
                                                         expirationDate: expirationDate,
                                                         bitStrength: passwordBitStrength)
             self.dismiss(animated: true)
         }
         button.addAction(action, for: .touchUpInside)
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(button)
         return button

@@ -35,18 +35,22 @@ class LabelTextView: UIView {
         backgroundColor = #colorLiteral(red: 0.3921568627, green: 0.5843137255, blue: 0.9294117647, alpha: 0.15)
         layer.cornerRadius = 12
         
-        setTitleLabelConstraints()
-        setInputTextViewConstraints()
+        setupAllConstraints()
     }
     
-    func setTitleLabelConstraints() {
+    private func setupAllConstraints() {
+        setupTitleLabelConstraints()
+        setupInputTextViewConstraints()
+    }
+    
+    private func setupTitleLabelConstraints() {
         titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 5).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
-    func setInputTextViewConstraints() {
+    private func setupInputTextViewConstraints() {
         textView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
         textView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 5).isActive = true
         textView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -5).isActive = true

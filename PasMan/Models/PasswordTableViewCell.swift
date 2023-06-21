@@ -41,9 +41,7 @@ class PasswordTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        setupMainViewConstraints()
-        setupTitleLabelConstraints()
-        setupLoginLabelConstraints()
+        setupAllConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -58,21 +56,27 @@ class PasswordTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setupMainViewConstraints() {
+    private func setupAllConstraints() {
+        setupMainViewConstraints()
+        setupTitleLabelConstraints()
+        setupLoginLabelConstraints()
+    }
+    
+    private func setupMainViewConstraints() {
         mainView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         mainView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 24).isActive = true
         mainView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -24).isActive = true
         mainView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
     }
     
-    func setupTitleLabelConstraints() {
+    private func setupTitleLabelConstraints() {
         titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         titleLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 10).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 18).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -17).isActive = true
     }
     
-    func setupLoginLabelConstraints() {
+    private func setupLoginLabelConstraints() {
         loginLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         loginLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
         loginLabel.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 18).isActive = true

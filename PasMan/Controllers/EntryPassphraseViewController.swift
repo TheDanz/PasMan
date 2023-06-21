@@ -46,8 +46,9 @@ class EntryPassphraseViewController: UIViewController {
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 4
         button.layer.shadowOffset = CGSize(width: 1, height: 5)
-        let action = UIAction { _ in
+        let action = UIAction { [weak self] _ in
             
+            guard let self = self else { return }
             guard let text = self.passphraseTextField.text else { return }
             
             let data = Data(text.utf8)
