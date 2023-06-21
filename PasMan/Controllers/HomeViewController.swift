@@ -117,12 +117,14 @@ class HomeViewController: UIViewController {
     private func setupLeftExpirationViewConstraints() {
         leftExpirationView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
         leftExpirationView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+        leftExpirationView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         leftExpirationView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }
     
     private func setupRightWeaknessViewConstraints() {
         rightWeaknessView.topAnchor.constraint(equalTo: self.mainView.bottomAnchor, constant: 10).isActive = true
         rightWeaknessView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        rightWeaknessView.heightAnchor.constraint(greaterThanOrEqualToConstant: 80).isActive = true
         rightWeaknessView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.46).isActive = true
     }
     
