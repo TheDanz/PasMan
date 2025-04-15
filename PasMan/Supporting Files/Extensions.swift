@@ -2,13 +2,15 @@ import UIKit
 
 extension UIView {
     func setScreenCaptureProtection() {
-        DispatchQueue.main.async {
-            let field = UITextField()
-            field.isSecureTextEntry = true
-            self.addSubview(field)
-            self.layer.superlayer?.addSublayer(field.layer)
-            field.layer.sublayers?.first?.addSublayer(self.layer)
-        }
+        let secureTextField = UITextField()
+        let secureView: UIView = secureTextField.subviews.first {
+            NSStringFromClass(type(of: $0)).contains("LayoutCanvasView")
+        }!
+        let originalLayer = secureView.layer
+        secureView.setValue(self.layer, forKey: "layer")
+        secureTextField.isSecureTextEntry = false
+        secureTextField.isSecureTextEntry = true
+        secureView.setValue(originalLayer, forKey: "layer")
     }
 }
 
